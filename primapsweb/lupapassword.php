@@ -3,7 +3,7 @@
   
 <head>
     <meta charset="utf-8">
-    <title>PrimaPs</title>
+    <title>PrimaPS</title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes"> 
@@ -34,17 +34,17 @@
 			</a>
 			
 			<a class="brand" href="index.html">
-								
+				PrimaPS				
 			</a>		
 			
 			<div class="nav-collapse">
 				<ul class="nav pull-right">
-					<!--
-					<li class="">						
+					
+					<!-- <li class="">						
 						<a href="signup.html" class="">
 							Don't have an account?
 						</a>
-						
+						 -->
 					</li>
 					
 					<li class="">						
@@ -54,7 +54,6 @@
 						</a>
 						
 					</li>
-					-->
 				</ul>
 				
 			</div><!--/.nav-collapse -->	
@@ -66,44 +65,46 @@
 </div> <!-- /navbar -->
 
 
-<div class="phplogin">
-	
+
 <div class="account-container">
 	
 	<div class="content clearfix">
 		
-		<form action="p.php" method="post">
-			<center>
-			<h1>Login</h1>		
-			</center>
+		<form action="cek_lupapassword.php" method="post">
+
+			<h1>Lupa Password </h1>		
+			
+
 			<div class="login-fields">
 				
-				
 				<div class="field">
-					<label for="username">Username</label>
-					<input type="text" id="username" name="username" value="" placeholder="Username" class="login username-field" />
+					
+				<label for="username">username</label>
+				<input type="tel" id="username" name="username" value="" placeholder="username"
+					required class="login username-field"</input>
+
+
 				</div> <!-- /field -->
 				
 				<div class="field">
-					<label for="password">Password:</label>
-					<input type="password" id="password" name="password" value="" placeholder="Password" class="login password-field"/>
-				</div> <!-- /password -->
+					
+				<label for="email">No Telpon</label>
+				<input type="tel" id="no_telpon" name="no_telpon" value="" placeholder="no telpon"
+					required class="login telpon-field"</input>
+
+
+				</div> <!-- /field -->
 				
 			</div> <!-- /login-fields -->
+			<!-- <div class="login-extra">
+	<a href="#">Lupa Password ?</a>
+	</div>  -->
 			
 			<div class="login-actions">
-				<!--
-				<span class="login-checkbox">
-					<input id="Field" name="Field" type="checkbox" class="field login-checkbox" value="First Choice" tabindex="4" />
-					<label class="choice" for="Field">Keep me signed in</label>
-				</span>
-				-->
-				<br/>
-					<a href="lupapassword.php">Lupa Password?</a>						
-				<button type="submit" class="button btn btn-success btn-large">Masuk</button>
+				
+			<button class="button btn btn-success btn-large" type="kirim">Kirim</button>
 				
 			</div> <!-- .actions -->
-			
 			
 			
 		</form>
@@ -111,18 +112,8 @@
 	</div> <!-- /content -->
 	
 </div> <!-- /account-container -->
-</div> <!-- /login -->
-
-<!--
-<div class="login-extra">
-	<a href="#">Lupa Password?</a>
-</div>--> <!-- /login-extra -->
-
-
 <script src="js/jquery-1.7.2.min.js"></script>
 <script src="js/bootstrap.js"></script>
-
-<script src="js/signin.js"></script>
 
 </body>
 

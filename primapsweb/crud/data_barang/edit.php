@@ -1,7 +1,7 @@
 <?php
   include '../../config/koneksi.php';
         $id = $_POST['id'];      
-        $sql = mysqli_query($koneksi,"SELECT * FROM barang WHERE id_barang = '$id'");
+        $sql = mysqli_query($koneksi,"SELECT * FROM tabelbarang WHERE id_barang = '$id'");
         while ($ql = mysqli_fetch_array($sql)){
 ?>
  <div class="modal-dialog modal-lg modal-dialog-centered">

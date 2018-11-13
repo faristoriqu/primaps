@@ -9,7 +9,7 @@ $hargab = $_POST['hargab'];
 $hargaj = $_POST['hargaj'];
     
  
-mysqli_query($koneksi,"INSERT INTO barang VALUES('$id_barang','$namabarang','$idkat', '$stok', '$ids', '$hargab','$hargaj')");
+mysqli_query($koneksi,"INSERT INTO tabelbarang VALUES('$id_barang','$namabarang','$idkat', '$stok', '$ids', '$hargab','$hargaj')");
  
 header("location:../../beranda.php?open=barang_data");
 ?>

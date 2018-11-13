@@ -1,6 +1,6 @@
 <?php 
   if(isset($_GET['delete'])){
-    mysqli_query($koneksi,"DELETE FROM barang WHERE id_barang='$_GET[delete]'")or die(mysql_error());
+    mysqli_query($koneksi,"DELETE FROM tabelbarang WHERE id_barang='$_GET[delete]'")or die(mysql_error());
     
   }
 
@@ -14,7 +14,7 @@
     $hargaj = $_POST['hargaj'];
     
      
-    mysqli_query($koneksi,"INSERT INTO barang VALUES('$id_barang','$namabarang', '$idkat', '$stok', '$ids','$hargab','$hargaj')");
+    mysqli_query($koneksi,"INSERT INTO tabelbarang VALUES('$id_barang','$namabarang', '$idkat', '$stok', '$ids','$hargab','$hargaj')");
      
     echo "<script>window.location.href='?open=barang_data'</script>";
   } 
@@ -29,7 +29,7 @@
     $hargaj = $_POST['hargaj'];
     
      
-    mysqli_query($koneksi,"UPDATE barang SET namabarang='$namabarang', idkat='$idkat', stok='$stok', ids='$ids', hargab='$hargab',hargaj='$hargaj'  WHERE id_barang='$id_barang'");
+    mysqli_query($koneksi,"UPDATE tabelbarang SET namabarang='$namabarang', idkat='$idkat', stok='$stok', ids='$ids', hargab='$hargab',hargaj='$hargaj'  WHERE id_barang='$id_barang'");
 
     echo "<script>window.location.href='?open=barang_data'</script>";
     }
@@ -87,7 +87,7 @@
 						</tr>
 							<?php 
 							  	
-							  	$qri = mysqli_query($koneksi,"SELECT * FROM barang") or die(mysqli_error());
+							  	$qri = mysqli_query($koneksi,"SELECT * FROM tabelbarang") or die(mysqli_error());
 							  	while ($data = mysqli_fetch_array($qri)) {	
 					   		?>	
 						<tr>

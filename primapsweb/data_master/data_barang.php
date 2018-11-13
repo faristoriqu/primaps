@@ -9,8 +9,8 @@
         <div class="span12">
           <div class="widget">
             <div class="widget-header"> <i class="icon-copy"></i>
-              <h3>Data User</h3>
-              <button type="submit" class="btn btn-info btn-sm" id="btnUserTambah">Tambah Data</button>
+              <h3>Data Barang</h3>
+              <button type="submit" class="btn btn-info btn-sm" id="btnBarangTambah">Tambah Data Barang</button>
             </div>
             <!-- /widget-header -->
             <div class="widget-content">
@@ -21,33 +21,36 @@
 				<div class="table-responsive">
 					<table class="table table-striped table-bordered  table-condensed ">
 						<tr>
-							<th>Id User</th>
-							<th>Username</th>
-							<th>Password</th>
-							<th>Level </th>
-							<th>No Telpon </th>
-							<th >Pilihan</th>
+							<th>Id Barang</th>
+							<th>Nama Barang</th>
+							<th>Idkat</th>
+							<th>Stok</th>
+							<th>Ids</th>
+							<th>Hargab</th>
+							<th >Hargaj</th>
 						</tr>
 						<?php 
 						include "koneksi.php";
-						$query_mysql = mysqli_query($koneksi,"SELECT * FROM login")or die(mysql_error());
+						$query_mysql = mysqli_query($koneksi,"SELECT * FROM tabelbarang")or die(mysql_error());
 						// $nomor = 1;
 						while($data = mysqli_fetch_array($query_mysql)){
 						?>
 						<tr>
 							
-							<td><?php echo $data['id_user']; ?></td>
-							<td><?php echo $data['username']; ?></td>
-							<td><?php echo $data['password']; ?></td>
-							
-				            <td><?php echo $data['level']; ?></td>
-				            <td><?php echo $data['no_telpon']; ?></td>
+							<td><?php echo $data['id_barang']; ?></td>
+							<td><?php echo $data['namabarang']; ?></td>
+							<td><?php echo $data['idkat']; ?></td>
+
+				            <td><?php echo $data['stok']; ?></td>
+				            <td><?php echo $data['ids']; ?></td>
+				            <td><?php echo $data['hargab']; ?></td>
+				            <td><?php echo $data['hargaj']; ?></td>
 				            
 							<td>
-								<a class="edit" href="edit.php?id=<?php 
-								echo $data['id_user']; ?>">Edit</a> |
+								<a class="edit" href="edite.php?id=<?php
+								 echo $data['id_barang']; ?>">Edit</a> |
 								<a class="hapus" href="hapus.php?id=<?php 
-								echo $data['id_user']; ?>">Hapus</a>					
+								echo $data['id_barang']; ?>">Hapus</a>					
 							</td>
 
 						</tr>

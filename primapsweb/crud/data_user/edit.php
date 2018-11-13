@@ -43,6 +43,14 @@
                                                 
                                             </div> <!-- /controls -->               
                                         </div> <!-- /control-group -->
+
+                                         <div class="control-group">            
+                                         <label class="control-label" >No Telpon</label>                             
+                                            <div class="controls">
+                                                <input type="text"  name="no_telpon" placeholder="no_telpon" value="<?php echo $ql['no_telpon'] ?>">
+                                                
+                                            </div> <!-- /controls -->               
+                                        </div> <!-- /control-group -->
                                         
                                         <div class="control-group">                                         
                                             <label class="control-label" >Level</label>

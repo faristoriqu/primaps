@@ -8,9 +8,10 @@
     $id_user = $_POST['id_user'];
     $username = $_POST['username'];
     $password = $_POST['password'];
+    $no_telpon = $_POST['no_telpon'];
     $level = $_POST['level'];
      
-    mysqli_query($koneksi,"INSERT INTO login VALUES('$id_user','$username','$password','$level')");
+    mysqli_query($koneksi,"INSERT INTO login VALUES('$id_user','$username','$password','$no_telpon','$level')");
      
     echo "<script>window.location.href='?open=user_data'</script>";
   } 
@@ -20,9 +21,10 @@
     $id_user = $_POST['id_user'];
     $username = $_POST['username'];
     $password = $_POST['password'];
+    $no_telpon = $_POST['no_telpon'];
     $level = $_POST['level'];
      
-    mysqli_query($koneksi,"UPDATE login SET username='$username', password='$password',level='$level'  WHERE id_user='$id'");
+    mysqli_query($koneksi,"UPDATE login SET username='$username', password='$password', no_telpon='$no_telpon', level='$level'  WHERE id_user='$id'");
 
     echo "<script>window.location.href='?open=user_data'</script>";
     }
@@ -72,6 +74,7 @@
 							<th>Id User</th>
 							<th>Username</th>
 							<th>Password</th>
+              <th>No Telpon</th>
 							<th>Level </th>
 							<th colspan="2">Pilihan</th>
 						</tr>
@@ -84,6 +87,7 @@
 							<td><?php echo $data['id_user']; ?></td>
 							<td><?php echo $data['username']; ?></td>
 							<td><?php echo $data['password'];  ?></td>
+              <td><?php echo $data['no_telpon'];  ?></td>
 							<td><?php echo $data['level']; ?></td>
               
 
@@ -168,6 +172,11 @@
               <input type="password" id="password" name="password" value=""  class="login"/>
             </div> <!-- /field -->
             
+             <div class="field">
+              <label for="no_telpon">No Telpon</label>
+              <input type="no_telpon" id="no_telpon" name="no_telpon" value=""  class="login"/>
+            </div> <!-- /field -->
+           
               <div class="form-group form-group-sm">
                 <label for="level" class="col-sm-3 control-label pad-right-zero">Level:</label>
                 <div class="col-sm-4">
