@@ -1,0 +1,35 @@
+th {
+		width: 800px; height: 30px;
+		border: 1px solid black;
+		color : black;
+		
+	   }
+
+td { 
+		border: 1px solid black;
+		width: 500px; height : 40px;
+		color:  black;
+		font-family: "times new roman";
+		
+	  }
+	  
+	  .btn-default
+	  {
+		color:  green;  
+	  }
+	  
+	  
+	  
+	 .tabel1 {
+		width: 740px; height: 30px;
+		border: 1px solid black;
+		color : black;
+		border-top-width: 1px solid black;
+	 }
+	   .tabel {
+		width: 550px; height: 30px;
+		border: 1px solid black;
+		color : black;
+		border-top-width: 1px solid black;
+		
+	   }
