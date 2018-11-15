@@ -1,5 +1,6 @@
 <br> 
-<div class="col-md-10">
+
+<div class="col-md-10" id="tambah" >
 <!-- Horizontal Form -->
   <div class="box box-info">
             <div class="box-header with-border">
@@ -9,7 +10,7 @@
             <!-- form start -->
             <form class="form-horizontal">
               <div class="box-body">
-                
+                <button class="btn btn-default" id="hideform">Hide</button>     
                 <div class="form-group">
                   <label  class="col-sm-2 control-label">Kelas</label>
                   <div class="col-sm-8">
@@ -17,20 +18,15 @@
                   </div>
                 </div>
 
-                <div class="form-group">
-                  <label  class="col-sm-2 control-label">Semester</label>
-                  <div class="col-sm-8">
-                    <input type="text" class="form-control" name="semester" placeholder="semester">
-                  </div>
-                </div>
-
-
                 
                 <div class="form-group">
-                  <label  class="col-sm-2 control-label" name="alamat">Mapel</label>
-
+                  <label class="col-sm-2 control-label">Semester</label>
                   <div class="col-sm-8">
-                    <input type="text" class="form-control" id="inputPassword3" placeholder="Mapel">
+                    
+                  <select class="form-control">
+                    <option value="ganjil">Ganjil</option>
+                    <option value="genap">Genap</option>
+                  </select>
                   </div>
                 </div>
 
@@ -47,5 +43,57 @@
   </div>
 </div>
 
+<section class="content">
+  <div class="row">
+    <div class="col-md-10">
+      <div class="box">
+            <div class="box-header">
+              <button class="btn btn-info " id="click-tambah" ><li class="fa fa-plus"></li> Tambah</button>
+              <h3 class="box-title">Data Semua Guru</h3>
+            </div>
+    
+            <!-- /.box-header -->
+            <div class="box-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>Kelas</th>                
+                  <th>Semester</th>
+                                  
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                  
+        `       </tr>
+        
+                
+                </tbody>
+                <tfoot>
+                
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+    </div>
+  </div>
+</section>
 
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+      $("#tambah").hide();
+        $("#click-tambah").click(function(e) {
+          e.preventDefault()
+            $("#tambah").show();
+        });
+        $("#hideform").click(function(e) {
+          e.preventDefault()
+            $("#tambah").hide();
+        });
+    });
+</script>
 

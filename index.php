@@ -22,7 +22,7 @@
                         include 'halaman/table/data_siswa.php';
                     }else if($_GET['halaman']=='guru') {
                         include 'halaman/form/guru.php';
-                        include 'halaman/table/data_guru.php';
+                        
                     }else if($_GET['halaman']=='mapel') {
                         include 'halaman/form/mapel.php';
                     }else if($_GET['halaman']=='data_siswa') {
