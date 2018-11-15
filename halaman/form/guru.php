@@ -3,74 +3,22 @@
 <!-- Horizontal Form -->
   <div class="box box-info">
             <div class="box-header with-border">
-              <h3 class="box-title">Kelola Data Guru</h3>
+              <h3 class="box-title">Kelola Data Barang</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
             <form class="form-horizontal">
               <div class="box-body">
                 
+               
                 <div class="form-group">
-                  <label  class="col-sm-2 control-label">NIP Guru</label>
+                  <label  class="col-sm-2 control-label">Nama Barang</label>
                   <div class="col-sm-9">
-                    <input type="text" class="form-control" id="namaguru" name="nipguru" placeholder="NIP Guru">
+                    <input type="text" class="form-control" id="namabarang" name="namabarang" placeholder="Nama Barang">
                   </div>
                 </div>
 
-                <div class="form-group">
-                  <label  class="col-sm-2 control-label">Nama Guru</label>
-                  <div class="col-sm-9">
-                    <input type="text" class="form-control" id="namaguru" name="namaguru" placeholder="Nama Guru">
-                  </div>
                 </div>
-
-                <!-- select -->
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Jenis Kelamin</label>
-                  <div class="col-sm-9">
-                    
-                  <select class="form-control">
-                    <option>Pria</option>
-                    <option>Wanita</option>
-                  </select>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                <label  class="col-sm-2 control-label" >Tgl. Lahir</label>
-                <div class="col-sm-9">
-
-                <div class="input-group">
-                  <div class="input-group-addon">
-                    <i class="fa fa-calendar"></i>
-                  </div>
-                  <input type="text" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
-                </div>
-
-                </div>
-                <!-- /.input group -->
-              </div>
-              <div class="form-group">
-                  <label class="col-sm-2 control-label">Status</label>
-                  <div class="col-sm-9">
-                    
-                  <select class="form-control">
-                    <option>Pegawai negeri Sipil (PNS)</option>
-                    <option>Guru Tidak Tetap (GTT)</option>
-                    <option>Guru Belum Tetap (GBT)</option>
-                    <option>Guru Wiyata Bhakti (GWB)</option>
-                  </select>
-                  </div>
-                </div>
-                
-                <div class="form-group">
-                  <label  class="col-sm-2 control-label" name="alamat">Upload Foto</label>
-
-                  <div class="col-sm-9">
-                     <input type="file" id="exampleInputFile">
-                  </div>
-                </div>
-              </div>
               <!-- /.box-body -->
               <div class="box-footer">
                 <button type="submit" class="btn btn-default">Batal</button>
@@ -95,44 +43,44 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>No</th>
-                  <th>Nama</th>
-                  <th>Mata Pelajaran</th>
-                  <th>Kelas</th>
-                  <th>Alamat</th>
-                  <th>Status</th> 
-                  <th>Nomor HP</th>                
+                  <th>ID Barang</th>
+                  <th>Nama Barang</th>
+                  <th>Kategori</th>
+                  <th>Stok</th>
+                  <th>Satuan</th>
+                  <th>Harga Beli</th> 
+                  <th>Harga Jual</th>                
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
-                  <td>1</td>
-                  <td>Khafidurrohman </td>
-                  <td>Interaksi Manusia Komputer</td>
-                  <td> 5</td>
-                  <td> Perumahan Mastrib Blok H.12</td>
-                  <td>PNS</td>
-                  <td>086473846574</td>
+                  <td>01</td>
+                  <td>Obat</td>
+                  <td>30</td>
+                  <td>50</td>
+                  <td>20</td>
+                  <td>20000</td>
+                  <td>21000</td>
         `       </tr>
         
                 <tr>
-                  <td>2</td>
-                  <td>Elly Antika</td>
-                  <td>Managemen Basis Data</td>
-                  <td> 6</td>
-                  <td>Jl. Melati 60 Sumbersari -  Jember</td>
-                  <td>PNS</td>
-                  <td>081928736546</td>
+                  <td>02</td>
+                  <td>Pakan</td>
+                  <td>40</td>
+                  <td>60</td>
+                  <td>50</td>
+                  <td>30000</td>
+                  <td>31000</td>
                 </tr>
         
                 <tr>
-                  <td>3</td>
-                  <td>Winarko Wedyodiningrat</td>
-                  <td>Matematika Dasar</td>
-                  <td> 1</td>
-                  <td>Jl. PB Sudirman Gang Mawar 29 Jember</td>
-                  <td>Honorer</td>
-                  <td>087656374827</td>
+                  <td>03</td>
+                  <td>Vaksin</td>
+                  <td>30</td>
+                  <td>20</td>
+                  <td>50</td>
+                  <td>10000</td>
+                  <td>11000</td>
                 </tr>
                 
                 </tbody>

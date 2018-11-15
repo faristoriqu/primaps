@@ -26,7 +26,7 @@
           <ul class="treeview-menu">
             <li><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
             <li class="active"><a href="?halaman=siswa"><i class="fa fa-circle-o"></i> Siswa</a></li>
-            <li class="active"><a href="?halaman=guru"><i class="fa fa-circle-o"></i> Guru</a></li>
+            <li class="active"><a href="?halaman=guru"><i class="fa fa-circle-o"></i> Data Barang</a></li>
             <li class="active"><a href="?halaman=mapel"><i class="fa fa-circle-o"></i> Mata Pelajaran</a></li>
           </ul>
         </li>
