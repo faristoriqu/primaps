@@ -176,8 +176,10 @@
                     <td><?php echo $data['password']; ?></td>
                     <td><?php echo $data['level']; ?></td>
                     <td>
-                      <button class="btn btn-warning " id="click-edit" ><li class="fa fa-pencil"></li></button>
-                      <button class="btn btn-danger " ><li class="fa fa-close"></li></button>
+                      <button class="btn btn-warning " id="click-edit <?php echo $data['id_user'] ?>" ><li class="fa fa-pencil"></li></button>
+
+                      <a class="btn btn-danger " href="?halaman=register&delete=<?php echo $data['id_user'] ?>" onclick="return confirm('Anda Yakin Ingin Menghapus Data?')"> <li class="fa fa-close"></li> </a>
+
                     </td>
                     
                   </tr>
