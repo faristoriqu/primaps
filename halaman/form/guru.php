@@ -1,16 +1,15 @@
 <br> 
-<div class="col-md-10">
+<div class="col-md-10" id="tambah">
 <!-- Horizontal Form -->
   <div class="box box-info">
             <div class="box-header with-border">
-              <h3 class="box-title">Kelola Data Barang</h3>
+            <h3 class="box-title">Kelola Data Barang</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
             <form class="form-horizontal">
               <div class="box-body">
-                
-               
+                <button class="btn btn-default" id="hideform">Hide</button>              
                 <div class="form-group">
                   <label  class="col-sm-2 control-label">Nama Barang</label>
                   <div class="col-sm-9">
@@ -35,7 +34,8 @@
     <div class="col-md-10">
       <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Data Semua Guru</h3>
+             <button class="btn btn-info " id="click-tambah" ><li class="fa fa-plus"></li> Tambah</button> 
+            <h3 class="box-title">Data Semua Barang</h3>
             </div>
     
             <!-- /.box-header -->
@@ -95,4 +95,18 @@
   </div>
 </section>
 
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+      $("#tambah").hide();
+        $("#click-tambah").click(function(e) {
+          e.preventDefault()
+            $("#tambah").show();
+        });
+        $("#hideform").click(function(e) {
+          e.preventDefault()
+            $("#tambah").hide();
+        });
+    });
+</script>
 
