@@ -1,10 +1,11 @@
+
 <br> 
 
 <div class="col-md-10" id="tambah" >
 <!-- Horizontal Form -->
   <div class="box box-info">
             <div class="box-header with-border">
-              <h3 class="box-title">Tambah Mapel</h3>
+              <h3 class="box-title">Satuan Barang</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
@@ -12,21 +13,9 @@
               <div class="box-body">
                 <button class="btn btn-default" id="hideform">Hide</button>     
                 <div class="form-group">
-                  <label  class="col-sm-2 control-label">Kelas</label>
+                  <label  class="col-sm-2 control-label">Satun Barang</label>
                   <div class="col-sm-8">
-                    <input type="text" class="form-control"  name="kelas" placeholder="Kelas">
-                  </div>
-                </div>
-
-                
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Semester</label>
-                  <div class="col-sm-8">
-                    
-                  <select class="form-control">
-                    <option value="ganjil">Ganjil</option>
-                    <option value="genap">Genap</option>
-                  </select>
+                    <input type="text" class="form-control"  name="satuanbarang" placeholder="satuanbarang">
                   </div>
                 </div>
 
@@ -49,7 +38,7 @@
       <div class="box">
             <div class="box-header">
               <button class="btn btn-info " id="click-tambah" ><li class="fa fa-plus"></li> Tambah</button>
-              <h3 class="box-title">Data Semua Guru</h3>
+              <h3 class="box-title">Satuan Barang</h3>
             </div>
     
             <!-- /.box-header -->
@@ -57,8 +46,8 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Kelas</th>                
-                  <th>Semester</th>
+                  <th>Satu Barang</th>                
+                  <th>Pilihan</th>
                                   
                 </tr>
                 </thead>

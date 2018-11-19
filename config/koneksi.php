@@ -1,6 +1,6 @@
 <?php 
 
-$koneksi = mysqli_connect("localhost","root","","primaps");
+$koneksi = mysqli_connect("localhost","root","","prima");
 	
 	if ($koneksi == false) {
 		echo "Koneksi Anda gagal karena ".mysqli_connect_error();
