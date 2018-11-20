@@ -31,7 +31,7 @@
     $password = $_POST['password'];
     $level = $_POST['level'];
      
-    $query_edit=mysqli_query($koneksi,"UPDATE login SET username='$username', password='$password',level='$level'  WHERE id_user='$id'");
+    $query_edit=mysqli_query($koneksi,"UPDATE login SET id_user='$id_user',username='$username', password='$password',level='$level'  WHERE id_user='$id'");
 
     if($query_edit==TRUE){
       echo "<script>window.location.href='?halaman=register'</script>";
@@ -95,52 +95,10 @@
             </form>
   </div>
 </div>
-<div class="col-md-8" id="edit">
-  <div class="box box-info">
-            <div class="box-header with-border">
-              <h3 class="box-title">Tambah User</h3>
-            </div>
-            <!-- /.box-header -->
-            <!-- form start -->
-            <form class="form-horizontal">
-              <div class="box-body">
-                
-                <div class="form-group">
-                  <label  class="col-sm-2 control-label">Username</label>
-                  <div class="col-sm-8">
-                    <input type="text" class="form-control"  name="username" placeholder="Username">
-                  </div>
-                </div>
 
-                <div class="form-group">
-                  <label  class="col-sm-2 control-label">Password</label>
-                  <div class="col-sm-8">
-                    <input type="text" class="form-control" name="password" placeholder="Password">
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Level</label>
-                  <div class="col-sm-8">
-                    
-                  <select class="form-control">
-                    <option value="admin">Admin</option>
-                    <option value="karyawan">Karyawan</option>
-                  </select>
-                  </div>
-                </div>
-                
-                
-              </div>
-              <!-- /.box-body -->
-              <div class="box-footer">
-                <button type="submit" class="btn btn-default" id="hideforme">Batal</button>
-                <button type="submit" class="btn btn-info pull-right">Simpan</button>
-              </div>
-              <!-- /.box-footer -->
-            </form>
-  </div>
+<div class="col-md-8" id="edit">   
 </div>
+
 <section class="content">
   <div class="row">
     <div class="col-md-8">
@@ -176,7 +134,7 @@
                     <td><?php echo $data['password']; ?></td>
                     <td><?php echo $data['level']; ?></td>
                     <td>
-                      <button class="btn btn-warning " id="click-edit <?php echo $data['id_user'] ?>" ><li class="fa fa-pencil"></li></button>
+                      <button class="btn btn-warning click-edit" id="<?php echo $data['id_user'] ?>"><li class="fa fa-pencil"></li></button>
 
                       <a class="btn btn-danger " href="?halaman=register&delete=<?php echo $data['id_user'] ?>" onclick="return confirm('Anda Yakin Ingin Menghapus Data?')"> <li class="fa fa-close"></li> </a>
 
@@ -195,15 +153,24 @@
 <script type="text/javascript">
     $(document).ready(function () {
       $("#tambah").hide();
-      $("#edit").hide();
+      
         $("#click-tambah").click(function(e) {
           e.preventDefault()
             $("#tambah").show();
         });
-        $("#click-edit").click(function(e) {
-          e.preventDefault()
-            $("#edit").show();
+        $(document).ready(function () {
+        $(".click-edit").click(function(e) {
+            var m = $(this).attr("id");
+            $.ajax({
+                url: "halaman/register/edit.php",
+                type: "POST",
+                data : {id: m,},
+                success: function (ajaxData){
+                    $("#edit").html(ajaxData);
+                }
+            });
         });
+    });
         $("#hideform").click(function(e) {
           e.preventDefault()
             $("#tambah").hide();
