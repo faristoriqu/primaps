@@ -49,7 +49,10 @@
                         include 'halaman/register/register.php';
                     }else if($_GET['halaman']=='nilai') {
                         include 'halaman/form/nilai.php';
+                    }else if($_GET['halaman']=='supplier') {
+                        include 'halaman/form/supplier/data_supplier.php';
                     }
+
             }
                 ?>
         	</div>

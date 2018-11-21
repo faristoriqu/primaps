@@ -4,9 +4,9 @@
   $query = mysqli_query($koneksi,"SELECT * FROM login WHERE id_user = '$id'") or die(mysqli_error());
   foreach ($query as $data) {
   ?>
-  <div class="box box-info">
+  <div class="box box-warning">
             <div class="box-header with-border">
-              <h3 class="box-title">Tambah User</h3>
+              <h3 class="box-title">Edit User</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->

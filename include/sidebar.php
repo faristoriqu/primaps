@@ -24,10 +24,11 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
+            
             <li class="active"><a href="?halaman=siswa"><i class="fa fa-circle-o"></i> Data Kategori</a></li>
             <li class="active"><a href="?halaman=guru"><i class="fa fa-circle-o"></i> Data Barang</a></li>
             <li class="active"><a href="?halaman=data_satuan"><i class="fa fa-circle-o"></i> Data Satuan</a></li>
+            <li class="active"><a href="?halaman=supplier"><i class="fa fa-circle-o"></i> Data Suplier</a></li>
           </ul>
         </li>
         
