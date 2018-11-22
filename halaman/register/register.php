@@ -10,9 +10,12 @@
   }
 
   if(isset($_POST['simpan'])){
-    $kategori = $_POST['kategori'];
+    $id_user = $_POST['id_user'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $level = $_POST['level'];
      
-    $query_tambah = mysqli_query($koneksi,"INSERT INTO login VALUES('$kategori')");
+    $query_tambah = mysqli_query($koneksi,"INSERT INTO login VALUES('$id_user','$username','$password','$level')");
      
     if($query_tambah == TRUE){
       echo "<script>window.location.href='?halaman=register'</script>";
