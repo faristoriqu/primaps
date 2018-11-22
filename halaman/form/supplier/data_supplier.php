@@ -141,7 +141,6 @@
 <script type="text/javascript">
     $(document).ready(function () {
       $("#tambah").hide();
-      
         $("#click-tambah").click(function(e) {
           e.preventDefault()
             $("#tambah").show();
