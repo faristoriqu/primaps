@@ -29,11 +29,19 @@
                     <select  name="idkat" id="idkat" class="form-control" class="form-control select2"  >
                       <option value="">-Pilih Kategori-</option>
                     <?php 
-                  
-                      $query = mysqli_query($koneksi,"SELECT * FROM kategori") or die(mysqli_error());
-                      while ($data = mysqli_fetch_array($query)) {  
+                    $querykat = mysqli_query($koneksi,"SELECT * FROM kategori") or die(mysqli_error());
+                    foreach ($querykat as $kat ) {  
                     ?>
-                    <option value="<?php echo $data['idkat'] ?>"><?php echo $data['kategori'] ?></option>
+                    <option value="<?php echo $data['idkat'] ?>"
+                      
+                      <?php if($kat['idkat']==$data['idkat']){ 
+                        echo "Selected";
+                      } ?>
+                      >
+                      <?php echo $kat['kategori'] ?>
+                        
+                      </option>
+                    
                     <?php } ?>    
                     
                     </select>
