@@ -16,10 +16,10 @@
     $ids = $_POST['ids'];
     
     
-    $query_tambah = mysqli_query($koneksi,"INSERT INTO barang(id_barang, namabarang, idkat, ids) VALUES('$id_barang', '$namabarang','$idkat','$ids')");
+    $query_tambah = mysqli_query($koneksi,"INSERT INTO barang (id_barang, namabarang, idkat, ids) VALUES(NULL, '$namabarang','$idkat','$ids')");
      
     if($query_tambah == TRUE){
-      echo "<script>window.location.href='?halaman=barang'</script>";
+     echo "<script>window.location.href='?halaman=barang'</script>";
     } else{
       echo "gagal";
     }
@@ -126,28 +126,24 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>ID Barang</th>
+                  <th>No</th>
                   <th>Nama Barang</th>
                   <th>Kategori</th>
                   <th>Satuan</th>
+                  <th>Pilihan</th>
                   
                 </thead>
                 <?php 
-                  
-                  $query = mysqli_query($koneksi,"SELECT * FROM barang") or die(mysqli_error());
+                  $query = mysqli_query($koneksi,"SELECT * FROM barang JOIN kategori ON barang.idkat =kategori.idkat JOIN satuan ON barang.ids=satuan.ids") or die(mysqli_error());
                   $no=1;
                   while ($data = mysqli_fetch_array($query)) {  
                 ?> 
-                
-                
                 <tbody>
                 <tr>
                   <td><?php echo $no ?></td>
                     <td><?php echo $data['namabarang']; ?></td>
-                    
-                    <td><?php echo $data['idkat'] ?></td>    
-
-                    <td ><?php echo $data['ids'] ?></td> 
+                    <td><?php echo $data['kategori'] ?></td>    
+                    <td ><?php echo $data['namasatuan'] ?></td> 
                     <td>
 
                       <button class="btn btn-warning click-edit" id="<?php echo $data['id_barang'] ?>"><li class="fa fa-pencil"></li></button>
