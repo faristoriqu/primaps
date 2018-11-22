@@ -24,7 +24,7 @@
                         include 'halaman/form/guru.php';
                         
                     }else if($_GET['halaman']=='data_satuan') {
-                        include 'halaman/form/data_satuan.php';
+                        include 'halaman/form/data_satuan/data_satuan.php';
                     }else if($_GET['halaman']=='data_siswa') {
                         include 'halaman/table/data_siswa.php';
                     }else if($_GET['halaman']=='data_guru') {

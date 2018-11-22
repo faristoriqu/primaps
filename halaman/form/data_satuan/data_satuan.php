@@ -45,17 +45,17 @@
 <!-- Horizontal Form -->
   <div class="box box-info">
             <div class="box-header with-border">
-              <h3 class="box-title">Satuan Barang</h3>
+              <h3 class="box-title ">Satuan Barang</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form class="form-horizontal" action="?halaman=data_satuan" method="post">
+            <form class="form-horizontal" action="?halaman=data_satuan" method="POST">
               <div class="box-body">
                      
                 <div class="form-group">
-                  <label  class="col-sm-2 control-label">Satun Barang</label>
+                  <label  class="col-sm-2 control-label">Satuan Barang</label>
                   <div class="col-sm-8">
-                    <input type="text" class="form-control"  name="namasatuan" placeholder="satuanbarang">
+                    <input type="text" class="form-control"  name="namasatuan" placeholder="Satuan Barang">
                   </div>
                 </div>
 
@@ -71,6 +71,8 @@
             </form>
   </div>
 </div>
+<div class="col-md-8" id="edit">
+  </div>
 
 <section class="content">
   <div class="row">
@@ -106,7 +108,7 @@
                     <td><?php echo $data['namasatuan']; ?></td>
                    
                     <td>
-                      <button class="btn btn-warning " id="click-edit <?php echo $data['ids'] ?>" ><li class="fa fa-pencil"></li></button>
+                      <button class="btn btn-warning click-edit" id="<?php echo $data['ids'] ?>" ><li class="fa fa-pencil"></li></button>
 
                       <a class="btn btn-danger " href="?halaman=data_satuan&delete=<?php echo $data['ids'] ?>" onclick="return confirm('Anda Yakin Ingin Menghapus Data?')"> <li class="fa fa-close"></li> </a>
 
@@ -125,19 +127,37 @@
     </div>
   </div>
 </section>
-
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
       $("#tambah").hide();
+      
         $("#click-tambah").click(function(e) {
           e.preventDefault()
             $("#tambah").show();
         });
+        $(document).ready(function () {
+        $(".click-edit").click(function(e) {
+            var m = $(this).attr("id");
+            $.ajax({
+                url: "halaman/form/data_satuan/edit.php",
+                type: "POST",
+                data : {id: m,},
+                success: function (ajaxData){
+                    $("#edit").html(ajaxData);
+                }
+            });
+        });
+    });
         $("#hideform").click(function(e) {
           e.preventDefault()
             $("#tambah").hide();
         });
+        $("#hideforme").click(function(e) {
+          e.preventDefault()
+            $("#edit").hide();
+        });
     });
+
 </script>
 
