@@ -25,7 +25,7 @@
           </a>
           <ul class="treeview-menu">
             
-            <li class="active"><a href="?halaman=siswa"><i class="fa fa-circle-o"></i> Data Kategori</a></li>
+            <li class="active"><a href="?halaman=data_kategori"><i class="fa fa-circle-o"></i> Data Kategori Barang</a></li>
             <li class="active"><a href="?halaman=barang"><i class="fa fa-circle-o"></i> Data Barang</a></li>
             <li class="active"><a href="?halaman=data_satuan"><i class="fa fa-circle-o"></i> Data Satuan</a></li>
             <li class="active"><a href="?halaman=supplier"><i class="fa fa-circle-o"></i> Data Suplier</a></li>
