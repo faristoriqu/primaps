@@ -20,15 +20,15 @@
                         include 'halaman/form/siswa.php';
                         // include 'pages/tables/data.html';
                         include 'halaman/table/data_siswa.php';
-                    }else if($_GET['halaman']=='guru') {
-                        include 'halaman/form/guru.php';
+                    }else if($_GET['halaman']=='barang') {
+                        include 'halaman/form/barang/barang.php';
                         
                     }else if($_GET['halaman']=='data_satuan') {
                         include 'halaman/form/data_satuan.php';
                     }else if($_GET['halaman']=='data_siswa') {
                         include 'halaman/table/data_siswa.php';
-                    }else if($_GET['halaman']=='data_guru') {
-                        include 'halaman/table/data_guru.php';
+                    }else if($_GET['halaman']=='barang') {
+                        include 'halaman/form/barang/barang.php';
                     }else if($_GET['halaman']=='data_siswa_kelas1') {
                         include 'halaman/table/data_siswa_kelas1.php';
                     }else if($_GET['halaman']=='data_siswa_kelas2') {
