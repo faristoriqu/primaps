@@ -16,10 +16,10 @@
                 <?php 
                     
                 if(isset($_GET['halaman'])){
-                    if($_GET['halaman']=='siswa') {
-                        include 'halaman/form/siswa.php';
+                    if($_GET['halaman']=='kategori') {
+                        include 'halaman/form/kategori/data_kategori.php';
                         // include 'pages/tables/data.html';
-                        include 'halaman/table/data_siswa.php';
+                        
                     }else if($_GET['halaman']=='guru') {
                         include 'halaman/form/guru.php';
                         
