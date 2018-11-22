@@ -26,7 +26,7 @@
                         include 'halaman/form/data_kategori/data_kategori.php';
                        
                     }else if($_GET['halaman']=='data_satuan') {
-                        include 'halaman/form/data_satuan.php';
+                        include 'halaman/form/data_satuan/data_satuan.php';
                     }else if($_GET['halaman']=='data_siswa') {
                         include 'halaman/table/data_siswa.php';
                     }else if($_GET['halaman']=='barang') {
