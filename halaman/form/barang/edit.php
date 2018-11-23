@@ -48,23 +48,32 @@
                   </div>
                   </div>
     
-                  <div class="form-group">
-                  <label class="col-sm-3 control-label">Satuan</label>
-                  <div class="col-sm-7">
-                  <select name="ids" id="ids" class="form-control" >
-                    <option value="">-Pilih Satuan-</option>
-                    <?php 
                   
-                      $query = mysqli_query($koneksi,"SELECT * FROM satuan") or die(mysqli_error());
-                      while ($data = mysqli_fetch_array($query)) {  
+                <div class="form-group"> 
+                  <label class="col-sm-3 control-label">Satuan</label>
+                  <div class="col-sm-7" >
+                    <select  name="idkat" id="idkat" class="form-control" class="form-control select2"  >
+                      <option value="">-Pilih Satuan-</option>
+                    <?php 
+                    $query1 = mysqli_query($koneksi,"SELECT * FROM satuan") or die(mysqli_error());
+                    foreach ($query1 as $kat ) {  
                     ?>
-                    <option value="<?php echo $data['ids'] ?>"><?php echo $data['namasatuan'] ?></option>
+                    <option value="<?php echo $data['ids'] ?>"
+                      
+                      <?php if($kat['ids']==$data['ids']){ 
+                        echo "Selected";
+                      } ?>
+                      >
+                      <?php echo $kat['namasatuan'] ?>
+                        
+                      </option>
+                    
                     <?php } ?>    
-                                       
+                    
                     </select>
                   </div>
-                </div>
-
+                  </div>
+    
               </div>
               <!-- /.box-body -->
               <div class="box-footer">

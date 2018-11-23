@@ -134,7 +134,7 @@
                   
                 </thead>
                 <?php 
-                  $query = mysqli_query($koneksi,"SELECT * FROM barang JOIN kategori ON barang.idkat =kategori.idkat JOIN satuan ON barang.ids=satuan.ids") or die(mysqli_error());
+                  $query = mysqli_query($koneksi,"SELECT * FROM barang JOIN kategori ON barang.idkat =kategori.idkat JOIN satuan ON barang.ids=satuan.ids ORDER BY namabarang") or die(mysqli_error());
                   $no=1;
                   while ($data = mysqli_fetch_array($query)) {  
                 ?> 

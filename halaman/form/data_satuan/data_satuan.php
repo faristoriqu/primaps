@@ -55,7 +55,7 @@
                 <div class="form-group">
                   <label  class="col-sm-2 control-label">Satuan Barang</label>
                   <div class="col-sm-8">
-                    <input type="text" class="form-control"  name="namasatuan" placeholder="satuanbarang">
+                    <input type="text" class="form-control"  name="namasatuan" placeholder="Satuan Barang">
                   </div>
                 </div>
 
@@ -89,7 +89,7 @@
                 <thead>
                 <tr>
                   <th>No</th>
-                  <th>Satun Barang</th>                
+                  <th>Satuan Barang</th>                
                   <th>Pilihan</th>
                                   
                 </tr>

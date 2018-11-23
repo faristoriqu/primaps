@@ -26,7 +26,7 @@
 
   if(isset($_POST['edit'])){
     $id = $_POST['id'];
-    $id_supplier = $_POST['id_user'];
+    $id_supplier = $_POST['id'];
     $namasupplier = $_POST['namasupplier'];
     $alamat = $_POST['alamat'];
     $telefon = $_POST['telefon'];
@@ -55,21 +55,21 @@
                 <div class="form-group">
                   <label  class="col-sm-3 control-label">Nama Supplier</label>
                   <div class="col-sm-8">
-                    <input type="text" class="form-control"  name="namasupplier" placeholder="Nama Supplier">
+                    <input type="text" class="form-control" id="namasupplier"  name="namasupplier" placeholder="Nama Supplier">
                   </div>
                 </div>
 
                 <div class="form-group">
                   <label  class="col-sm-3 control-label">Alamat</label>
                   <div class="col-sm-8">
-                    <textarea class="form-control"  name="alamat" placeholder="Alamat"></textarea>
+                    <textarea class="form-control" id="alamat" name="alamat" placeholder="Alamat"></textarea>
                   </div>
                 </div>
 
                 <div class="form-group">
                   <label  class="col-sm-3 control-label">Telefon</label>
                   <div class="col-sm-8">
-                    <input type="text" class="form-control" name="telefon" placeholder="Telefon">
+                    <input type="text" class="form-control" id= "telefon" name="telefon" placeholder="Telefon">
                   </div>
                 </div>
                 
