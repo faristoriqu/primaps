@@ -1,5 +1,5 @@
 <br> 
-<div class="col-md-10">
+<div class="col-md-15">
 <!-- Horizontal Form -->
   <div class="box box-info">
             <div class="box-header with-border">
