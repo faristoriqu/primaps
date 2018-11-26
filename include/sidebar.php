@@ -29,6 +29,8 @@
             <li class="active"><a href="?halaman=barang"><i class="fa fa-circle-o"></i> Data Barang</a></li>
             <li class="active"><a href="?halaman=data_satuan"><i class="fa fa-circle-o"></i> Data Satuan</a></li>
             <li class="active"><a href="?halaman=supplier"><i class="fa fa-circle-o"></i> Data Suplier</a></li>
+            <li class="active"><a href="?halaman=barang_masuk"><i class="fa fa-circle-o"></i> Data Barang Masuk</a></li>
+          
           </ul>
         </li>
         
