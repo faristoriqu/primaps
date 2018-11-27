@@ -29,10 +29,9 @@
     }
 ?>
 
-<br> 
 
 <section class="content">
-  <div class="row">
+  <div class="data">
     <div class="col-md-8">
        <form action="?halaman=barang_masuk" method="post">
       <div class="box box-primary">

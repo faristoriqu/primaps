@@ -36,19 +36,12 @@
       echo "gagal";
     }
     }
-?>
-
-
- 
+?> 
 <section class="content">
   <div class="data">
-    <div class="col-md-10" id="tambah" >
-      <div class="box box-info">
-                <div class="box-header with-border">
-                  <h3 class="box-title">Satuan Barang</h3>
-                </div>
-                <!-- /.box-header -->
-                <!-- form start -->
+    <div class="col-md-12">
+      <div class="box">
+            <div class="box-header">
                 <form class="form-horizontal" action="?halaman=data_satuan" method="POST">
                   <div class="box-body">
                          
@@ -58,32 +51,16 @@
                         <input type="text" class="form-control"  name="namasatuan" placeholder="Satuan Barang">
                       </div>
                     </div>
-
-                    
-                    
+                    <div class="form-group">
+                      <center>
+                        <button type="submit" class="btn btn-info" name="simpan">Simpan</button>
+                      </center>  
+                    </div> 
                   </div>
-                  <!-- /.box-body -->
-                  <div class="box-footer">
-                    <button type="submit" class="btn btn-default" id="hideform">Batal</button>
-                    <button type="submit" class="btn btn-info pull-right" name="simpan">Simpan</button>
-                  </div>
-                  <!-- /.box-footer -->
                 </form>
-      </div>
-    </div>
-    <div class="col-md-8" id="edit">   
-    </div>
-
-
-    <div class="col-md-10">
-      <div class="box">
-            <div class="box-header">
-              <button class="btn btn-info " id="click-tambah" ><li class="fa fa-plus"></li> Tambah</button>
-              <h3 class="box-title">Satuan Barang</h3>
             </div>
-    
-            <!-- /.box-header -->
             <div class="box-body">
+              <div class="col-sm-8" style="text-align: center";>
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
@@ -120,6 +97,7 @@
                 </tfoot>
                 <?php $no++; }  ?>
               </table>
+              </div>
             </div>
             <!-- /.box-body -->
           </div>

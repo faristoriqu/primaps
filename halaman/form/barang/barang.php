@@ -42,78 +42,76 @@
     }
 ?>
 
-<br> 
-<div class="col-md-10" id="tambah">
-<!-- Horizontal Form -->
-  <div class="box box-info">
-            <div class="box-header with-border">
-            <h3 class="box-title">Kelola Data Barang</h3>
-            </div>
-            <!-- /.box-header -->
-            <!-- form start -->
-            <form action="?halaman=barang" method="post"class="form-horizontal">
-              <div class="box-body">
-                <div class="form-group">
-                  <label  class="col-sm-2 control-label">Nama Barang</label>
-                  <div class="col-sm-8">
-                    <input type="text" class="form-control" id="namabarang" name="namabarang" placeholder="Nama Barang">
-                  </div>
-                </div>
-               
-               
-                <div class="form-group"> 
-                  <label class="col-sm-2 control-label">Kategori</label>
-                  <div class="col-sm-8" >
-                    <select  name="idkat" id="idkat" class="form-control" class="form-control select2"  >
-                      <option value="">-Pilih Kategori-</option>
-                    <?php 
-                  
-                      $query = mysqli_query($koneksi,"SELECT * FROM kategori") or die(mysqli_error());
-                      while ($data = mysqli_fetch_array($query)) {  
-                    ?>
-                    <option value="<?php echo $data['idkat'] ?>"><?php echo $data['kategori'] ?></option>
-                    <?php } ?>    
-                    
-                    </select>
-                  </div>
-                  </div>
-    
-                  <div class="form-group">
-                  <label class="col-sm-2 control-label">Satuan</label>
-                  <div class="col-sm-8">
-                  <select name="ids" id="ids" class="form-control" required>
-                    <option value="">-Pilih Satuan-</option>
-                    <?php 
-                  
-                      $query = mysqli_query($koneksi,"SELECT * FROM satuan") or die(mysqli_error());
-                      while ($data = mysqli_fetch_array($query)) {  
-                    ?>
-                    <option value="<?php echo $data['ids'] ?>"><?php echo $data['namasatuan'] ?></option>
-                    <?php } ?>    
-                                       
-                    </select>
-                  </div>
-                </div>
-
-                 
-                </div>
-              <!-- /.box-body -->
-              <div class="box-footer">
-                <button type="submit" class="btn btn-default" id="hideform">Batal</button>
-                <button type="submit" class="btn btn-info pull-right" name="simpan">Simpan
-                </button>
-              </div>
-              <!-- /.box-footer -->
-            </form>
-  </div>
-
-
-</div>
-<div class="col-md-8" id="edit">   
-</div>
-
+ 
 <section class="content">
-  <div class="row">
+  <div class="data">
+    <div class="col-md-10" id="tambah">
+      <div class="box box-info">
+                <div class="box-header with-border">
+                <h3 class="box-title">Kelola Data Barang</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form action="?halaman=barang" method="post"class="form-horizontal">
+                  <div class="box-body">
+                    <div class="form-group">
+                      <label  class="col-sm-2 control-label">Nama Barang</label>
+                      <div class="col-sm-8">
+                        <input type="text" class="form-control" id="namabarang" name="namabarang" placeholder="Nama Barang">
+                      </div>
+                    </div>
+                   
+                   
+                    <div class="form-group"> 
+                      <label class="col-sm-2 control-label">Kategori</label>
+                      <div class="col-sm-8" >
+                        <select  name="idkat" id="idkat" class="form-control" class="form-control select2"  >
+                          <option value="">-Pilih Kategori-</option>
+                        <?php 
+                      
+                          $query = mysqli_query($koneksi,"SELECT * FROM kategori") or die(mysqli_error());
+                          while ($data = mysqli_fetch_array($query)) {  
+                        ?>
+                        <option value="<?php echo $data['idkat'] ?>"><?php echo $data['kategori'] ?></option>
+                        <?php } ?>    
+                        
+                        </select>
+                      </div>
+                      </div>
+        
+                      <div class="form-group">
+                      <label class="col-sm-2 control-label">Satuan</label>
+                      <div class="col-sm-8">
+                      <select name="ids" id="ids" class="form-control" required>
+                        <option value="">-Pilih Satuan-</option>
+                        <?php 
+                      
+                          $query = mysqli_query($koneksi,"SELECT * FROM satuan") or die(mysqli_error());
+                          while ($data = mysqli_fetch_array($query)) {  
+                        ?>
+                        <option value="<?php echo $data['ids'] ?>"><?php echo $data['namasatuan'] ?></option>
+                        <?php } ?>    
+                                           
+                        </select>
+                      </div>
+                    </div>
+
+                     
+                    </div>
+                  <!-- /.box-body -->
+                  <div class="box-footer">
+                    <button type="submit" class="btn btn-default" id="hideform">Batal</button>
+                    <button type="submit" class="btn btn-info pull-right" name="simpan">Simpan
+                    </button>
+                  </div>
+                  <!-- /.box-footer -->
+                </form>
+      </div>
+    </div>
+    <div class="col-md-8" id="edit">   
+    </div>
+
+
     <div class="col-md-10">
       <div class="box">
             <div class="box-header">
