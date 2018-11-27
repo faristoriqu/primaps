@@ -6,7 +6,7 @@
       echo "<script>window.location.href='?halaman=data_satuan'</script>";
     }else{
       echo "gagal";
-    } 
+    }
   }
 
   if(isset($_POST['simpan'])){
@@ -40,41 +40,42 @@
 
 
 <br> 
-<section class="content">
-  <div class="data">
-    <div class="col-md-10" id="tambah" >
-      <div class="box box-info">
-                <div class="box-header with-border">
-                  <h3 class="box-title">Satuan Barang</h3>
+
+<div class="col-md-10" id="tambah" >
+<!-- Horizontal Form -->
+  <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Satuan Barang</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form class="form-horizontal" action="?halaman=data_satuan" method="POST">
+              <div class="box-body">
+                     
+                <div class="form-group">
+                  <label  class="col-sm-2 control-label">Satuan Barang</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control"  name="namasatuan" placeholder="Satuan Barang">
+                  </div>
                 </div>
-                <!-- /.box-header -->
-                <!-- form start -->
-                <form class="form-horizontal" action="?halaman=data_satuan" method="POST">
-                  <div class="box-body">
-                         
-                    <div class="form-group">
-                      <label  class="col-sm-2 control-label">Satuan Barang</label>
-                      <div class="col-sm-8">
-                        <input type="text" class="form-control"  name="namasatuan" placeholder="Satuan Barang">
-                      </div>
-                    </div>
 
-                    
-                    
-                  </div>
-                  <!-- /.box-body -->
-                  <div class="box-footer">
-                    <button type="submit" class="btn btn-default" id="hideform">Batal</button>
-                    <button type="submit" class="btn btn-info pull-right" name="simpan">Simpan</button>
-                  </div>
-                  <!-- /.box-footer -->
-                </form>
-      </div>
-    </div>
-    <div class="col-md-8" id="edit">   
-    </div>
+                
+                
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer">
+                <button type="submit" class="btn btn-default" id="hideform">Batal</button>
+                <button type="submit" class="btn btn-info pull-right" name="simpan">Simpan</button>
+              </div>
+              <!-- /.box-footer -->
+            </form>
+  </div>
+</div>
+<div class="col-md-8" id="edit">   
+</div>
 
-
+<section class="content">
+  <div class="row">
     <div class="col-md-10">
       <div class="box">
             <div class="box-header">
