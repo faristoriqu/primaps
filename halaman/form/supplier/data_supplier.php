@@ -42,53 +42,54 @@
 ?>
 
 <br> 
-<div class="col-md-8" id="tambah">
-  <div class="box box-info">
-            <div class="box-header with-border">
-              <h3 class="box-title">Tambah Supplier</h3>
-            </div>
-            <!-- /.box-header -->
-            <!-- form start -->
-            <form class="form-horizontal" action="?halaman=supplier" method="POST">
-              <div class="box-body">
-                
-                <div class="form-group">
-                  <label  class="col-sm-3 control-label">Nama Supplier</label>
-                  <div class="col-sm-8">
-                    <input type="text" class="form-control" id="namasupplier"  name="namasupplier" placeholder="Nama Supplier">
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label  class="col-sm-3 control-label">Alamat</label>
-                  <div class="col-sm-8">
-                    <textarea class="form-control" id="alamat" name="alamat" placeholder="Alamat"></textarea>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <label  class="col-sm-3 control-label">Telefon</label>
-                  <div class="col-sm-8">
-                    <input type="text" class="form-control" id= "telefon" name="telefon" placeholder="Telefon">
-                  </div>
-                </div>
-                
-              </div>
-              <!-- /.box-body -->
-              <div class="box-footer">
-                <button type="submit" class="btn btn-default" id="hideform">Batal</button>
-                <button type="submit" class="btn btn-info pull-right" name="simpan">Simpan</button>
-              </div>
-              <!-- /.box-footer -->
-            </form>
-  </div>
-</div>
-
-<div class="col-md-8" id="edit">   
-</div>
-
 <section class="content">
-  <div class="row">
+  <div class="data">
+    <div class="col-md-8" id="tambah">
+      <div class="box box-info">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Tambah Supplier</h3>
+                </div>
+                <!-- /.box-header -->
+                <!-- form start -->
+                <form class="form-horizontal" action="?halaman=supplier" method="POST">
+                  <div class="box-body">
+                    
+                    <div class="form-group">
+                      <label  class="col-sm-3 control-label">Nama Supplier</label>
+                      <div class="col-sm-8">
+                        <input type="text" class="form-control" id="namasupplier"  name="namasupplier" placeholder="Nama Supplier">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label  class="col-sm-3 control-label">Alamat</label>
+                      <div class="col-sm-8">
+                        <textarea class="form-control" id="alamat" name="alamat" placeholder="Alamat"></textarea>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label  class="col-sm-3 control-label">Telefon</label>
+                      <div class="col-sm-8">
+                        <input type="text" class="form-control" id= "telefon" name="telefon" placeholder="Telefon">
+                      </div>
+                    </div>
+                    
+                  </div>
+                  <!-- /.box-body -->
+                  <div class="box-footer">
+                    <button type="submit" class="btn btn-default" id="hideform">Batal</button>
+                    <button type="submit" class="btn btn-info pull-right" name="simpan">Simpan</button>
+                  </div>
+                  <!-- /.box-footer -->
+                </form>
+      </div>
+    </div>
+
+    <div class="col-md-8" id="edit">   
+    </div>
+
+
     <div class="col-md-8">
       <div class="box box-primary">
             <div class="box-header">
