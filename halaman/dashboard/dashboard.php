@@ -1,19 +1,4 @@
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    
-    <section class="content-header">
-       
-      <h1>
-        <i class="ion ion-ios-speedometer"></i>
-        Dashboard 
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Dashboard</li>
-      </ol>
-    </section>
-
-    <section class="content">
+<section class="content">
       <!-- Small boxes (Stat box) -->
       <div class="data">
         <div class="col-lg-3 col-xs-6">
@@ -107,4 +92,4 @@
         </div>
         <!-- ./col -->
       </div>
-    </section>
+</section>

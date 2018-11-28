@@ -59,9 +59,10 @@
                   </div>
                 </form>
             </div>
-            <div class="box-body">
-              <div class="col-sm-8" style="text-align: center";>
-              <table id="example1" class="table table-bordered table-striped">
+            <div class="box-body" style="align-self: center;">
+              
+              <div class="col-sm-8">
+              <table id="example2" class="table table-bordered table-striped">
                 <thead>
                 <tr>
                   <th>No</th>
