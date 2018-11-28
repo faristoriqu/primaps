@@ -14,11 +14,11 @@
         	?>
         	<div class="content-wrapper">
                 <?php 
-                    
+                    include 'halaman/dashboard/dashboard.php';
                 if(isset($_GET['halaman'])){
+                    
                     if($_GET['halaman']=='siswa') {
                         include 'halaman/form/siswa.php';
-                        // include 'pages/tables/data.html';
                         include 'halaman/table/data_siswa.php';
                     }else if($_GET['halaman']=='barang') {
                         include 'halaman/form/barang/barang.php';
