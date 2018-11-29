@@ -39,30 +39,67 @@
 ?> 
 <section class="content">
   <div class="data">
-    <div class="col-md-12">
-      <div class="box">
+    <div class="col-md-10 col-sm-offset-1">
+      <div class="box box-info">
             <div class="box-header">
                 <form class="form-horizontal" action="?halaman=data_satuan" method="POST">
                   <div class="box-body">
                          
                     <div class="form-group">
-                      <label  class="col-sm-2 control-label">Satuan Barang</label>
-                      <div class="col-sm-8">
-                        <input type="text" class="form-control"  name="namasatuan" placeholder="Satuan Barang">
+                      <label  class="col-sm-2 control-label">Karyawan</label>
+                      <div class="col-sm-3">
+                        <input type="text" class="form-control"  name="karyawan" placeholder="nama karyawan">
+                      </div>
+                      <div class="col-sm-3 col-sm-offset-1">
+                       <div class="input-group">
+                            <div class="input-group-addon">
+                              <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" name="tgl_lahir" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                          </div>
                       </div>
                     </div>
+
                     <div class="form-group">
-                      <center>
-                        <button type="submit" class="btn btn-info" name="simpan">Simpan</button>
-                      </center>  
+                      <label  class="col-sm-2 control-label">Kode Transaksi</label>
+                      <div class="col-sm-3">
+                        <input type="text" class="form-control"  name="kode" placeholder="">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label  class="col-sm-2 control-label">Nama Barang</label>
+                      <div class="col-sm-3">
+                       <select class="form-control select2" style="width: 100%;">
+                          <option>Alabama</option>
+                          <option>Alaska</option>
+                          <option>California</option>
+                          <option>Delaware</option>
+                          <option>Tennessee</option>
+                          <option>Texas</option>
+                          <option>Washington</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label  class="col-sm-2 control-label">Jumlah</label>
+                      <div class="col-sm-3">
+                        <input type="number" class="form-control"  name="kode" placeholder="">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="col-md-3 col-sm-offset-5">
+                        <button type="submit" class="btn btn-info" name="tambah">Tambah</button>
+                      </div>
                     </div> 
                   </div>
                 </form>
             </div>
-            <div class="box-body" style="align-self: center;">
-              
-              <div class="col-sm-8">
-              <table id="example2" class="table table-bordered table-striped">
+            <div class="box-body">
+              <div class="col-sm-8 col-sm-offset-2">
+              <table class="table table-striped table-bordered">
                 <thead>
                 <tr>
                   <th>No</th>
@@ -85,8 +122,7 @@
                     <td><?php echo $data['namasatuan']; ?></td>
                    
                     <td>
-                      <button class="btn btn-warning click-edit" id="<?php echo $data['ids'] ?>" ><li class="fa fa-pencil"></li></button>
-
+                      
                       <a class="btn btn-danger " href="?halaman=data_satuan&delete=<?php echo $data['ids'] ?>" onclick="return confirm('Anda Yakin Ingin Menghapus Data?')"> <li class="fa fa-close"></li> </a>
 
                     </td>
@@ -108,14 +144,14 @@
 
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script type="text/javascript">
-   $(document).ready(function () {
+  $(document).ready(function () {
       $("#tambah").hide();
       
         $("#click-tambah").click(function(e) {
           e.preventDefault()
             $("#tambah").show();
-        });
-        $(document).ready(function () {
+  });
+  $(document).ready(function () {
         $(".click-edit").click(function(e) {
             var m = $(this).attr("id");
             $.ajax({
@@ -127,7 +163,7 @@
                 }
             });
         });
-    });
+  });
         $("#hideform").click(function(e) {
           e.preventDefault()
             $("#tambah").hide();
@@ -136,6 +172,9 @@
           e.preventDefault()
             $("#edit").hide();
         });
+
     });
 </script>
+<!-- Select2 -->
+<script src="bower_components/select2/dist/js/select2.full.min.js"></script>
 
