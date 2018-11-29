@@ -1,41 +1,23 @@
 <?php 
-  if(isset($_GET['delete'])){
-    $query_delete = mysqli_query($koneksi,"DELETE FROM satuan WHERE ids='$_GET[delete]'")or die(mysql_error());
-    
-    if ($query_delete == TRUE) {
-      echo "<script>window.location.href='?halaman=data_satuan'</script>";
-    }else{
-      echo "gagal";
-    }
+  $carikode = mysqli_query($koneksi, "SELECT kode_transaksi from transaksi") or die (mysqli_error());
+  // menjadikannya array
+  $datakode = mysqli_fetch_array($carikode);
+  $jumlah_data = mysqli_num_rows($carikode);
+  // jika $datakode
+  if ($datakode) {
+   // membuat variabel baru untuk mengambil kode barang mulai dari 1
+   $nilaikode = substr($jumlah_data[0], 1);
+   // menjadikan $nilaikode ( int )
+   $kode = (int) $nilaikode;
+   // setiap $kode di tambah 1
+   $kode = $jumlah_data + 1;
+   // hasil untuk menambahkan kode 
+   // angka 3 untuk menambahkan tiga angka setelah B dan angka 0 angka yang berada di tengah
+   // atau angka sebelum $kode
+   $kode_otomatis = "TRS".str_pad($kode, 4, "0", STR_PAD_LEFT);
+  } else {
+   $kode_otomatis = "TRS0001";
   }
-
-  if(isset($_POST['simpan'])){
-    
-    $namasatuan = $_POST['namasatuan'];
-    
-     
-    $query_tambah = mysqli_query($koneksi,"INSERT INTO satuan VALUES(NULL,'$namasatuan')");
-     
-    if($query_tambah == TRUE){
-      echo "<script>window.location.href='?halaman=data_satuan'</script>";
-    } else{
-      echo "gagal";
-    }
-  } 
-
-  if(isset($_POST['edit'])){
-    $id = $_POST['id'];
-    $namasatuan = $_POST['namasatuan'];
-   
-     
-    $query_edit=mysqli_query($koneksi,"UPDATE satuan SET namasatuan='$namasatuan'  WHERE ids='$id'");
-
-    if($query_edit==TRUE){
-      echo "<script>window.location.href='?halaman=data_satuan'</script>";
-    }else{
-      echo "gagal";
-    }
-    }
 ?> 
 <section class="content">
   <div class="data">
@@ -46,16 +28,12 @@
                   <div class="box-body">
                          
                     <div class="form-group">
-                      <label  class="col-sm-2 control-label">Karyawan</label>
-                      <div class="col-sm-3">
-                        <input type="text" class="form-control"  name="karyawan" placeholder="nama karyawan">
-                      </div>
-                      <div class="col-sm-3 col-sm-offset-1">
+                      <div class="col-sm-3 col-sm-offset-8">
                        <div class="input-group">
                             <div class="input-group-addon">
                               <i class="fa fa-calendar"></i>
                             </div>
-                            <input type="text" name="tgl_lahir" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                            <input type="text" name="tgl_lahir" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask value="<?php $tgl=date('d-m-Y'); echo $tgl; ?>" disabled="disabled">
                           </div>
                       </div>
                     </div>
@@ -63,30 +41,33 @@
                     <div class="form-group">
                       <label  class="col-sm-2 control-label">Kode Transaksi</label>
                       <div class="col-sm-3">
-                        <input type="text" class="form-control"  name="kode" placeholder="">
+                        <input type="text" class="form-control"  name="kode" placeholder="" value="<?php echo $kode_otomatis ?>" disabled="disabled">
                       </div>
+                      <div class="col-sm-3">
+                        <input type="text" class="form-control"  name="karyawan" placeholder="nama karyawan">
+                      </div>
+                      <label  class="col-sm-1 control-label">Karyawan</label>
                     </div>
 
                     <div class="form-group">
                       <label  class="col-sm-2 control-label">Nama Barang</label>
                       <div class="col-sm-3">
                        <select class="form-control select2" style="width: 100%;">
-                          <option>Alabama</option>
-                          <option>Alaska</option>
-                          <option>California</option>
-                          <option>Delaware</option>
-                          <option>Tennessee</option>
-                          <option>Texas</option>
-                          <option>Washington</option>
+                          <?php 
+                          $query = mysqli_query($koneksi,"SELECT * FROM barang") or die(mysqli_error());
+                          foreach ($query as $data){  
+                          ?>
+                        <option value="<?php echo $data['id_barang'] ?>"><?php echo $data['namabarang'] ?></option>
+                        <?php } ?>
                         </select>
+                      </div>
+                      <div class="col-sm-3">
+                        <input type="number" class="form-control"  name="kode" placeholder="Jumlah">
                       </div>
                     </div>
 
                     <div class="form-group">
-                      <label  class="col-sm-2 control-label">Jumlah</label>
-                      <div class="col-sm-3">
-                        <input type="number" class="form-control"  name="kode" placeholder="">
-                      </div>
+                      
                     </div>
 
                     <div class="form-group">

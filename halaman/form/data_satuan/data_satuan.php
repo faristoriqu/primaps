@@ -89,36 +89,25 @@
                 <tr>
                   <th>No</th>
                   <th>Satuan Barang</th>                
-                  <th>Pilihan</th>
-                                  
+                  <th>Pilihan</th>           
                 </tr>
                 </thead>
-
-                <?php 
-                  
-                  $query = mysqli_query($koneksi,"SELECT * FROM satuan") or die(mysqli_error());
-                  $no=1;
-                  while ($data = mysqli_fetch_array($query)) {  
-                ?>  
                 <tbody>
+                    <?php
+                      $query = mysqli_query($koneksi,"SELECT * FROM satuan") or die(mysqli_error());
+                      $no=1;
+                      while ($data = mysqli_fetch_array($query)) {  
+                    ?>  
                   <tr>
                     <td><?php echo $no ?></td>
-                    
                     <td><?php echo $data['namasatuan']; ?></td>
-                   
                     <td>
                       <button class="btn btn-warning click-edit" id="<?php echo $data['ids'] ?>" ><li class="fa fa-pencil"></li></button>
-
                       <a class="btn btn-danger " href="?halaman=data_satuan&delete=<?php echo $data['ids'] ?>" onclick="return confirm('Anda Yakin Ingin Menghapus Data?')"> <li class="fa fa-close"></li> </a>
-
                     </td>
-                    
                   </tr>
-                </tbody>
-                <tfoot>
-                
-                </tfoot>
                 <?php $no++; }  ?>
+                </tbody>
               </table>
             </div>
             <!-- /.box-body -->
