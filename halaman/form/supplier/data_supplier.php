@@ -42,7 +42,7 @@
 ?>
 
 <br> 
-<div class="col-md-8" id="tambah">
+ <div class="col-md-10 col-sm-offset-1" id="tambah">
   <div class="box box-info">
             <div class="box-header with-border">
               <h3 class="box-title">Tambah Supplier</h3>
@@ -84,12 +84,12 @@
   </div>
 </div>
 
-<div class="col-md-8" id="edit">   
+ <div class="col-md-10 col-sm-offset-1" id="edit">
 </div>
 
 <section class="content">
   <div class="row">
-    <div class="col-md-8">
+     <div class="col-md-10 col-sm-offset-1" >
       <div class="box box-primary">
             <div class="box-header">
               <button class="btn btn-info " id="click-tambah" ><li class="fa fa-plus"></li> Tambah</button>

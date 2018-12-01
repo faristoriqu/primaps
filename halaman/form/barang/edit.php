@@ -4,8 +4,9 @@
   $query = mysqli_query($koneksi,"SELECT * FROM barang WHERE id_barang = '$id'") or die(mysqli_error());
   foreach ($query as $data) {
   ?>
-  <div class="box box-info">
-            <div class="box-header with-border">
+      <div class="box box-info">
+                <div class="box-header with-border">
+
               <h3 class="box-title">Edit Barang</h3>
             </div>
             <!-- /.box-header -->
@@ -23,10 +24,12 @@
                   </div>
                 </div>
 
+
+
                 <div class="form-group"> 
                   <label class="col-sm-3 control-label">Kategori</label>
                   <div class="col-sm-7" >
-                    <select  name="idkat" id="idkat" class="form-control" class="form-control select2"  >
+                    <select class="form-control select2" style="width: 100%;">
                       <option value="">-Pilih Kategori-</option>
                     <?php 
                     $querykat = mysqli_query($koneksi,"SELECT * FROM kategori") or die(mysqli_error());
@@ -52,7 +55,7 @@
                 <div class="form-group"> 
                   <label class="col-sm-3 control-label">Satuan</label>
                   <div class="col-sm-7" >
-                    <select  name="idkat" id="idkat" class="form-control" class="form-control select2"  >
+                    <select class="form-control select2" style="width: 100%;">
                       <option value="">-Pilih Satuan-</option>
                     <?php 
                     $query1 = mysqli_query($koneksi,"SELECT * FROM satuan") or die(mysqli_error());
