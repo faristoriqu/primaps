@@ -18,13 +18,54 @@
   } else {
    $kode_otomatis = "TRS0001";
   }
+
+   if(isset($_GET['delete'])){
+    $query_delete = mysqli_query($koneksi,"DELETE FROM transaksi_tmp WHERE id_barang='$_GET[delete]'")or die(mysql_error());
+    
+    if ($query_delete == TRUE) {
+      echo "<script>window.location.href='?halaman=transaksi'</script>";
+    }else{
+      echo "gagal";
+    } 
+  }
+
+  
+  if(isset($_POST['tambah'])){
+    $sid=session_id();
+    $id_barang=$_POST['id_barang'];
+    $id=$_POST['id_barang'];
+    $jumlah=$_POST['jumlah'];
+    $kode_transaksi=$_POST['kode_transaksi'];
+
+    // $query_add = mysqli_query($koneksi,"INSERT INTO transaksi VALUES('$kode_transaksi','$jumlah','$kode_transaksi')");
+
+    $query_add = mysqli_query($koneksi,"INSERT INTO transaksi_tmp VALUES('$id_barang','$jumlah','$kode_transaksi')");
+
+      //di cek dulu apakah barang yang di beli sudah ada di tabel keranjang
+       //$sql = mysqli_query($koneksi,"SELECT * FROM transaksi WHERE id_barang='$id' AND kode_transaksi='$sid'");
+      // $ketemu=mysqli_num_rows($sql);
+      // if ($ketemu==0){
+      //   // kalau barang belum ada, maka di jalankan perintah insert
+       
+        
+      // } else {
+      //     //  kalau barang ada, maka di jalankan perintah update
+      //     $query_edit=mysqli_query($koneksi,"UPDATE transaksi_tmp SET jumlah=jumlah + '$jumlah' WHERE kode_transaksi='$sid' AND id_barang='$id'");
+      // }   
+    if ($query_add==TRUE) {
+        echo "<script>window.location.href='?halaman=transaksi'</script>";  
+        }else{
+          echo("gagal");
+        }  
+  } 
+
 ?> 
 <section class="content">
   <div class="data">
     <div class="col-md-10 col-sm-offset-1">
       <div class="box box-info">
             <div class="box-header">
-                <form class="form-horizontal" action="?halaman=data_satuan" method="POST">
+                <form class="form-horizontal" action="?halaman=transaksi" method="POST">
                   <div class="box-body">
                          
                     <div class="form-group">
@@ -41,7 +82,7 @@
                     <div class="form-group">
                       <label  class="col-sm-2 control-label">Kode Transaksi</label>
                       <div class="col-sm-3">
-                        <input type="text" class="form-control"  name="kode" placeholder="" value="<?php echo $kode_otomatis ?>" disabled="disabled">
+                        <input type="text" class="form-control" readonly name="kode_transaksi" placeholder="" value="<?php echo $kode_otomatis ?>" >
                       </div>
                       <div class="col-sm-3">
                         <input type="text" class="form-control"  name="karyawan" placeholder="nama karyawan">
@@ -52,7 +93,7 @@
                     <div class="form-group">
                       <label  class="col-sm-2 control-label">Nama Barang</label>
                       <div class="col-sm-3">
-                       <select class="form-control select2" style="width: 100%;">
+                       <select class="form-control select2" style="width: 100%;" name="id_barang">
                           <?php 
                           $query = mysqli_query($koneksi,"SELECT * FROM barang") or die(mysqli_error());
                           foreach ($query as $data){  
@@ -62,7 +103,7 @@
                         </select>
                       </div>
                       <div class="col-sm-3">
-                        <input type="number" class="form-control"  name="kode" placeholder="Jumlah">
+                        <input type="number" class="form-control"  name="jumlah" placeholder="Jumlah">
                       </div>
                     </div>
 
@@ -92,7 +133,7 @@
 
                 <?php 
                   
-                  $query = mysqli_query($koneksi,"SELECT * FROM satuan") or die(mysqli_error());
+                  $query = mysqli_query($koneksi,"SELECT * FROM transaksi_tmp ") or die(mysqli_error());
                   $no=1;
                   while ($data = mysqli_fetch_array($query)) {  
                 ?>  
@@ -100,11 +141,11 @@
                   <tr>
                     <td><?php echo $no ?></td>
                     
-                    <td><?php echo $data['namasatuan']; ?></td>
+                    <td><?php echo $data['id_barang']; ?></td>
                    
                     <td>
                       
-                      <a class="btn btn-danger " href="?halaman=data_satuan&delete=<?php echo $data['ids'] ?>" onclick="return confirm('Anda Yakin Ingin Menghapus Data?')"> <li class="fa fa-close"></li> </a>
+                      <a class="btn btn-danger " href="?halaman=transaksi&delete=<?php echo $data['id_barang'] ?>" onclick="return confirm('Anda Yakin Ingin Menghapus Data?')"> <li class="fa fa-close"></li> </a>
 
                     </td>
                     

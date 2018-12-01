@@ -1,7 +1,6 @@
 <footer class="main-footer">
     <div class="pull-right hidden-xs">
-      <b>Version</b> 2.4.0
     </div>
-    <strong>Copyright &copy; 2018 <a href="https://pandawadev.com">PandawaDev</a>.</strong> All rights
-    reserved.
+    <center>
+    <strong>Copyright &copy; 2018 <a href="https://pandawadev.com">PandawaDev</a></strong> </center>	
   </footer>

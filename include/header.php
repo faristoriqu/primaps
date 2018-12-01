@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <header class="main-header">
 
     <!-- Logo -->

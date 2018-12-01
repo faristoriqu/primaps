@@ -18,7 +18,7 @@
     $query_tambah = mysqli_query($koneksi,"INSERT INTO supplier VALUES(NULL,'$namasupplier','$alamat','$telefon')");
      
     if($query_tambah == TRUE){
-      
+      echo "<script>window.location.href='?halaman=supplier'</script>";
     } else{
       echo "gagal";
     }
