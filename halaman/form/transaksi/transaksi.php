@@ -31,16 +31,53 @@
 
   
   if(isset($_POST['tambah'])){
-    $sid=session_id();
+    
     $id_barang=$_POST['id_barang'];
-    $id=$_POST['id_barang'];
     $jumlah=$_POST['jumlah'];
     $kode_transaksi=$_POST['kode_transaksi'];
 
+    $cari = mysqli_query($koneksi,"SELECT * FROM barang WHERE id_barang NOT IN (SELECT id_barang FROM transaksi_tmp)");
+    
+    if ($cari==TRUE) {
+        $query_add = mysqli_query($koneksi,"INSERT INTO transaksi_tmp VALUES('$id_barang','$jumlah','$kode_transaksi')");
+      if ($query_add==TRUE) {
+        echo "<script>window.location.href='?halaman=transaksi'</script>";  
+      }else{
+            echo("gagal");
+      }
+    }else{
+          $query_edit = mysqli_query($koneksi,"UPDATE transaksi_tmp SET jumlah=(jumlah + ".$jumlah.") WHERE id_barang='$id_barang' AND kode_transaksi='$kode_transaksi'");
+      if ($query_edit==TRUE) {
+        echo "<script>window.location.href='?halaman=transaksi'</script>";  
+      }else{
+          echo("gagal");
+      }  
+    }
+
+    
+    // $data = mysqli_query($koneksi, "SELECT * FROM transaksi_tmp WHERE id_barang='$id_barang' AND kode_transaksi='$kode_transaksi'");
+    // $cek = mysqli_num_rows($data);
+    // if ($cek==0) {
+    //   $query_add = mysqli_query($koneksi,"INSERT INTO transaksi_tmp VALUES('$id_barang','$jumlah','$kode_transaksi')");
+    //   if ($query_add==TRUE) {
+    //     echo "<script>window.location.href='?halaman=transaksi'</script>";  
+    //   }else{
+    //         echo("gagal");
+    //   }
+    // }else{
+    //   $query_edit = mysqli_query($koneksi,"UPDATE transaksi_tmp SET jumlah=jumlah + '$jumlah' WHERE id_barang='$id_barang' AND kode_transaksi='$kode_transaksi'");
+    //   if ($query_edit==TRUE) {
+    //     echo "<script>window.location.href='?halaman=transaksi'</script>";  
+    //   }else{
+    //       echo("gagal");
+    //   }
+    // }
+    
+
+
     // $query_add = mysqli_query($koneksi,"INSERT INTO transaksi VALUES('$kode_transaksi','$jumlah','$kode_transaksi')");
 
-    $query_add = mysqli_query($koneksi,"INSERT INTO transaksi_tmp VALUES('$id_barang','$jumlah','$kode_transaksi')");
-
+    
       //di cek dulu apakah barang yang di beli sudah ada di tabel keranjang
        //$sql = mysqli_query($koneksi,"SELECT * FROM transaksi WHERE id_barang='$id' AND kode_transaksi='$sid'");
       // $ketemu=mysqli_num_rows($sql);
@@ -52,11 +89,7 @@
       //     //  kalau barang ada, maka di jalankan perintah update
       //     $query_edit=mysqli_query($koneksi,"UPDATE transaksi_tmp SET jumlah=jumlah + '$jumlah' WHERE kode_transaksi='$sid' AND id_barang='$id'");
       // }   
-    if ($query_add==TRUE) {
-        echo "<script>window.location.href='?halaman=transaksi'</script>";  
-        }else{
-          echo("gagal");
-        }  
+     
   } 
 
 ?> 
@@ -115,50 +148,67 @@
                       <div class="col-md-3 col-sm-offset-5">
                         <button type="submit" class="btn btn-info" name="tambah">Tambah</button>
                       </div>
-                    </div> 
+                    </div>
+                    <div class="form-group">
+                      <div class="col-sm-8 col-sm-offset-1">
+                        <table class="table table-striped table-bordered">
+                          <thead>
+                          <tr>
+                            <th>No</th>
+                            <th>Nama Barang</th>                
+                            <th>Jumlah</th>
+                            <th>Harga</th>
+                            <th>Subtotal</th>                
+                            <th>Pilihan</th>          
+                          </tr>
+                          </thead>
+                          <tbody>
+                            <?php 
+                            $query = mysqli_query($koneksi,"SELECT * FROM transaksi_tmp JOIN barang ON transaksi_tmp.id_barang=barang.id_barang") or die(mysqli_error());
+                            $no=1;
+                            $total=0;
+                            while ($data = mysqli_fetch_array($query)) {  
+                          ?>  
+                            <tr>
+                              <td><?php echo $no ?></td>
+                              <td><?php echo $data['namabarang']; ?></td>
+                              <td><?php echo $data['jumlah']; ?></td>
+                              <td><?php echo $data['hargaj']; ?></td>
+                              <?php 
+                              $subtotal = $data['jumlah'] * $data['hargaj'];
+                              $total = $total + $subtotal
+                              ?>
+                              <td style="text-align: right;"><?php echo $subtotal ?></td>
+                              <td>
+                                <a class="btn btn-danger " href="?halaman=transaksi&delete=<?php echo $data['id_barang'] ?>" onclick="return confirm('Anda Yakin Ingin Menghapus Data?')"> <li class="fa fa-close"></li> </a>
+                              </td>
+                            </tr>
+                          <?php $no++; }  ?>  
+                          </tbody>
+                          <tfoot> 
+                            <tr>
+                              <th colspan="4" style="text-align: right;">Total</th>
+                              <td colspan="2" style="text-align: center;"> <?php echo $total ?> </td>
+                            </tr>               
+                          </tfoot> 
+                        </table>
+                       </div> 
+                        
+                          <div class="col-sm-3">
+                            <input type="text" class="form-control"  name="bayar" placeholder="Bayar">
+                          </div>
+                        
+                         
+                          <div class="col-sm-3">
+                            <input type="text" class="form-control"  name="bayar" placeholder="Kembalian">
+                          </div>
+                        
+
+                    </div>   
                   </div>
                 </form>
             </div>
-            <div class="box-body">
-              <div class="col-sm-8 col-sm-offset-2">
-              <table class="table table-striped table-bordered">
-                <thead>
-                <tr>
-                  <th>No</th>
-                  <th>Satuan Barang</th>                
-                  <th>Pilihan</th>
-                                  
-                </tr>
-                </thead>
-
-                <?php 
-                  
-                  $query = mysqli_query($koneksi,"SELECT * FROM transaksi_tmp ") or die(mysqli_error());
-                  $no=1;
-                  while ($data = mysqli_fetch_array($query)) {  
-                ?>  
-                <tbody>
-                  <tr>
-                    <td><?php echo $no ?></td>
-                    
-                    <td><?php echo $data['id_barang']; ?></td>
-                   
-                    <td>
-                      
-                      <a class="btn btn-danger " href="?halaman=transaksi&delete=<?php echo $data['id_barang'] ?>" onclick="return confirm('Anda Yakin Ingin Menghapus Data?')"> <li class="fa fa-close"></li> </a>
-
-                    </td>
-                    
-                  </tr>
-                </tbody>
-                <tfoot>
-                
-                </tfoot>
-                <?php $no++; }  ?>
-              </table>
-              </div>
-            </div>
-            <!-- /.box-body -->
+            
           </div>
     </div>
   </div>
