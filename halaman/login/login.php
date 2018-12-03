@@ -28,16 +28,17 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition login-page">
-  <?php 
+  <?php
   if(isset($_GET['pesan'])){
     if($_GET['pesan'] == "gagal"){
-      echo "Login gagal! username dan password salah!";
+      echo "<script>alert('Login gagal! username dan password salah!')</script>";
     }else if($_GET['pesan'] == "logout"){
-      echo "Anda telah berhasil logout";
+      echo "<script>alert('Anda telah berhasil logout')</script>";
     }else if($_GET['pesan'] == "belum_login"){
-      echo "Anda harus login untuk mengakses halaman admin";
+      echo "<script>alert('Anda harus login untuk mengakses halaman admin')</script>";
+
     }
-  }
+  } 
   ?>
 <div class="login-box">
   <div class="login-logo">
