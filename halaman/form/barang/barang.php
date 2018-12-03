@@ -1,3 +1,9 @@
+<html>
+<head>
+  <title>
+    Barang
+  </title>
+</head>
 <?php 
   if(isset($_GET['delete'])){
     $query_delete = mysqli_query($koneksi,"DELETE FROM barang WHERE id_barang='$_GET[delete]'")or die(mysql_error());
@@ -128,7 +134,7 @@
                   <th>Kategori</th>
                   <th>Satuan</th>
                   <th>Pilihan</th>
-                  
+                </tr>
                 </thead>
                 <?php 
                   $query = mysqli_query($koneksi,"SELECT * FROM barang JOIN kategori ON barang.idkat =kategori.idkat JOIN satuan ON barang.ids=satuan.ids ORDER BY namabarang") or die(mysqli_error());
@@ -199,3 +205,4 @@
 
 </script>
 
+</html>
