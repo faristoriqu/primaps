@@ -36,9 +36,9 @@
     $jumlah=$_POST['jumlah'];
     $kode_transaksi=$_POST['kode_transaksi'];
 
-    $cari = mysqli_query($koneksi,"SELECT * FROM barang WHERE id_barang NOT IN (SELECT id_barang FROM transaksi_tmp)");
-    
-    if ($cari==TRUE) {
+    $data = mysqli_query($koneksi, "SELECT * FROM transaksi_tmp WHERE id_barang='$id_barang' AND kode_transaksi='$kode_transaksi'");
+    $cari = mysqli_num_rows($data);    
+    if ($cari==0) {
         $query_add = mysqli_query($koneksi,"INSERT INTO transaksi_tmp VALUES('$id_barang','$jumlah','$kode_transaksi')");
       if ($query_add==TRUE) {
         echo "<script>window.location.href='?halaman=transaksi'</script>";  
@@ -53,45 +53,7 @@
           echo("gagal");
       }  
     }
-
-    
-    // $data = mysqli_query($koneksi, "SELECT * FROM transaksi_tmp WHERE id_barang='$id_barang' AND kode_transaksi='$kode_transaksi'");
-    // $cek = mysqli_num_rows($data);
-    // if ($cek==0) {
-    //   $query_add = mysqli_query($koneksi,"INSERT INTO transaksi_tmp VALUES('$id_barang','$jumlah','$kode_transaksi')");
-    //   if ($query_add==TRUE) {
-    //     echo "<script>window.location.href='?halaman=transaksi'</script>";  
-    //   }else{
-    //         echo("gagal");
-    //   }
-    // }else{
-    //   $query_edit = mysqli_query($koneksi,"UPDATE transaksi_tmp SET jumlah=jumlah + '$jumlah' WHERE id_barang='$id_barang' AND kode_transaksi='$kode_transaksi'");
-    //   if ($query_edit==TRUE) {
-    //     echo "<script>window.location.href='?halaman=transaksi'</script>";  
-    //   }else{
-    //       echo("gagal");
-    //   }
-    // }
-    
-
-
-    // $query_add = mysqli_query($koneksi,"INSERT INTO transaksi VALUES('$kode_transaksi','$jumlah','$kode_transaksi')");
-
-    
-      //di cek dulu apakah barang yang di beli sudah ada di tabel keranjang
-       //$sql = mysqli_query($koneksi,"SELECT * FROM transaksi WHERE id_barang='$id' AND kode_transaksi='$sid'");
-      // $ketemu=mysqli_num_rows($sql);
-      // if ($ketemu==0){
-      //   // kalau barang belum ada, maka di jalankan perintah insert
-       
-        
-      // } else {
-      //     //  kalau barang ada, maka di jalankan perintah update
-      //     $query_edit=mysqli_query($koneksi,"UPDATE transaksi_tmp SET jumlah=jumlah + '$jumlah' WHERE kode_transaksi='$sid' AND id_barang='$id'");
-      // }   
-     
-  } 
-
+  }
 ?> 
 <section class="content">
   <div class="data">
@@ -197,13 +159,11 @@
                           <div class="col-sm-3">
                             <input type="text" class="form-control"  name="bayar" placeholder="Bayar">
                           </div>
-                        
-                         
+
                           <div class="col-sm-3">
                             <input type="text" class="form-control"  name="bayar" placeholder="Kembalian">
                           </div>
-                        
-
+                      </div>    
                     </div>   
                   </div>
                 </form>
