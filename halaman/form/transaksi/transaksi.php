@@ -36,9 +36,9 @@
     $jumlah=$_POST['jumlah'];
     $kode_transaksi=$_POST['kode_transaksi'];
 
-    $cari = mysqli_query($koneksi,"SELECT * FROM barang WHERE id_barang NOT IN (SELECT id_barang FROM transaksi_tmp)");
-    
-    if ($cari==TRUE) {
+     $data = mysqli_query($koneksi, "SELECT * FROM transaksi_tmp WHERE id_barang='$id_barang' AND kode_transaksi='$kode_transaksi'");
+     $cari = mysqli_num_rows($data);
+    if ($cari==0) {
         $query_add = mysqli_query($koneksi,"INSERT INTO transaksi_tmp VALUES('$id_barang','$jumlah','$kode_transaksi')");
       if ($query_add==TRUE) {
         echo "<script>window.location.href='?halaman=transaksi'</script>";  
