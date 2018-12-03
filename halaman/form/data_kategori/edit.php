@@ -3,7 +3,7 @@
   $id = $_POST['id'];
   $query = mysqli_query($koneksi,"SELECT * FROM kategori WHERE idkat = '$id'") or die(mysqli_error());
   foreach ($query as $data) {
-  ?>
+  ?>  
   <div class="box box-info">
             <div class="box-header with-border">
               <h3 class="box-title">Kategori Barang </h3>

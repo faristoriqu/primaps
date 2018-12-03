@@ -28,18 +28,6 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition login-page">
-  <!-- cek pesan notifikasi -->
-  <?php 
-  if(isset($_GET['pesan'])){
-    if($_GET['pesan'] == "gagal"){
-      echo "Login gagal! username dan password salah!";
-    }else if($_GET['pesan'] == "logout"){
-      echo "Anda telah berhasil logout";
-    }else if($_GET['pesan'] == "belum_login"){
-      echo "Anda harus login untuk mengakses halaman admin";
-    }
-  }
-  ?>
 <div class="login-box">
   <div class="login-logo">
     <a href="../../index2.html"><b>Login</b></a>
@@ -48,13 +36,13 @@
   <div class="login-box-body">
     <p class="login-box-msg">Silahkan Masukkan Username dan Password</p>
 
-    <form action="cek_login.php" method="POST">
+    <form action="../../index.php" method="post">
       <div class="form-group has-feedback">
-        <input type="username" class="form-control" placeholder="Username" name="username">
+        <input type="Username" class="form-control" placeholder="Username">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password" name="password">
+        <input type="password" class="form-control" placeholder="Password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">

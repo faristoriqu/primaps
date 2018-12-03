@@ -45,7 +45,7 @@
  
 <section class="content">
   <div class="data">
-    <div class="col-md-10" id="tambah">
+      <div class="col-md-10 col-sm-offset-1" id="tambah">
       <div class="box box-info">
                 <div class="box-header with-border">
                 <h3 class="box-title">Kelola Data Barang</h3>
@@ -60,13 +60,13 @@
                         <input type="text" class="form-control" id="namabarang" name="namabarang" placeholder="Nama Barang">
                       </div>
                     </div>
-                   
-                   
-                    <div class="form-group"> 
-                      <label class="col-sm-2 control-label">Kategori</label>
-                      <div class="col-sm-8" >
-                        <select  name="idkat" id="idkat" class="form-control" class="form-control select2"  >
-                          <option value="">-Pilih Kategori-</option>
+
+                     <div class="form-group">
+                      <label  class="col-sm-2 control-label">Kategori</label>
+                      <div class="col-sm-8">
+                         
+                       <select class="form-control select2" style="width: 100%;">
+                         <option value="">-Pilih Kategori-</option>
                         <?php 
                       
                           $query = mysqli_query($koneksi,"SELECT * FROM kategori") or die(mysqli_error());
@@ -74,29 +74,27 @@
                         ?>
                         <option value="<?php echo $data['idkat'] ?>"><?php echo $data['kategori'] ?></option>
                         <?php } ?>    
-                        
-                        </select>
+                          
+                          </select>
                       </div>
                       </div>
-        
+                   
                       <div class="form-group">
-                      <label class="col-sm-2 control-label">Satuan</label>
+                      <label  class="col-sm-2 control-label">Satuan</label>
                       <div class="col-sm-8">
-                      <select name="ids" id="ids" class="form-control" required>
+                       <select class="form-control select2" style="width: 100%;">
                         <option value="">-Pilih Satuan-</option>
                         <?php 
-                      
-                          $query = mysqli_query($koneksi,"SELECT * FROM satuan") or die(mysqli_error());
+                        $query = mysqli_query($koneksi,"SELECT * FROM satuan") or die(mysqli_error());
                           while ($data = mysqli_fetch_array($query)) {  
                         ?>
                         <option value="<?php echo $data['ids'] ?>"><?php echo $data['namasatuan'] ?></option>
                         <?php } ?>    
-                                           
+                         
                         </select>
                       </div>
-                    </div>
-
-                     
+                      </div>                                    
+                    
                     </div>
                   <!-- /.box-body -->
                   <div class="box-footer">
@@ -108,11 +106,11 @@
                 </form>
       </div>
     </div>
-    <div class="col-md-8" id="edit">   
+    <div  <div class="col-md-10 col-sm-offset-1" id="edit">   
     </div>
 
 
-    <div class="col-md-10">
+      <div class="col-md-10 col-sm-offset-1">
       <div class="box">
             <div class="box-header">
              <button class="btn btn-info " id="click-tambah" ><li class="fa fa-plus"></li> Tambah</button> 
