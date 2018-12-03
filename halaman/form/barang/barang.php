@@ -71,7 +71,7 @@
                       <label  class="col-sm-2 control-label">Kategori</label>
                       <div class="col-sm-8">
                          
-                       <select class="form-control select2" style="width: 100%;">
+                       <select class="form-control select2" name="idkat" style="width: 100%;">
                          <option value="">-Pilih Kategori-</option>
                         <?php 
                       
@@ -88,7 +88,7 @@
                       <div class="form-group">
                       <label  class="col-sm-2 control-label">Satuan</label>
                       <div class="col-sm-8">
-                       <select class="form-control select2" style="width: 100%;">
+                       <select class="form-control select2" name="ids" style="width: 100%;">
                         <option value="">-Pilih Satuan-</option>
                         <?php 
                         $query = mysqli_query($koneksi,"SELECT * FROM satuan") or die(mysqli_error());
