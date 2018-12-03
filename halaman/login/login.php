@@ -28,7 +28,6 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition login-page">
-  <!-- cek pesan notifikasi -->
   <?php 
   if(isset($_GET['pesan'])){
     if($_GET['pesan'] == "gagal"){
@@ -48,13 +47,13 @@
   <div class="login-box-body">
     <p class="login-box-msg">Silahkan Masukkan Username dan Password</p>
 
-    <form action="cek_login.php" method="POST">
+    <form action="../../index.php" method="post">
       <div class="form-group has-feedback">
-        <input type="username" class="form-control" placeholder="Username" name="username">
+        <input type="Username" class="form-control" placeholder="Username">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password" name="password">
+        <input type="password" class="form-control" placeholder="Password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">

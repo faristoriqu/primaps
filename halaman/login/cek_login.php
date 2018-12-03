@@ -16,10 +16,10 @@ $data = mysqli_query($koneksi,"select * from login where username='$username' an
 $cek = mysqli_num_rows($data);
 
 if($cek > 0){
-	$_SESSION['username'] = $username;
-	$_SESSION['status'] = "login";
-	header("location:../../index.php");
+  $_SESSION['username'] = $username;
+  $_SESSION['status'] = "login";
+  header("location:../../index.php");
 }else{
-	header("location:login.php?pesan=gagal");
+  header("location:login.php?pesan=gagal");
 }
 ?>

@@ -79,7 +79,7 @@
       <div class="box">
             <div class="box-header">
               <button class="btn btn-info " id="click-tambah" ><li class="fa fa-plus"></li> Tambah</button>
-              <h1 class="box-title">Satuan Barang</h1>
+              <h3 class="box-title">Satuan Barang</h3>
             </div>
     
             <!-- /.box-header -->
