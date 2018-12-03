@@ -23,16 +23,16 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="dist/img/m.png" class="user-image" alt="User Image">
-              <span class="hidden-xs">PandawaDev</span>
+              <img src="dist/img/avatar.png" class="user-image" alt="User Image">
+              <span class="hidden-xs">Syapi i</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="dist/img/m.png" class="img-circle" alt="User Image">
+                <img src="dist/img/avatar.png" class="img-circle" alt="User Image">
 
                 <p>
-                  PandawaDev
+                  Syapi i
                   <small>Software Developer Nov. 2018</small>
                 </p>
               </li>
