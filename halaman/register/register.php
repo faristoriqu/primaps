@@ -43,7 +43,7 @@
 
 <section class="content">
   <div class="data">
-    <div class="col-md-10 col-sm-offset-1" id="tambah">    
+    <div class="col-md-8" id="tambah">
       <div class="box box-info">
                 <div class="box-header with-border">
                   <h3 class="box-title">Tambah User</h3>
@@ -97,11 +97,11 @@
       </div>
     </div>
 
-   <div class="col-md-10 col-sm-offset-1" id="edit">   
+    <div class="col-md-8" id="edit">   
     </div>
 
-    <div class="col-md-10 col-sm-offset-1" id="tambah">
-          <div class="box box-primary">
+    <div class="col-md-8">
+      <div class="box box-primary">
             <div class="box-header">
               <button class="btn btn-info " id="click-tambah" ><li class="fa fa-plus"></li> Tambah</button>
               <br><br>

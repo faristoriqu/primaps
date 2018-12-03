@@ -32,7 +32,7 @@
 
 <section class="content">
   <div class="data">
-      <div class="col-md-10 col-sm-offset-1">
+    <div class="col-md-8">
        <form action="?halaman=barang_masuk" method="post">
       <div class="box box-primary">
             <div class="box-header">
@@ -45,11 +45,12 @@
                   </div>
                 </div>
                  <br><br> 
-
+                
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Supplier</label>
                   <div class="col-sm-8">
-                  <select class="form-control select2" style="width: 100%;">  <option value="">-Pilih Supplier-</option>
+                  <select name="id_supplier" id="id_supplier" class="form-control" required>
+                    <option value="">-Pilih Supplier-</option>
                     <?php 
                   
                       $query = mysqli_query($koneksi,"SELECT * FROM supplier") or die(mysqli_error());
@@ -66,7 +67,7 @@
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Barang</label>
                   <div class="col-sm-8">
-                  <select class="form-control select2" style="width: 100%;">
+                  <select name="id_barang" id="id_barang" class="form-control" required>
                     <option value="">-Pilih Barang-</option>
                     <?php 
                   
@@ -106,7 +107,7 @@
                          
     <button  type="simpan" class="btn btn-info pull-left" name="simpan">Simpan</button>
               </div>   
-                    
+                      
               <h3 class="box-title">Data Semua Barang Masuk</h3>
             
                 <!-- /.box-header -->

@@ -42,7 +42,7 @@
  
 <section class="content">
   <div class="data">
-    <div class="col-md-10 col-sm-offset-1" id="tambah">
+    <div class="col-md-10" id="tambah" >
       <div class="box box-info">
                 <div class="box-header with-border">
                   <h3 class="box-title">Satuan Barang</h3>
@@ -71,16 +71,14 @@
                 </form>
       </div>
     </div>
-     <div class="col-md-10 col-sm-offset-1" id="edit">  
+    <div class="col-md-8" id="edit">   
     </div>
 
 
-     <div class="col-md-10 col-sm-offset-1" >
+    <div class="col-md-10">
       <div class="box">
             <div class="box-header">
               <button class="btn btn-info " id="click-tambah" ><li class="fa fa-plus"></li> Tambah</button>
-              <br>
-              <br>
               <h3 class="box-title">Satuan Barang</h3>
             </div>
     
@@ -91,25 +89,36 @@
                 <tr>
                   <th>No</th>
                   <th>Satuan Barang</th>                
-                  <th>Pilihan</th>           
+                  <th>Pilihan</th>
+                                  
                 </tr>
                 </thead>
+
+                <?php 
+                  
+                  $query = mysqli_query($koneksi,"SELECT * FROM satuan") or die(mysqli_error());
+                  $no=1;
+                  while ($data = mysqli_fetch_array($query)) {  
+                ?>  
                 <tbody>
-                    <?php
-                      $query = mysqli_query($koneksi,"SELECT * FROM satuan") or die(mysqli_error());
-                      $no=1;
-                      while ($data = mysqli_fetch_array($query)) {  
-                    ?>  
                   <tr>
                     <td><?php echo $no ?></td>
+                    
                     <td><?php echo $data['namasatuan']; ?></td>
+                   
                     <td>
                       <button class="btn btn-warning click-edit" id="<?php echo $data['ids'] ?>" ><li class="fa fa-pencil"></li></button>
+
                       <a class="btn btn-danger " href="?halaman=data_satuan&delete=<?php echo $data['ids'] ?>" onclick="return confirm('Anda Yakin Ingin Menghapus Data?')"> <li class="fa fa-close"></li> </a>
+
                     </td>
+                    
                   </tr>
-                <?php $no++; }  ?>
                 </tbody>
+                <tfoot>
+                
+                </tfoot>
+                <?php $no++; }  ?>
               </table>
             </div>
             <!-- /.box-body -->
