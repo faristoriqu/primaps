@@ -70,11 +70,12 @@
     function isi_tmp(){
       include 'config/koneksi.php';
       $isitmp = array();
+      $id_barang=$_POST['id_barang'];
       $baca = mysqli_query($koneksi,"SELECT * FROM transaksi_tmp WHERE id_barang= '$id_barang'");
-      while ($baca = mysqli_fetch_array($data)) {
+      while ($data = mysqli_fetch_array($baca)) {
         $isitmp[] = $data;
       }
-      return $isikeranjang;
+      return $isitmp;
     }
     // simpan ke transaksi
     $query_tambah= mysqli_query($koneksi,"INSERT INTO transaksi VALUES ('$kode_transaksi','$tanggal','$total','$potongan','$bayar','$kembalian')");
@@ -83,13 +84,15 @@
     $isitmp = isi_tmp();
     $jml = count($isitmp);
 
-    for ($i=0; $i < $jml ; $i++) { 
+    for ($i=0; $i < $jml ; $i++) {
+     
       $query_detadd = mysqli_query($koneksi,"INSERT INTO detail VALUES ('$kode_transaksi','{$isitmp[$i]['id_barang']}','{$isitmp[$i]['jumlah']}')");
     }
     //hapus data tmp
     for ($i=0 ; $i < $jml ; $i++ ) { 
       $query_deltmp = mysqli_query($koneksi,"DELETE FROM transaksi_tmp WHERE id_barang = '{$isitmp[$i]['id_barang']}'"); 
     }
+
   }
 
 ?> 
