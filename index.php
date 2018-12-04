@@ -6,7 +6,7 @@
     <head>
     	<?php include 'include/head.php'; ?>
     </head>
-    <body class="hold-transition skin-blue sidebar-mini">
+    <body class="hold-transition skin-blue sidebar-mini" background="image/grey-gradient-abstract-background.jpeg">
         <div class="wrapper">
 
         	<?php 
@@ -32,6 +32,10 @@
                                 include 'halaman/form/barang_masuk/barang_masuk.php';
                             }else if($_GET['halaman']=='transaksi') {
                                 include 'halaman/form/transaksi/transaksi.php';
+                            }else if($_GET['halaman']=='laporan_barang') {
+                                include 'halaman/form/laporan/laporan_barang.php';
+                            }else if($_GET['halaman']=='laporan_penjualan') {
+                                include 'halaman/form/laporan/laporan_penjualan.php';
                             }
 
                         }else{
