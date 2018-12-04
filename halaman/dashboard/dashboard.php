@@ -1,3 +1,4 @@
+
 <section class="content">
       <!-- Small boxes (Stat box) -->
       <div class="data">

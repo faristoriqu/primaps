@@ -6,7 +6,7 @@
     <head>
     	<?php include 'include/head.php'; ?>
     </head>
-    <body class="hold-transition skin-blue sidebar-mini">
+    <body class="hold-transition skin-blue sidebar-mini" background="image/grey-gradient-abstract-background.jpeg">
         <div class="wrapper">
 
         	<?php 
