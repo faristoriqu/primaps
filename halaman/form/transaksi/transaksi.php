@@ -67,31 +67,38 @@
     $kembalian=$_POST['kembalian'];
 
     // fungsi untuk mendapatkan isi keranjang belanja
-    function isi_tmp(){
-      include 'config/koneksi.php';
-      $isitmp = array();
-      $id_barang=$_POST['id_barang'];
-      $baca = mysqli_query($koneksi,"SELECT * FROM transaksi_tmp WHERE id_barang= '$id_barang'");
-      while ($data = mysqli_fetch_array($baca)) {
-        $isitmp[] = $data;
-      }
-      return $isitmp;
+    // function isi_tmp(){
+    //   include 'config/koneksi.php';
+    //   $isitmp = array();
+      
+    //   $baca = mysqli_query($koneksi,"SELECT * FROM transaksi_tmp");
+    //   while ($data = mysqli_fetch_array($baca)) {
+    //     $isitmp[] = $data;
+    //   }
+    //   return $isitmp;
+    // }
+
+    $baca = mysqli_query($koneksi,"SELECT * FROM transaksi_tmp");
+    foreach ($baca as $kolom ) {
+      $id = $kolom['id_barang'];
+      $j = $kolom['jumlah'];
+     $query_detadd = mysqli_query($koneksi,"INSERT INTO detail VALUES ('$kode_transaksi','$id','$j')");      
     }
+
     // simpan ke transaksi
     $query_tambah= mysqli_query($koneksi,"INSERT INTO transaksi VALUES ('$kode_transaksi','$tanggal','$total','$potongan','$bayar','$kembalian')");
 
     //panggil isi keranjang dan hitung jumlah produk yang dibeli
-    $isitmp = isi_tmp();
-    $jml = count($isitmp);
+    // $isitmp = isi_tmp();
+    // $jml = count($isitmp);
 
-    for ($i=0; $i < $jml ; $i++) {
+    // for ($i=0; $i < $jml ; $i++) {
      
-      $query_detadd = mysqli_query($koneksi,"INSERT INTO detail VALUES ('$kode_transaksi','{$isitmp[$i]['id_barang']}','{$isitmp[$i]['jumlah']}')");
-    }
+    //   $query_detadd = mysqli_query($koneksi,"INSERT INTO detail VALUES ('$kode_transaksi','{$isitmp[$i]['id_barang']}','{$isitmp[$i]['jumlah']}')");
+    // }
     //hapus data tmp
-    for ($i=0 ; $i < $jml ; $i++ ) { 
-      $query_deltmp = mysqli_query($koneksi,"DELETE FROM transaksi_tmp WHERE id_barang = '{$isitmp[$i]['id_barang']}'"); 
-    }
+      $query_deltmp = mysqli_query($koneksi,"DELETE FROM transaksi_tmp"); 
+    echo "<script>window.location.href='?halaman=transaksi'</script>";  
 
   }
 
@@ -110,7 +117,7 @@
                             <div class="input-group-addon">
                               <i class="fa fa-calendar"></i>
                             </div>
-                            <input type="text" name="tanggal" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask value="<?php $tgl=date('d-m-Y'); echo $tgl; ?>" readonly">
+                            <input type="text" name="tanggal" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask value="<?php $tgl=date('d- v m-Y'); echo $tgl; ?>" readonly">
                           </div>
                       </div>
                     </div>
