@@ -202,16 +202,17 @@
 
                     <div class="form-group">
                       <div class="col-sm-3">
-                        <input type="text" class="form-control"  name="total" value="<?php echo $ttl ?>">
+                        <input type="text" class="form-control" onkeyup="totalan();" id="potongan" name="potongan" placeholder="Potongan">
                       </div>
                       <div class="col-sm-3">
-                        <input type="text" class="form-control"  name="potongan" placeholder="Potongan">
+                        <input type="text" class="form-control" onkeyup="totalan();" id="total" name="total" value="<?php echo $ttl ?>">
+                        <!-- <input type="text" class="form-control" onkeyup="totalan();hitung();" id="totals" name="totals" value="" placeholder="tot"> -->
                       </div>
                       <div class="col-sm-3">
-                        <input type="text" class="form-control"  name="bayar" placeholder="Bayar">
+                        <input type="text" class="form-control" onkeyup="hitung();" id="bayar" name="bayar" placeholder="Bayar">
                       </div>
                       <div class="col-sm-3">
-                        <input type="text" class="form-control"  name="kembalian" placeholder="Kembalian">
+                        <input type="text" class="form-control" onkeyup="hitung();" id="kembalian" name="kembalian" placeholder="Kembalian">
                       </div>
                       <div class="col-sm-3">
                         <button type="submit" class="btn btn-warning" name="transaksi">Transaksi</button>
@@ -257,27 +258,30 @@
             $("#edit").hide();
         });
 
-  $("#id_barang").change(function(){
-    var stok = $(this).find(":selected").data("stok")
-    $("#stok").val(stok)
-  })
-  $("#jumlah").change(function(){
-    var id_barang = $("#id_barang").val()
-    if(id_barang==""){
-      alert("isi");
-    }
-    else{
-        var stok = parseInt($("#stok").val())
-        var thisVal = parseInt($(this).val())
-        if(thisVal > stok){
-          alert("gagal");
+</script>
+<script type="text/javascript">
+  
+        function hitung() {
+          var total = document.getElementById('total').value;
+          var bayar = document.getElementById('bayar').value;
+
+          var result = parseInt(bayar) - parseInt(total);
+          
+          if (isNaN(result)) {
+            
+          }
+          document.getElementById('kembalian').value = result;
         }
-        else{
-          alert("berhasil");
+        function totalan() {
+          var potongan = document.getElementById('potongan').value;
+          var total = document.getElementById('total').value;
+          var awalan = document.getElementById('total').value;
+          var result = parseInt(total) - parseInt(potongan);
+          if (isNaN(result)) {
+            document.getElementById('total').value = awalan;   
+          }
+          document.getElementById('total').value = result;
         }
-    }
-  })
-    });
 </script>
 <!-- Select2 -->
 <script src="bower_components/select2/dist/js/select2.full.min.js"></script>
