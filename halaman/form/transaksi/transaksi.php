@@ -60,7 +60,7 @@
     $id_barang=$_POST['id_barang'];
     $jumlah=$_POST['jumlah'];
     $kode_transaksi=$_POST['kode_transaksi'];
-    $tanggal=$_POST['tanggal'];
+    $tanggal=date("Y-m-d",strtotime($_POST['tanggal']));
     $total=$_POST['total'];
     $bayar=$_POST['bayar'];
     $potongan=$_POST['potongan'];
@@ -117,7 +117,7 @@
                             <div class="input-group-addon">
                               <i class="fa fa-calendar"></i>
                             </div>
-                            <input type="text" name="tanggal" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask value="<?php $tgl=date('d- v m-Y'); echo $tgl; ?>" readonly">
+                            <input type="text" name="tanggal" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask value="<?php $tgl=date('d-m-Y'); echo $tgl; ?>" readonly">
                           </div>
                       </div>
                     </div>
@@ -132,17 +132,19 @@
                     <div class="form-group">
                       <label  class="col-sm-2 control-label">Nama Barang</label>
                       <div class="col-sm-3">
-                       <select class="form-control select2" style="width: 100%;" name="id_barang">
+                       <select class="form-control select2" style="width: 100%;" name="id_barang" id="id_barang">
+                        <option value="">---Select---</option>
                           <?php 
                           $query = mysqli_query($koneksi,"SELECT * FROM barang") or die(mysqli_error());
                           foreach ($query as $data){  
                           ?>
-                        <option value="<?php echo $data['id_barang'] ?>"><?php echo $data['namabarang'] ?></option>
+                        <option data-stok="<?php echo $data['stok'] ?>" value="<?php echo $data['id_barang'] ?>"><?php echo $data['namabarang'] ?></option>
                         <?php } ?>
                         </select>
                       </div>
                       <div class="col-sm-3">
-                        <input type="number" class="form-control"  name="jumlah" placeholder="Jumlah">
+                        <input type="hidden" class="form-control"  id="stok">
+                        <input type="number" class="form-control"  name="jumlah" placeholder="Jumlah" id="jumlah">
                       </div>
                     </div>
 
@@ -183,6 +185,7 @@
                               <td style="text-align: right;"><?php echo $subtotal ?></td>
                               <td>
                                 <a class="btn btn-danger " href="?halaman=transaksi&delete=<?php echo $data['id_barang'] ?>" onclick="return confirm('Anda Yakin Ingin Menghapus Data?')"> <li class="fa fa-close"></li> </a>
+
                               </td>
                             </tr>
                           <?php $no++; }  ?>  
@@ -254,6 +257,26 @@
             $("#edit").hide();
         });
 
+  $("#id_barang").change(function(){
+    var stok = $(this).find(":selected").data("stok")
+    $("#stok").val(stok)
+  })
+  $("#jumlah").change(function(){
+    var id_barang = $("#id_barang").val()
+    if(id_barang==""){
+      alert("isi");
+    }
+    else{
+        var stok = parseInt($("#stok").val())
+        var thisVal = parseInt($(this).val())
+        if(thisVal > stok){
+          alert("gagal");
+        }
+        else{
+          alert("berhasil");
+        }
+    }
+  })
     });
 </script>
 <!-- Select2 -->
