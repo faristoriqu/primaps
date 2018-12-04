@@ -32,6 +32,10 @@
                                 include 'halaman/form/barang_masuk/barang_masuk.php';
                             }else if($_GET['halaman']=='transaksi') {
                                 include 'halaman/form/transaksi/transaksi.php';
+                            }else if($_GET['halaman']=='laporan_barang') {
+                                include 'halaman/form/laporan/laporan_barang.php';
+                            }else if($_GET['halaman']=='laporan_penjualan') {
+                                include 'halaman/form/laporan/laporan_penjualan.php';
                             }
 
                         }else{
