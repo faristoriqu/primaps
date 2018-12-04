@@ -36,61 +36,71 @@
     $jumlah=$_POST['jumlah'];
     $kode_transaksi=$_POST['kode_transaksi'];
 
-     $data = mysqli_query($koneksi, "SELECT * FROM transaksi_tmp WHERE id_barang='$id_barang' AND kode_transaksi='$kode_transaksi'");
+     $data = mysqli_query($koneksi, "SELECT * FROM transaksi_tmp WHERE id_barang='$id_barang'");
      $cari = mysqli_num_rows($data);
     if ($cari==0) {
-        $query_add = mysqli_query($koneksi,"INSERT INTO transaksi_tmp VALUES('$id_barang','$jumlah','$kode_transaksi')");
+        $query_add = mysqli_query($koneksi,"INSERT INTO transaksi_tmp VALUES('$id_barang','$jumlah')");
       if ($query_add==TRUE) {
         echo "<script>window.location.href='?halaman=transaksi'</script>";  
       }else{
             echo("gagal");
       }
     }else{
-          $query_edit = mysqli_query($koneksi,"UPDATE transaksi_tmp SET jumlah=(jumlah + ".$jumlah.") WHERE id_barang='$id_barang' AND kode_transaksi='$kode_transaksi'");
+          $query_edit = mysqli_query($koneksi,"UPDATE transaksi_tmp SET jumlah=(jumlah + ".$jumlah.") WHERE id_barang='$id_barang' ");
       if ($query_edit==TRUE) {
         echo "<script>window.location.href='?halaman=transaksi'</script>";  
       }else{
           echo("gagal");
       }  
     }
+  }
 
-    
-    // $data = mysqli_query($koneksi, "SELECT * FROM transaksi_tmp WHERE id_barang='$id_barang' AND kode_transaksi='$kode_transaksi'");
-    // $cek = mysqli_num_rows($data);
-    // if ($cek==0) {
-    //   $query_add = mysqli_query($koneksi,"INSERT INTO transaksi_tmp VALUES('$id_barang','$jumlah','$kode_transaksi')");
-    //   if ($query_add==TRUE) {
-    //     echo "<script>window.location.href='?halaman=transaksi'</script>";  
-    //   }else{
-    //         echo("gagal");
+  if (isset($_POST['transaksi'])) {
+
+    $id_barang=$_POST['id_barang'];
+    $jumlah=$_POST['jumlah'];
+    $kode_transaksi=$_POST['kode_transaksi'];
+    $tanggal=$_POST['tanggal'];
+    $total=$_POST['total'];
+    $bayar=$_POST['bayar'];
+    $potongan=$_POST['potongan'];
+    $kembalian=$_POST['kembalian'];
+
+    // fungsi untuk mendapatkan isi keranjang belanja
+    // function isi_tmp(){
+    //   include 'config/koneksi.php';
+    //   $isitmp = array();
+      
+    //   $baca = mysqli_query($koneksi,"SELECT * FROM transaksi_tmp");
+    //   while ($data = mysqli_fetch_array($baca)) {
+    //     $isitmp[] = $data;
     //   }
-    // }else{
-    //   $query_edit = mysqli_query($koneksi,"UPDATE transaksi_tmp SET jumlah=jumlah + '$jumlah' WHERE id_barang='$id_barang' AND kode_transaksi='$kode_transaksi'");
-    //   if ($query_edit==TRUE) {
-    //     echo "<script>window.location.href='?halaman=transaksi'</script>";  
-    //   }else{
-    //       echo("gagal");
-    //   }
+    //   return $isitmp;
     // }
-    
 
+    $baca = mysqli_query($koneksi,"SELECT * FROM transaksi_tmp");
+    foreach ($baca as $kolom ) {
+      $id = $kolom['id_barang'];
+      $j = $kolom['jumlah'];
+     $query_detadd = mysqli_query($koneksi,"INSERT INTO detail VALUES ('$kode_transaksi','$id','$j')");      
+    }
 
-    // $query_add = mysqli_query($koneksi,"INSERT INTO transaksi VALUES('$kode_transaksi','$jumlah','$kode_transaksi')");
+    // simpan ke transaksi
+    $query_tambah= mysqli_query($koneksi,"INSERT INTO transaksi VALUES ('$kode_transaksi','$tanggal','$total','$potongan','$bayar','$kembalian')");
 
-    
-      //di cek dulu apakah barang yang di beli sudah ada di tabel keranjang
-       //$sql = mysqli_query($koneksi,"SELECT * FROM transaksi WHERE id_barang='$id' AND kode_transaksi='$sid'");
-      // $ketemu=mysqli_num_rows($sql);
-      // if ($ketemu==0){
-      //   // kalau barang belum ada, maka di jalankan perintah insert
-       
-        
-      // } else {
-      //     //  kalau barang ada, maka di jalankan perintah update
-      //     $query_edit=mysqli_query($koneksi,"UPDATE transaksi_tmp SET jumlah=jumlah + '$jumlah' WHERE kode_transaksi='$sid' AND id_barang='$id'");
-      // }   
+    //panggil isi keranjang dan hitung jumlah produk yang dibeli
+    // $isitmp = isi_tmp();
+    // $jml = count($isitmp);
+
+    // for ($i=0; $i < $jml ; $i++) {
      
-  } 
+    //   $query_detadd = mysqli_query($koneksi,"INSERT INTO detail VALUES ('$kode_transaksi','{$isitmp[$i]['id_barang']}','{$isitmp[$i]['jumlah']}')");
+    // }
+    //hapus data tmp
+      $query_deltmp = mysqli_query($koneksi,"DELETE FROM transaksi_tmp"); 
+    echo "<script>window.location.href='?halaman=transaksi'</script>";  
+
+  }
 
 ?> 
 <section class="content">
@@ -107,7 +117,7 @@
                             <div class="input-group-addon">
                               <i class="fa fa-calendar"></i>
                             </div>
-                            <input type="text" name="tgl_lahir" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask value="<?php $tgl=date('d-m-Y'); echo $tgl; ?>" disabled="disabled">
+                            <input type="text" name="tanggal" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask value="<?php $tgl=date('d- v m-Y'); echo $tgl; ?>" readonly">
                           </div>
                       </div>
                     </div>
@@ -117,10 +127,6 @@
                       <div class="col-sm-3">
                         <input type="text" class="form-control" readonly name="kode_transaksi" placeholder="" value="<?php echo $kode_otomatis ?>" >
                       </div>
-                      <div class="col-sm-3">
-                        <input type="text" class="form-control"  name="karyawan" placeholder="nama karyawan">
-                      </div>
-                      <label  class="col-sm-1 control-label">Karyawan</label>
                     </div>
 
                     <div class="form-group">
@@ -138,10 +144,6 @@
                       <div class="col-sm-3">
                         <input type="number" class="form-control"  name="jumlah" placeholder="Jumlah">
                       </div>
-                    </div>
-
-                    <div class="form-group">
-                      
                     </div>
 
                     <div class="form-group">
@@ -166,7 +168,7 @@
                             <?php 
                             $query = mysqli_query($koneksi,"SELECT * FROM transaksi_tmp JOIN barang ON transaksi_tmp.id_barang=barang.id_barang") or die(mysqli_error());
                             $no=1;
-                            $total=0;
+                            $ttl=0;
                             while ($data = mysqli_fetch_array($query)) {  
                           ?>  
                             <tr>
@@ -176,7 +178,7 @@
                               <td><?php echo $data['hargaj']; ?></td>
                               <?php 
                               $subtotal = $data['jumlah'] * $data['hargaj'];
-                              $total = $total + $subtotal
+                              $ttl = $ttl + $subtotal
                               ?>
                               <td style="text-align: right;"><?php echo $subtotal ?></td>
                               <td>
@@ -188,22 +190,29 @@
                           <tfoot> 
                             <tr>
                               <th colspan="4" style="text-align: right;">Total</th>
-                              <td colspan="2" style="text-align: center;"> <?php echo $total ?> </td>
+                              <td colspan="2" style="text-align: center;"> <?php echo $ttl ?> </td>
                             </tr>               
                           </tfoot> 
                         </table>
                        </div> 
-                        
-                          <div class="col-sm-3">
-                            <input type="text" class="form-control"  name="bayar" placeholder="Bayar">
-                          </div>
-                        
-                         
-                          <div class="col-sm-3">
-                            <input type="text" class="form-control"  name="bayar" placeholder="Kembalian">
-                          </div>
-                        
+                    </div>
 
+                    <div class="form-group">
+                      <div class="col-sm-3">
+                        <input type="text" class="form-control"  name="total" value="<?php echo $ttl ?>">
+                      </div>
+                      <div class="col-sm-3">
+                        <input type="text" class="form-control"  name="potongan" placeholder="Potongan">
+                      </div>
+                      <div class="col-sm-3">
+                        <input type="text" class="form-control"  name="bayar" placeholder="Bayar">
+                      </div>
+                      <div class="col-sm-3">
+                        <input type="text" class="form-control"  name="kembalian" placeholder="Kembalian">
+                      </div>
+                      <div class="col-sm-3">
+                        <button type="submit" class="btn btn-warning" name="transaksi">Transaksi</button>
+                      </div>
                     </div>   
                   </div>
                 </form>

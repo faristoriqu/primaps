@@ -123,7 +123,7 @@
                 <tbody>
                 <?php 
                   
-                  $query = mysqli_query($koneksi,"SELECT * FROM login ORDER BY username ASC") or die(mysqli_error());
+                  $query = mysqli_query($koneksi,"SELECT * FROM login ") or die(mysqli_error());
                   $no=1;
                   while ($data = mysqli_fetch_array($query)) {  
                 ?>  
