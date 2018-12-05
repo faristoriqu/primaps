@@ -40,18 +40,18 @@
      $cari = mysqli_num_rows($data);
     if ($cari==0) {
         $query_add = mysqli_query($koneksi,"INSERT INTO transaksi_tmp VALUES('$id_barang','$jumlah')");
-      if ($query_add==TRUE) {
-        echo "<script>window.location.href='?halaman=transaksi'</script>";  
-      }else{
-            echo("gagal");
-      }
+      // if ($query_add==TRUE) {
+      //   echo "<script>window.location.href='?halaman=transaksi'</script>";  
+      // }else{
+      //       echo("gagal");
+      // }
     }else{
           $query_edit = mysqli_query($koneksi,"UPDATE transaksi_tmp SET jumlah=(jumlah + ".$jumlah.") WHERE id_barang='$id_barang' ");
-      if ($query_edit==TRUE) {
-        echo "<script>window.location.href='?halaman=transaksi'</script>";  
-      }else{
-          echo("gagal");
-      }  
+      // if ($query_edit==TRUE) {
+      //   echo "<script>window.location.href='?halaman=transaksi'</script>";  
+      // }else{
+      //     echo("gagal");
+      // }  
     }
   }
 
@@ -108,7 +108,7 @@
     <div class="col-md-10 col-sm-offset-1">
       <div class="box box-info">
             <div class="box-header">
-                <form class="form-horizontal" action="?halaman=transaksi" method="POST">
+                <form class="form-horizontal" action="?halaman=transaksi" method="POST" >
                   <div class="box-body">
                          
                     <div class="form-group">
@@ -150,12 +150,12 @@
 
                     <div class="form-group">
                       <div class="col-md-3 col-sm-offset-5">
-                        <button type="submit" class="btn btn-info" name="tambah">Tambah</button>
+                        <button type="submit" class="btn btn-info" name="tambah" id="btn">Tambah</button>
                       </div>
                     </div>
-                    <div class="form-group">
-                      <div class="col-sm-8 col-sm-offset-1">
-                        <table class="table table-striped table-bordered">
+                    <div class="form-group" >
+                      <div class="col-sm-8" col-sm-offset-1>
+                        <table class="table table-striped table-bordered" >
                           <thead>
                           <tr>
                             <th>No</th>
@@ -166,7 +166,7 @@
                             <th>Pilihan</th>          
                           </tr>
                           </thead>
-                          <tbody>
+                          <tbody >
                             <?php 
                             $query = mysqli_query($koneksi,"SELECT * FROM transaksi_tmp JOIN barang ON transaksi_tmp.id_barang=barang.id_barang") or die(mysqli_error());
                             $no=1;
@@ -189,11 +189,12 @@
                               </td>
                             </tr>
                           <?php $no++; }  ?>  
+
                           </tbody>
                           <tfoot> 
                             <tr>
                               <th colspan="4" style="text-align: right;">Total</th>
-                              <td colspan="2" style="text-align: center;"> <?php echo $ttl ?> </td>
+                              <td colspan="2" style="text-align: center;"> </td>
                             </tr>               
                           </tfoot> 
                         </table>
@@ -229,6 +230,18 @@
 
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script type="text/javascript">
+  $(document).ready(function(){
+    loadData();
+  });
+  function loadData(){
+    $.get('data.php', function(data){
+      $('#table').html(data);  
+    })
+  }
+
+
+
+
   $(document).ready(function () {
       $("#tambah").hide();
       
@@ -286,3 +299,5 @@
 <!-- Select2 -->
 <script src="bower_components/select2/dist/js/select2.full.min.js"></script>
 
+
+                            
