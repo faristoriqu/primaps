@@ -154,7 +154,7 @@
                       </div>
                       <div class="col-sm-3">
                         <input type="hidden" class="form-control"  id="stok">
-                        <input type="number" class="form-control"  name="jumlah" placeholder="Jumlah" id="jumlah">
+                        <input type="number" class="form-control"  name="jumlah" placeholder="Jumlah" id="jumlah" required oninvalid="this.setCustomValidity('masukkan jumlah beli')" oninput="setCustomValidity("")">
                       </div>
                     </div>
 
