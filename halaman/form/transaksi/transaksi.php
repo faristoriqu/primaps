@@ -14,7 +14,7 @@
    // hasil untuk menambahkan kode 
    // angka 3 untuk menambahkan tiga angka setelah B dan angka 0 angka yang berada di tengah
    // atau angka sebelum $kode
-   $kode_otomatis = "TRS".str_pad($kode, 4, "0", STR_PAD_LEFT);
+   $kode_otomatis = "TRS".str_pad($kode, 6, "0", STR_PAD_LEFT);
   } else {
    $kode_otomatis = "TRS0001";
   }
@@ -87,6 +87,13 @@
 
     // simpan ke transaksi
     $query_tambah= mysqli_query($koneksi,"INSERT INTO transaksi VALUES ('$kode_transaksi','$tanggal','$total','$potongan','$bayar','$kembalian')");
+    if ($query_tambah==TRUE) {
+        $query_deltmp = mysqli_query($koneksi,"DELETE FROM transaksi_tmp"); 
+
+        echo "<script>window.location.href='halaman/form/cetak/lhk.php'</script>";
+      }else{
+          echo("gagal");
+      }
 
     //panggil isi keranjang dan hitung jumlah produk yang dibeli
     // $isitmp = isi_tmp();
@@ -97,8 +104,11 @@
     //   $query_detadd = mysqli_query($koneksi,"INSERT INTO detail VALUES ('$kode_transaksi','{$isitmp[$i]['id_barang']}','{$isitmp[$i]['jumlah']}')");
     // }
     //hapus data tmp
-      $query_deltmp = mysqli_query($koneksi,"DELETE FROM transaksi_tmp"); 
-    echo "<script>window.location.href='?halaman=transaksi'</script>";  
+      
+
+      echo "<script>window.location.href='?halaman=transaksi'</script>";  
+       
+
 
   }
 
@@ -194,7 +204,7 @@
                           <tfoot> 
                             <tr>
                               <th colspan="4" style="text-align: right;">Total</th>
-                              <td colspan="2" style="text-align: center;"> </td>
+                              <td colspan="2" style="text-align: center;"><?php echo $ttl ?> </td>
                             </tr>               
                           </tfoot> 
                         </table>
@@ -203,20 +213,20 @@
 
                     <div class="form-group">
                       <div class="col-sm-3">
-                        <input type="text" class="form-control" onkeyup="totalan();" id="potongan" name="potongan" placeholder="Potongan">
+                        <input type="text" class="form-control" onkeyup="totalan(<?php echo $ttl ?>);" id="potongan" name="potongan" placeholder="Potongan">
                       </div>
                       <div class="col-sm-3">
-                        <input type="text" class="form-control" onkeyup="totalan();" id="total" name="total" value="<?php echo $ttl ?>">
+                        <input type="text" class="form-control" id="total"  name="total" value="<?php echo $ttl ?>">
                         <!-- <input type="text" class="form-control" onkeyup="totalan();hitung();" id="totals" name="totals" value="" placeholder="tot"> -->
                       </div>
                       <div class="col-sm-3">
                         <input type="text" class="form-control" onkeyup="hitung();" id="bayar" name="bayar" placeholder="Bayar">
                       </div>
                       <div class="col-sm-3">
-                        <input type="text" class="form-control" onkeyup="hitung();" id="kembalian" name="kembalian" placeholder="Kembalian">
+                        <input type="text" class="form-control"  id="kembalian" name="kembalian" placeholder="Kembalian">
                       </div>
                       <div class="col-sm-3">
-                        <button type="submit" class="btn btn-warning" name="transaksi">Transaksi</button>
+                        <button  type="submit" class="btn btn-warning" name="transaksi"  href="">Transaksi</button>
                       </div>
                     </div>   
                   </div>
@@ -230,6 +240,16 @@
 
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script type="text/javascript">
+  //print
+  $( document ).ready(function() {
+    $('#trs').click(function()
+     {
+         window.print();
+         
+     });
+});
+
+  //load crud dengan ajax
   $(document).ready(function(){
     loadData();
   });
@@ -239,61 +259,46 @@
     })
   }
 
-
-
-
-  $(document).ready(function () {
-      $("#tambah").hide();
-      
-        $("#click-tambah").click(function(e) {
-          e.preventDefault()
-            $("#tambah").show();
+  $(document).ready(function(){
+    loadData();
   });
-  $(document).ready(function () {
-        $(".click-edit").click(function(e) {
-            var m = $(this).attr("id");
-            $.ajax({
-                url: "halaman/form/data_satuan/edit.php",
-                type: "POST",
-                data : {id: m,},
-                success: function (ajaxData){
-                    $("#edit").html(ajaxData);
-                }
-            });
-        });
-  });
-        $("#hideform").click(function(e) {
-          e.preventDefault()
-            $("#tambah").hide();
-        });
-        $("#hideforme").click(function(e) {
-          e.preventDefault()
-            $("#edit").hide();
-        });
+  function loadData(){
+    $.get('data.php', function(data){
+      $('#table').html(data);  
+    })
+  }
 
 </script>
 <script type="text/javascript">
-  
+      //kembalian dan total bayar  
         function hitung() {
           var total = document.getElementById('total').value;
           var bayar = document.getElementById('bayar').value;
 
           var result = parseInt(bayar) - parseInt(total);
           
-          if (isNaN(result)) {
+          if (bayar=="") {
+            document.getElementById('kembalian').value = "";
+          }else{
+            document.getElementById('kembalian').value = result;
+            if (result == 0) {
+                document.getElementById('kembalian').value = "";
+            }  
+          }
+        }
+        function totalan(ttl) {
+          var potongan = document.getElementById('potongan').value;
+          var bayar = document.getElementById('bayar').value;
+          var result = parseInt(ttl) - parseInt(potongan);
+          
+          if (potongan=="") {
+            document.getElementById('total').value = ttl;   
+            
+          }else {
+            document.getElementById('total').value =result;
             
           }
-          document.getElementById('kembalian').value = result;
-        }
-        function totalan() {
-          var potongan = document.getElementById('potongan').value;
-          var total = document.getElementById('total').value;
-          var awalan = document.getElementById('total').value;
-          var result = parseInt(total) - parseInt(potongan);
-          if (isNaN(result)) {
-            document.getElementById('total').value = awalan;   
-          }
-          document.getElementById('total').value = result;
+          hitung();
         }
 </script>
 <!-- Select2 -->

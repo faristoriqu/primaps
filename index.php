@@ -36,6 +36,8 @@
                                 include 'halaman/form/laporan/laporan_barang.php';
                             }else if($_GET['halaman']=='laporan_penjualan') {
                                 include 'halaman/form/laporan/laporan_penjualan.php';
+                            }else if($_GET['halaman']=='pemesanan') {
+                                include 'halaman/form/pemesanan/pemesanan.php';
                             }
 
                         }else{
