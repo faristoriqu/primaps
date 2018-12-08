@@ -165,7 +165,7 @@
                           </thead>
                           <tbody >
                                 <?php 
-                            $query = mysqli_query($koneksi,"SELECT * FROM transaksi_tmp JOIN barang ON transaksi_tmp.id_barang=barang.id_barang") or die(mysqli_error());
+                            $query = mysqli_query($koneksi,"SELECT * FROM transaksi_tmp JOIN barang ON transaksi_tmp.id_barang=barang.id_barang JOIN satuan ON barang.ids=satuan.ids JOIN kategori ON barang.idkat=kategori.idkat") or die(mysqli_error());
                             $no=1;
                             $ttl=0;
                             while ($data = mysqli_fetch_array($query)) {  
@@ -177,12 +177,16 @@
                               <td><?php echo $data['hargaj']; ?></td>
                               <?php 
                               $subtotal = $data['jumlah'] * $data['hargaj'];
-                              $ttl = $ttl + $subtotal
+                              $ttl = $ttl + $subtotal;
+
+                              
                               ?>
                               <td style="text-align: right;"><?php echo $subtotal ?></td>
                               <td>
                                 <a class="btn btn-danger " href="?halaman=transaksi&delete=<?php echo $data['id_barang'] ?>" onclick="return confirm('Anda Yakin Ingin Menghapus Data?')"> <li class="fa fa-close"></li> </a>
-
+                                <?php if($data['namasatuan']=="sak"&& $data['kategori']=="pakan"){ ?>
+                                <a href="" class="btn btn-primary"><li class="fa fa-print"></li></a>
+                                <?php } ?>
                               </td>
                             </tr>
                           <?php $no++; }  ?>  
