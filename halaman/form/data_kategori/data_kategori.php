@@ -14,7 +14,7 @@
     $kategori = $_POST['kategori'];
     
      
-    $query_tambah = mysqli_query($koneksi,"INSERT INTO kategori VALUES(NULL,'$kategori')");
+  $query_tambah = mysqli_query($koneksi,"INSERT INTO kategori VALUES(NULL,'$kategori')");
      
     if($query_tambah == TRUE){
       echo "<script>window.location.href='?halaman=data_kategori'</script>";
