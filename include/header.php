@@ -19,7 +19,21 @@
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
          <!-- Messages: style can be found in dropdown.less-->
-          
+          <li class="dropdown tasks-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class=""><?php date_default_timezone_set("Asia/Jakarta"); echo date('d-m-Y H:i:s'); ?></i>              
+            </a>
+          </li>
+          <li class="dropdown tasks-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class=""></i>              
+            </a>
+          </li>
+          <li class="dropdown tasks-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class=""></i>              
+            </a>
+          </li>
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -48,9 +62,9 @@
                   <div class="col-xs-4 text-center">
                     <a href="#">Friends</a>
                   </div>
-                </div>
+                </div> -->
                 
-              </li> -->
+              </li>
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
@@ -62,10 +76,21 @@
               </li>
             </ul>
           </li>
+          
           <!-- Control Sidebar Toggle Button -->
-         
+         <li class="dropdown tasks-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class=""></i>              
+            </a>
+          </li>
+          <li class="dropdown tasks-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class=""></i>              
+            </a>
+          </li>
         </ul>
       </div>
+
 
     </nav>
   </header>

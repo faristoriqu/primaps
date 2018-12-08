@@ -46,19 +46,24 @@
       if ($cari==0 ) {
         if ($stok >= $jumlah) {
       $query_add = mysqli_query($koneksi,"INSERT INTO transaksi_tmp VALUES('$id_barang','$jumlah')");
+      if ($query_add==TRUE) {
+        echo "<script>window.location.href='?halaman=transaksi'</script>";  
       }else{
-        return false;
+          echo("gagal");
+      }  
+      }else{
+        echo "<script>window.location.href='?halaman=transaksi'</script>";  
       }
     }else{
       if ($stok >= $jumlah) {
           $query_edit = mysqli_query($koneksi,"UPDATE transaksi_tmp SET jumlah=(jumlah + ".$jumlah.") WHERE id_barang='$id_barang' ");
-      // if ($query_edit==TRUE) {
-      //   echo "<script>window.location.href='?halaman=transaksi'</script>";  
-      // }else{
-      //     echo("gagal");
-      // }  
+      if ($query_edit==TRUE) {
+        echo "<script>window.location.href='?halaman=transaksi'</script>";  
+      }else{
+          echo("gagal");
+      }  
         }else{
-          return false;
+          echo "<script>window.location.href='?halaman=transaksi'</script>";  
         }
     }
     
@@ -69,7 +74,7 @@
     $id_barang=$_POST['id_barang'];
     $jumlah=$_POST['jumlah'];
     $kode_transaksi=$_POST['kode_transaksi'];
-    $tanggal=date("Y-m-d",strtotime($_POST['tanggal']));
+    $tanggal=date("Y-d-m",strtotime($_POST['tanggal']));
     $total=$_POST['total'];
     $bayar=$_POST['bayar'];
     $potongan=$_POST['potongan'];
@@ -109,7 +114,7 @@
                             <div class="input-group-addon">
                               <i class="fa fa-calendar"></i>
                             </div>
-                            <input type="text" name="tanggal" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask value="<?php $tgl=date('d-m-Y'); echo $tgl; ?>" readonly">
+                            <input type="text" name="tanggal" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask value="<?php date_default_timezone_set("Asia/Jakarta"); echo date('d-m-Y'); ?>" readonly">
                           </div>
                       </div>
                     </div>

@@ -9,61 +9,25 @@
                <br><br>
 
                 <div class="box-header with-border">
-                  <h5 class="box-title">Pilih Tanggal</h5>
-                </div>
-
-
-                <div class="input-group">
-                  <button type="button" class="btn btn-default pull-right" id="daterange-btn">
-                    <span>
-                      <i class="fa fa-calendar"></i> Date range picker
-                    </span>
-                    <i class="fa fa-caret-down"></i>
-                  </button>
-                  </div>
-
-            </div>  
-                     
-
-               
-            <div class="box-body">
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                    <th>Tanggal</th>
-                    <th>Kode Transaksi</th>
-                    <th>Kode Barang</th>
-                    <th>Nama Barang</th>
-                    <th>Potongan</th>
-                    <th>Jumlah</th>
-                    <th>Total Harga</th>
-                  </tr>
-                </thead>                
-                <body>
-                   <?php 
-                  $query = mysqli_query($koneksi,"SELECT * FROM transaksi JOIN detail ON transaksi.kode_transaksi =detail.kode_transaksi  ORDER BY id_barang") or die(mysqli_error());
-                  $no=1;
-                  while ($data = mysqli_fetch_array($query)) {  
-                ?> 
-               
                   
-               
-                
-               
-                  <tr>
-                    <td><?php echo $data['tanggal']; ?></td>
-                    <td><?php echo $data['kode_transaksi']; ?></td>
-                    <td><?php echo $data['total']; ?></td>
-                    <td><?php echo $data['id_barang']; ?></td>
-                    <td><?php echo $data['potongan']; ?></td>
-                    <td><?php echo $data['bayar']; ?></td>
-                    <td><?php echo $data['kembalian']; ?></td>
-    
-                    
-                  </tr>
-                  <?php $no++;} ?>
-                </tbody>
-              </table>
+                  <div class="col-md-3">
+                    <div class="form-group">
+                      
+                      <select class="form-control select2" style="width: 100%;" name="tanggal" id="tanggal">
+                        <option selected="selected">Pilih Tanggal</option>
+                        <?php date_default_timezone_set("Asia/Jakarta"); echo $tanggal=date('d-m-Y');?>
+                        <option > Hari ini</option>
+                        <option>California</option>
+                        <option>Delaware</option>
+                        <option>Tennessee</option>
+                        <option>Texas</option>
+                        <option>Washington</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+            </div>  
+            <div class="box-body hari_ini">
             </div>
       </div>  
     </div>
@@ -71,3 +35,27 @@
 </section>  
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script type="text/javascript">
+    $(document).ready(function () {
+        $("#tanggal").change(function(e) {
+            var m = $("#tanggal").val();
+            $.ajax({
+                url: "halaman/form/laporan/penjualan_hariini.php",
+                type: "POST",
+                data : {id: m,},
+                success: function (ajaxData){
+                    $(".hari_ini").html(ajaxData);
+                }
+            });
+        });
+    });
+    // $(document).ready(function(){
+    // $("#tanggal").change(function(e){
+    //   $.ajax({
+    //   url : "halaman/form/laporan/penjualan_hariini.php",
+    //   success:function(data){
+    //   $('.tambah').html(data);  
+    //   }
+    // }) 
+    // }) 
+  // });
+</script>
