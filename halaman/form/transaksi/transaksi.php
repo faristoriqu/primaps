@@ -35,24 +35,33 @@
     $id_barang=$_POST['id_barang'];
     $jumlah=$_POST['jumlah'];
     $kode_transaksi=$_POST['kode_transaksi'];
+    $stok=$_POST['stok'];
+
+
 
      $data = mysqli_query($koneksi, "SELECT * FROM transaksi_tmp WHERE id_barang='$id_barang'");
      $cari = mysqli_num_rows($data);
-    if ($cari==0) {
-        $query_add = mysqli_query($koneksi,"INSERT INTO transaksi_tmp VALUES('$id_barang','$jumlah')");
-      // if ($query_add==TRUE) {
-      //   echo "<script>window.location.href='?halaman=transaksi'</script>";  
-      // }else{
-      //       echo("gagal");
-      // }
+     
+    
+      if ($cari==0 ) {
+        if ($stok >= $jumlah) {
+      $query_add = mysqli_query($koneksi,"INSERT INTO transaksi_tmp VALUES('$id_barang','$jumlah')");
+      }else{
+        return false;
+      }
     }else{
+      if ($stok >= $jumlah) {
           $query_edit = mysqli_query($koneksi,"UPDATE transaksi_tmp SET jumlah=(jumlah + ".$jumlah.") WHERE id_barang='$id_barang' ");
       // if ($query_edit==TRUE) {
       //   echo "<script>window.location.href='?halaman=transaksi'</script>";  
       // }else{
       //     echo("gagal");
       // }  
+        }else{
+          return false;
+        }
     }
+    
   }
 
   if (isset($_POST['transaksi'])) {
@@ -64,19 +73,8 @@
     $total=$_POST['total'];
     $bayar=$_POST['bayar'];
     $potongan=$_POST['potongan'];
-    $kembalian=$_POST['kembalian'];
+    
 
-    // fungsi untuk mendapatkan isi keranjang belanja
-    // function isi_tmp(){
-    //   include 'config/koneksi.php';
-    //   $isitmp = array();
-      
-    //   $baca = mysqli_query($koneksi,"SELECT * FROM transaksi_tmp");
-    //   while ($data = mysqli_fetch_array($baca)) {
-    //     $isitmp[] = $data;
-    //   }
-    //   return $isitmp;
-    // }
 
     $baca = mysqli_query($koneksi,"SELECT * FROM transaksi_tmp");
     foreach ($baca as $kolom ) {
@@ -86,25 +84,9 @@
     }
 
     // simpan ke transaksi
-    $query_tambah= mysqli_query($koneksi,"INSERT INTO transaksi VALUES ('$kode_transaksi','$tanggal','$total','$potongan','$bayar','$kembalian')");
-    if ($query_tambah==TRUE) {
+    $query_tambah= mysqli_query($koneksi,"INSERT INTO transaksi VALUES ('$kode_transaksi','$tanggal','$total','$potongan','$bayar')");
+    
         $query_deltmp = mysqli_query($koneksi,"DELETE FROM transaksi_tmp"); 
-
-        echo "<script>window.location.href='halaman/form/cetak/lhk.php'</script>";
-      }else{
-          echo("gagal");
-      }
-
-    //panggil isi keranjang dan hitung jumlah produk yang dibeli
-    // $isitmp = isi_tmp();
-    // $jml = count($isitmp);
-
-    // for ($i=0; $i < $jml ; $i++) {
-     
-    //   $query_detadd = mysqli_query($koneksi,"INSERT INTO detail VALUES ('$kode_transaksi','{$isitmp[$i]['id_barang']}','{$isitmp[$i]['jumlah']}')");
-    // }
-    //hapus data tmp
-      
 
       echo "<script>window.location.href='?halaman=transaksi'</script>";  
        
@@ -153,8 +135,8 @@
                         </select>
                       </div>
                       <div class="col-sm-3">
-                        <input type="hidden" class="form-control"  id="stok">
-                        <input type="number" class="form-control"  name="jumlah" placeholder="Jumlah" id="jumlah" required oninvalid="this.setCustomValidity('masukkan jumlah beli')" oninput="setCustomValidity("")">
+                        <input type="text" class="form-control"  id="stok" name="stok">
+                        <input type="number" class="form-control"  name="jumlah" placeholder="Jumlah" id="jumlah" >
                       </div>
                     </div>
 
@@ -177,7 +159,7 @@
                           </tr>
                           </thead>
                           <tbody >
-                            <?php 
+                                <?php 
                             $query = mysqli_query($koneksi,"SELECT * FROM transaksi_tmp JOIN barang ON transaksi_tmp.id_barang=barang.id_barang") or die(mysqli_error());
                             $no=1;
                             $ttl=0;
@@ -217,7 +199,7 @@
                       </div>
                       <div class="col-sm-3">
                         <input type="text" class="form-control" id="total"  name="total" value="<?php echo $ttl ?>">
-                        <!-- <input type="text" class="form-control" onkeyup="totalan();hitung();" id="totals" name="totals" value="" placeholder="tot"> -->
+                        
                       </div>
                       <div class="col-sm-3">
                         <input type="text" class="form-control" onkeyup="hitung();" id="bayar" name="bayar" placeholder="Bayar">
@@ -240,34 +222,31 @@
 
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script type="text/javascript">
-  //print
-  $( document ).ready(function() {
-    $('#trs').click(function()
-     {
-         window.print();
-         
-     });
-});
-
-  //load crud dengan ajax
-  $(document).ready(function(){
-    loadData();
-  });
-  function loadData(){
-    $.get('data.php', function(data){
-      $('#table').html(data);  
+    $(document).ready(function(){
+    $("#id_barang").change(function(){
+      var stok = $(this).find(":selected").data("stok")
+      $("#stok").val(stok)
     })
-  }
-
-  $(document).ready(function(){
-    loadData();
-  });
-  function loadData(){
-    $.get('data.php', function(data){
-      $('#table').html(data);  
+    $("#jumlah").change(function(){
+      var id_barang = $("#id_barang").val()
+      var jumlah = $("#jumlah").val()
+      if(id_barang==""){
+        alert("pilih barang");
+      }else{
+          var stok = parseInt($("#stok").val())
+          var thisVal = parseInt($(this).val())
+          var jumlah = $("#jumlah").val()
+          
+          if(thisVal > stok){
+            alert("Stok tidak mecukupi, tersedia = " +stok);
+          }else if(thisVal==""){
+            alert("masukkan jumlah");
+          }else{
+            return TRUE;
+          }
+      }
     })
-  }
-
+  })
 </script>
 <script type="text/javascript">
       //kembalian dan total bayar  

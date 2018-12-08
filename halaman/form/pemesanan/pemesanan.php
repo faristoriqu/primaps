@@ -121,7 +121,12 @@
                   <div class="box-body">
                          
                     <div class="form-group">
-                      <div class="col-sm-3 col-sm-offset-8">
+                      <label  class="col-sm-2 control-label">Kode Transaksi</label>
+                      <div class="col-sm-3 col-sm-offset-1">
+                        <input type="text" class="form-control" readonly name="kode_pemesanan" placeholder="" value="<?php echo $kode_otomatis ?>" >
+                      </div>
+
+                      <div class="col-sm-3 col-sm-offset-2">
                        <div class="input-group">
                             <div class="input-group-addon">
                               <i class="fa fa-calendar"></i>
@@ -132,9 +137,15 @@
                     </div>
 
                     <div class="form-group">
-                      <label  class="col-sm-2 control-label">Kode Transaksi</label>
+                      <label  class="col-sm-2 control-label">Nama Barang</label>
                       <div class="col-sm-3">
-                        <input type="text" class="form-control" readonly name="kode_pemesanan" placeholder="" value="<?php echo $kode_otomatis ?>" >
+                        <input type="number" class="form-control"  name="namapembeli" placeholder="Pembeli" id="jumlah">  
+                      </div>
+                      <div class="col-sm-3">
+                        <input type="number" class="form-control"  name="telepon" placeholder="Telepon" id="jumlah">
+                      </div>
+                      <div class="col-sm-3">
+                        <input type="number" class="form-control"  name="namapembeli" placeholder="Alamat" id="jumlah">  
                       </div>
                     </div>
 
@@ -152,7 +163,7 @@
                         </select>
                       </div>
                       <div class="col-sm-3">
-                        <input type="hidden" class="form-control"  id="stok">
+                        
                         <input type="number" class="form-control"  name="jumlah" placeholder="Jumlah" id="jumlah">
                       </div>
                     </div>
