@@ -124,6 +124,9 @@
                       <div class="col-sm-3">
                         <input type="text" class="form-control" readonly name="kode_transaksi" placeholder="" value="<?php echo $kode_otomatis ?>" >
                       </div>
+                      <div class="col-sm-3">
+                        <input type="text" class="form-control" readonly name="kode_transaksi" placeholder="" value="<?php $sid = session_id(); echo $sid ?>" >
+                      </div>
                     </div>
 
                     <div class="form-group">

@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+
 <header class="main-header">
 
     <!-- Logo -->
@@ -38,7 +38,7 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="dist/img/avatar.png" class="user-image" alt="User Image">
-              <span class="hidden-xs">Syapi i</span>
+              <span class="hidden-xs"><?php echo $_SESSION['username'] ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -46,7 +46,7 @@
                 <img src="dist/img/avatar.png" class="img-circle" alt="User Image">
 
                 <p>
-                  Syapi i
+                  <?php echo $_SESSION['username']; ?>
                   <small>Software Developer Nov. 2018</small>
                 </p>
               </li>
@@ -71,7 +71,7 @@
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="halaman/login/logout.php" class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>

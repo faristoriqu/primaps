@@ -1,6 +1,11 @@
 <?php 
   include 'config/koneksi.php';
- ?>
+
+    session_start();
+    if($_SESSION['status']!="login"){
+        header("location:halaman/login/login.php");
+    }
+?>
 <!doctype html>
 <html>
     <head>
