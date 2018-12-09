@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 03, 2018 at 01:28 PM
+-- Generation Time: Dec 09, 2018 at 07:06 AM
 -- Server version: 10.1.9-MariaDB
 -- PHP Version: 5.6.15
 
@@ -42,7 +42,7 @@ CREATE TABLE `barang` (
 
 INSERT INTO `barang` (`id_barang`, `namabarang`, `idkat`, `stok`, `ids`, `hargab`, `hargaj`) VALUES
 (2, '124p', 1, 0, 2, 0, 380000),
-(5, 'premix', 1, 0, 3, 0, 15000);
+(5, 'premix', 1, 12, 3, 0, 15000);
 
 -- --------------------------------------------------------
 
@@ -82,10 +82,22 @@ DELIMITER ;
 --
 
 CREATE TABLE `detail` (
-  `kode_transaksi` int(100) NOT NULL,
+  `kode_transaksi` varchar(100) NOT NULL,
   `id_barang` int(11) NOT NULL,
   `jumlah_beli` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `detail`
+--
+
+INSERT INTO `detail` (`kode_transaksi`, `id_barang`, `jumlah_beli`) VALUES
+('TRS0001', 2, 1),
+('TRS0001', 5, 1),
+('TRS000002', 2, 12),
+('TRS000003', 5, 2),
+('TRS000004', 2, 1),
+('TRS000004', 5, 1);
 
 --
 -- Triggers `detail`
@@ -97,6 +109,36 @@ CREATE TRIGGER `kurangistok` AFTER INSERT ON `detail` FOR EACH ROW BEGIN
 END
 $$
 DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `detail_pemesanan`
+--
+
+CREATE TABLE `detail_pemesanan` (
+  `kode_pemesanan` int(11) NOT NULL,
+  `id_po` int(10) NOT NULL,
+  `jumlah` int(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `detail_pemesanan`
+--
+
+INSERT INTO `detail_pemesanan` (`kode_pemesanan`, `id_po`, `jumlah`) VALUES
+(0, 0, 1),
+(0, 1, 1),
+(0, 2, 2),
+(0, 0, 1),
+(0, 1, 1),
+(0, 2, 2),
+(0, 0, 1),
+(0, 1, 1),
+(0, 2, 2),
+(0, 0, 1),
+(0, 1, 1),
+(0, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -157,6 +199,60 @@ CREATE TABLE `pegawai` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pemesanan`
+--
+
+CREATE TABLE `pemesanan` (
+  `kode_pemesanan` varchar(100) NOT NULL,
+  `tanggal` date NOT NULL,
+  `total` int(20) NOT NULL,
+  `bayar` int(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pemesanan`
+--
+
+INSERT INTO `pemesanan` (`kode_pemesanan`, `tanggal`, `total`, `bayar`) VALUES
+('', '2018-06-12', 1056000, 0),
+('PSN000002', '2018-06-12', 1056000, 0),
+('PSN000003', '2018-06-12', 1056000, 0),
+('PSN000004', '2018-06-12', 1056000, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pemesanan_tmp`
+--
+
+CREATE TABLE `pemesanan_tmp` (
+  `id_po` int(10) NOT NULL,
+  `jumlah` int(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `po`
+--
+
+CREATE TABLE `po` (
+  `id_po` int(10) NOT NULL,
+  `nama` text NOT NULL,
+  `harga` int(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `po`
+--
+
+INSERT INTO `po` (`id_po`, `nama`, `harga`) VALUES
+(1, 'pullet isa brown', 56000),
+(2, 'doc wonokoyo', 500000);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `satuan`
 --
 
@@ -171,7 +267,16 @@ CREATE TABLE `satuan` (
 
 INSERT INTO `satuan` (`ids`, `namasatuan`) VALUES
 (2, 'sak'),
-(3, 'kilo');
+(3, 'kilo'),
+(4, 'a'),
+(5, 'c'),
+(6, 'sadf'),
+(7, 'sdaf'),
+(8, 'ew'),
+(9, 'sdaf'),
+(10, 'sdaf'),
+(11, 'sadf'),
+(12, 'sdf');
 
 -- --------------------------------------------------------
 
@@ -204,22 +309,18 @@ CREATE TABLE `transaksi` (
   `tanggal` date NOT NULL,
   `total` int(20) NOT NULL,
   `potongan` int(20) NOT NULL,
-  `bayar` int(20) NOT NULL,
-  `kembalian` int(20) NOT NULL
+  `bayar` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `transaksi`
 --
 
-INSERT INTO `transaksi` (`kode_transaksi`, `tanggal`, `total`, `potongan`, `bayar`, `kembalian`) VALUES
-('TRS0001', '0000-00-00', 380000, 0, 380000, 0),
-('TRS0002', '0000-00-00', 380000, 0, 380000, 0),
-('TRS0003', '0000-00-00', 380000, 0, 380000, 0),
-('TRS0004', '0000-00-00', 380000, 0, 380000, 0),
-('TRS0005', '0000-00-00', 1140000, 0, 2147483647, 0),
-('TRS0006', '0000-00-00', 1140000, 0, 2147483647, 0),
-('TRS0007', '0000-00-00', 1140000, 0, 2147483647, 0);
+INSERT INTO `transaksi` (`kode_transaksi`, `tanggal`, `total`, `potongan`, `bayar`) VALUES
+('TRS000002', '2018-07-12', 4560000, 0, 0),
+('TRS000003', '2018-12-09', 30000, 0, 0),
+('TRS000004', '2018-12-09', 395000, 0, 0),
+('TRS0001', '2018-08-12', 395000, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -237,7 +338,38 @@ CREATE TABLE `transaksi_tmp` (
 --
 
 INSERT INTO `transaksi_tmp` (`id_barang`, `jumlah`) VALUES
-(2, 3);
+(2, 1);
+
+--
+-- Triggers `transaksi_tmp`
+--
+DELIMITER $$
+CREATE TRIGGER `tmp` AFTER INSERT ON `transaksi_tmp` FOR EACH ROW BEGIN
+	UPDATE barang SET stok=stok - NEW.jumlah
+    WHERE id_barang=NEW.id_barang;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `tmpdel` AFTER DELETE ON `transaksi_tmp` FOR EACH ROW BEGIN
+	UPDATE barang SET stok=stok + OLD.jumlah
+    WHERE id_barang=OLD.id_barang;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `updatetmp` AFTER UPDATE ON `transaksi_tmp` FOR EACH ROW BEGIN
+	IF NEW.jumlah <> OLD.jumlah THEN
+    	UPDATE barang SET stok=stok+OLD.jumlah
+        WHERE id_barang=NEW.id_barang;
+        
+        
+        UPDATE barang SET stok=stok-NEW.jumlah
+        WHERE id_barang=NEW.id_barang;
+        END IF;
+END
+$$
+DELIMITER ;
 
 --
 -- Indexes for dumped tables
@@ -284,6 +416,12 @@ ALTER TABLE `pegawai`
   ADD PRIMARY KEY (`id_pegawai`);
 
 --
+-- Indexes for table `po`
+--
+ALTER TABLE `po`
+  ADD PRIMARY KEY (`id_po`);
+
+--
 -- Indexes for table `satuan`
 --
 ALTER TABLE `satuan`
@@ -327,10 +465,15 @@ ALTER TABLE `kategori`
 ALTER TABLE `pegawai`
   MODIFY `id_pegawai` int(11) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `po`
+--
+ALTER TABLE `po`
+  MODIFY `id_po` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
 -- AUTO_INCREMENT for table `satuan`
 --
 ALTER TABLE `satuan`
-  MODIFY `ids` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ids` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 --
 -- AUTO_INCREMENT for table `supplier`
 --
