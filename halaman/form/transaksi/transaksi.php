@@ -140,7 +140,7 @@
                         </select>
                       </div>
                       <div class="col-sm-3">
-                        <input type="text" class="form-control"  id="stok" name="stok">
+                        <input type="hidden" class="form-control"  id="stok" name="stok">
                         <input type="number" class="form-control"  name="jumlah" placeholder="Jumlah" id="jumlah" >
                       </div>
                     </div>
