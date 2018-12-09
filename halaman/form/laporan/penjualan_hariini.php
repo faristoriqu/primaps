@@ -6,8 +6,8 @@
                   <tr>
                     <th>Tanggal</th>
                     <th>Kode Transaksi</th>
-                    <th>Kode Barang</th>
                     <th>Nama Barang</th>
+                    <th>Harga</th>
                     <th>Potongan</th>
                     <th>Total Harga</th>
                   </tr>
@@ -32,8 +32,8 @@
                   <tr>
                     <td><?php echo $data['tanggal']; ?></td>
                     <td><?php echo $data['kode_transaksi']; ?></td>
-                    <td><?php echo $data['total']; ?></td>
                     <td><?php echo $data['namabarang']; ?></td>
+                    <td><?php echo $data['total']; ?></td>                    
                     <td><?php echo $data['potongan']; ?></td>
                     <td><?php echo $data['bayar']; ?></td> 
                   </tr>

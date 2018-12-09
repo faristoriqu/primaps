@@ -13,12 +13,9 @@
                     </tr>
                   </thead>                
                   <tbody>
-                  <?php 
+                    <?php 
                   include '../../../config/koneksi.php';
                     $id=$_POST['id'];
-                    if ($id !="" && ) {
-                      # code...
-                    }
                     $query = mysqli_query($koneksi,"SELECT * FROM barang JOIN satuan ON barang.ids=satuan.ids   WHERE idkat='$id'  ORDER BY barang.namabarang ASC") or die(mysqli_error());
                    
                     while ($data = mysqli_fetch_array($query)) {  

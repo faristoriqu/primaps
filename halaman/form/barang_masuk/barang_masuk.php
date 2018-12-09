@@ -16,8 +16,9 @@
     $id_supplier = $_POST['id_supplier'];
     $jumlah= $_POST['jumlah'];
     $harga = $_POST['harga'];
+    $jual = $_POST['jual'];
       
-    $query_tambah = mysqli_query($koneksi,"INSERT INTO barangmasuk (nofaktur, tgl, id_barang, id_supplier, jumlah, harga) VALUES('$nofaktur', '$tgl', '$id_barang', '$id_supplier', '$jumlah', '$harga')");
+    $query_tambah = mysqli_query($koneksi,"INSERT INTO barangmasuk (nofaktur, tgl, id_barang, id_supplier, jumlah, harga, jual) VALUES('$nofaktur', '$tgl', '$id_barang', '$id_supplier', '$jumlah', '$harga', '$jual')");
      
     if($query_tambah == TRUE){
      echo "<script>window.location.href='?halaman=barang_masuk'</script>";
@@ -99,6 +100,15 @@
                 </div>
                 <br><br>
 
+                
+                <div class="form-group">
+                  <label  class="col-sm-2 control-label">Jumlah</label>
+                  <div class="col-sm-8">
+                    <input type="text" class="form-control" id="jumlah" name="jumlah" placeholder="Jumlah">
+                  </div>
+                </div>
+                <br><br>
+
                 <div class="form-group">
                   <label  class="col-sm-2 control-label">Harga</label>
                   <div class="col-sm-8">
@@ -107,14 +117,15 @@
                 </div>
                 <br><br>
         
- 
                 <div class="form-group">
-                  <label  class="col-sm-2 control-label">Jumlah</label>
+                  <label  class="col-sm-2 control-label">Jual</label>
                   <div class="col-sm-8">
-                    <input type="text" class="form-control" id="jumlah" name="jumlah" placeholder="Jumlah">
+                    <input type="text" class="form-control" id="jual" name="jual" placeholder="Jual">
                   </div>
                 </div>
-                <br><br> 
+                <br><br>
+        
+  
 
                 
     <button  type="simpan" class="btn btn-info pull-left" name="simpan">Simpan</button>
@@ -129,8 +140,6 @@
                 <thead>
                   <tr>
                     <th>No</th>
-                    <th>No Faktur</th>
-                    <th>Tanggal</th>
                     <th>Nama Barang</th>
                     <th>Nama Supplier</th>
                     <th>Harga</th>
@@ -149,8 +158,6 @@
                
                   <tr>
                     <td><?php echo $no ?></td>
-                    <td><?php echo $data['nofaktur']; ?></td>
-                    <td><?php echo $data['tgl']; ?></td>
                     <td><?php echo $data['namabarang']; ?></td>
                     <td><?php echo $data['namasupplier']; ?></td>
                     <td><?php echo $data['harga']; ?></td>
@@ -173,8 +180,6 @@
                           <tr>
                             <td colspan='4' align='left'><b>Total</b></td>
                               <td> </td>
-                              <td></td>
-                              <td></td>
                               <td align='right'><b><?php echo $ttl ?> </td>
 
                               </tr>               
