@@ -1,4 +1,6 @@
-
+<head>
+  <link rel="stylesheet" href="bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+</head>
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                   <tr>
@@ -17,9 +19,15 @@
                    date_default_timezone_set("Asia/Jakarta");
                     $tanggal=date('Y-m-d');
                     
-                    $query = mysqli_query($koneksi,"SELECT * FROM transaksi JOIN detail ON transaksi.kode_transaksi =detail.kode_transaksi JOIN barang ON detail.id_barang=barang.id_barang WHERE tanggal= '$tanggal'") or die(mysqli_error());
+
+                    if ($id == "show-all") {
+                      $query = mysqli_query($koneksi,"SELECT * FROM transaksi JOIN detail ON transaksi.kode_transaksi =detail.kode_transaksi JOIN barang ON detail.id_barang=barang.id_barang ORDER BY transaksi.kode_transaksi ASC") or die(mysqli_error());
+                    }else if ($id == "hari-ini"){
+                      $query = mysqli_query($koneksi,"SELECT * FROM transaksi JOIN detail ON transaksi.kode_transaksi =detail.kode_transaksi JOIN barang ON detail.id_barang=barang.id_barang WHERE tanggal= '$tanggal' ORDER BY transaksi.kode_transaksi ASC ") or die(mysqli_error());
+                    }
+                    
                   $no=1;
-                  while ($data = mysqli_fetch_array($query)) {  
+                  foreach ($query as $data) {  
                 ?> 
                   <tr>
                     <td><?php echo $data['tanggal']; ?></td>

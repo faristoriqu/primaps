@@ -7,11 +7,11 @@
                <center><h3 class="big-box">LAPORAN BARANG</h3></center>
                <br>
 
-               <div class="form-group">
+                <div class="form-group">
                       <label  class="col-sm-1 control-label">Kategori</label>
                       <div class="col-sm-3">
                          
-                       <select class="form-control select2" name="idkat" style="width: 100%;">
+                       <select class="form-control select2" name="idkat" style="width: 100%;" id="idkat">
                          <option value="">-Pilih Kategori-</option>
                         <?php 
                       
@@ -21,9 +21,7 @@
                         <option value="<?php echo $data['idkat'] ?>"><?php echo $data['kategori'] ?></option>
                         <?php } ?>    
                         </select>
-                     
-
-                             </div>  
+                      </div>  
                               
                       <label  class="col-sm-1 control-label">Stok</label>
                       <div class="col-sm-3"> 
@@ -32,47 +30,13 @@
                          <option value="1">0</option>
                          <option value="2">dibawah 50</option>                                                                
                         </select>
-                                       
-               </div>
-                  <button type="submit" class="btn btn-info btn-sm " name="btnCariStock" id="btnCariStock">Cari Data</button>
-
-
-              </div>  
+                      </div>
+                </div>  
                     
 
                
-            <div class="box-body">
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                    <th>No</th>
-                    <th>Nama Barang</th>
-                    <th>Satuan</th>
-                    <th>Jumlah</th>
-                    <th>Harga Beli</th>
-                    <th>Harga Jual</th>
-                    
-                  </tr>
-                </thead>                
-                <body>
-                <?php 
-                  $query = mysqli_query($koneksi,"SELECT * FROM barangmasuk JOIN barang ON barangmasuk.id_barang =barang.id_barang JOIN supplier ON barangmasuk.id_supplier=supplier.id_supplier JOIN satuan ON barang.ids=satuan.ids ORDER BY namabarang") or die(mysqli_error());
-                  $no=1;
-                  while ($data = mysqli_fetch_array($query)) {  
-                ?> 
-               
-                  <tr>
-                    <td><?php echo $no ?></td>
-                    <td><?php echo $data['namabarang']; ?></td>
-                    <td><?php echo $data['namasatuan']; ?></td>
-                    <td><?php echo $data['jumlah']; ?></td>
-                    <td><?php echo $data['harga']; ?></td>
-                    <td><?php echo $data['jual']; ?></td>
-                    
-                  </tr>
-                  <?php $no++;} ?>
-                </tbody>
-              </table>
+            <div class="box-body table" id="">
+              
             </div>
       </div>  
     </div>
@@ -80,4 +44,18 @@
 </section>  
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script type="text/javascript">
+    $(document).ready(function () {
+        $("#idkat").change(function(e) {
+            var m = $("#idkat").val();
+            $.ajax({
+                url: "halaman/form/laporan/barang.php",
+                type: "POST",
+                data : {id: m,},
+                success: function (ajaxData){
+                    $(".table").html(ajaxData);
+                }
+            });
+        });
+    });  
+</script>
     
