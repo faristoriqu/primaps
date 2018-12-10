@@ -71,7 +71,6 @@
   }
 
   if (isset($_POST['transaksi'])) {
-
     $id_barang=$_POST['id_barang'];
     $jumlah=$_POST['jumlah'];
     $kode_transaksi=$_POST['kode_transaksi'];
@@ -92,11 +91,7 @@
     // simpan ke transaksi
     $query_tambah= mysqli_query($koneksi,"INSERT INTO transaksi VALUES ('$kode_transaksi','$tanggal','$total','$potongan','$bayar')");
     
-        $query_deltmp = mysqli_query($koneksi,"DELETE FROM transaksi_tmp"); 
-
-      echo "<script>window.location.href='?halaman=transaksi'</script>";  
-       
-
+    $query_deltmp = mysqli_query($koneksi,"DELETE FROM transaksi_tmp"); 
 
   }
 
@@ -105,8 +100,10 @@
   <div class="data">
     <div class="col-md-10 col-sm-offset-1">
       <div class="box box-info">
+
             <div class="box-header">
-                <form class="form-horizontal" action="?halaman=transaksi" method="POST" >
+                <!-- <form class="form-horizontal" action="?halaman=transaksi" method="POST" > -->
+                <form class="form-horizontal" method="POST" action="?halaman=transaksi">
                   <div class="box-body">
                          
                     <div class="form-group">
@@ -225,7 +222,7 @@
                       </div>
 
                       <div class="col-sm-3 col-sm-offset-1">
-                        <button  type="submit" class="btn btn-warning" name="transaksi"  href="">Transaksi</button>
+                        <button  type="submit" class="btn btn-warning" name="transaksi">Transaksi</button>
                       </div>
                     </div>   
                   </div>
@@ -236,7 +233,12 @@
     </div>
   </div>
 </section>
-
+<?php 
+  if(isset($_POST['transaksi'])){
+    echo "<script>window.location.href='halaman/form/cetak/struk.php?val=$kode_transaksi'</script>";  
+    
+  }
+?>
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
