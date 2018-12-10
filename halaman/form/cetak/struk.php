@@ -1,8 +1,11 @@
 <?php
+if(isset($_POST['transaksi'])){
+
+}
  // Define relative path from this script to mPDF
- $nama_dokumen='Cetak Bukti -'.$_GET['val'];
+$nama_dokumen='Cetak Bukti -'.$_GET['val'];
 include '../../../config/koneksi.php';
-include '../../../vendors/mpdf60/mpdf.php';
+include '../../../dist/mpdf60/mpdf.php';
 $no_regist_keluar = $_GET['val'];
 $mpdf=new mPDF('utf-8', 'A4'); // Create new mPDF Document
  
@@ -20,7 +23,9 @@ ob_start();
 <h5 style="text-align: center;">
   <u>Surat Bukti Barang Keluar</u><br>SBBK
 </h5>
+
 <?php
+/*
 //Query Untuk Menampilkan Isi Table Logistik Masuk
 $query = $connect->query("SELECT * FROM v_tlk WHERE no_regist_keluar='$no_regist_keluar'");
 foreach ($query as $data) {
@@ -120,6 +125,7 @@ foreach($query2 as $data2){
 <!--CONTOH Code END-->
  
 <?php
+*/
 $html = ob_get_contents(); //Proses untuk mengambil hasil dari OB..
 ob_end_clean();
 //Here convert the encode for UTF-8, if you prefer the ISO-8859-1 just change for $mpdf->WriteHTML($html);
