@@ -16,14 +16,32 @@ ob_start();
 <!--CONTOH Code START-->
 
 <h4 style="text-align: center;">
-  INSTALASI PERBEKALAN FARMASI KABUPATEN LUMAJANG
+  PrimaPs
   <br>
-  JL. MAHAKAM NO. 103 TELP. 0334-882981 LUMAJANG
+  JL. Raya Sukowono Jember
 </h4>
 <h5 style="text-align: center;">
-  <u>Surat Bukti Barang Keluar</u><br>SBBK
+  <u>Struk Nota Penjualan</u><br>SBBK
 </h5>
 
+<?php
+  $query = mysqli_query($koneksi,"SELECT * FROM transaksi   WHERE kode_transaksi='$no_regist_keluar'") or die(mysqli_error());
+  $no=1;
+  $ttl=0;
+  while ($data = mysqli_fetch_array($query)) {  
+    $tgl_regist = $data['tanggal'];
+  $tgl_indo = date('d-m-Y',strtotime($tgl_regist));
+?>
+<table>
+  <tr>
+    <td colspan="2">Kode Transaksi : </td>
+    <td><?php echo $data['kode_transaksi']; ?></td>
+    <td style="width: 350px;"></td>
+    <td>Tanggal : </td>
+    <td><?php echo $tgl_indo; ?></td>
+  </tr>
+</table>
+<?php } ?>
 <?php
 /*
 //Query Untuk Menampilkan Isi Table Logistik Masuk
@@ -124,8 +142,9 @@ foreach($query2 as $data2){
 
 <!--CONTOH Code END-->
  
-<?php
 */
+?>
+<?php
 $html = ob_get_contents(); //Proses untuk mengambil hasil dari OB..
 ob_end_clean();
 //Here convert the encode for UTF-8, if you prefer the ISO-8859-1 just change for $mpdf->WriteHTML($html);
