@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 09, 2018 at 07:06 AM
+-- Generation Time: Dec 10, 2018 at 05:48 AM
 -- Server version: 10.1.9-MariaDB
 -- PHP Version: 5.6.15
 
@@ -97,7 +97,8 @@ INSERT INTO `detail` (`kode_transaksi`, `id_barang`, `jumlah_beli`) VALUES
 ('TRS000002', 2, 12),
 ('TRS000003', 5, 2),
 ('TRS000004', 2, 1),
-('TRS000004', 5, 1);
+('TRS000004', 5, 1),
+('TRS000005', 2, 1);
 
 --
 -- Triggers `detail`
@@ -178,8 +179,8 @@ CREATE TABLE `login` (
 
 INSERT INTO `login` (`id_user`, `username`, `password`, `level`) VALUES
 ('1', 'admin', 'admin', 'admin'),
-('2', 'safina', 'safii', 'admin'),
-('80', 'yusuf', 'kjjkbkln', 'admin'),
+('2', 'safina', 'safii', 'karyawan'),
+('80', 'yusuf', 'kjjkbkln', 'karyawan'),
 ('89', 'khizam', 'asdfjisdfjis', 'admin');
 
 -- --------------------------------------------------------
@@ -320,6 +321,18 @@ INSERT INTO `transaksi` (`kode_transaksi`, `tanggal`, `total`, `potongan`, `baya
 ('TRS000002', '2018-07-12', 4560000, 0, 0),
 ('TRS000003', '2018-12-09', 30000, 0, 0),
 ('TRS000004', '2018-12-09', 395000, 0, 0),
+('TRS000005', '2018-12-10', 380000, 0, 0),
+('TRS000006', '2018-12-10', 0, 0, 0),
+('TRS000007', '2018-12-10', 0, 0, 0),
+('TRS000008', '2018-12-10', 0, 0, 0),
+('TRS000009', '2018-12-10', 0, 0, 0),
+('TRS000010', '2018-12-10', 0, 0, 0),
+('TRS000011', '2018-12-10', 0, 0, 0),
+('TRS000012', '2018-12-10', 0, 0, 0),
+('TRS000013', '2018-12-10', 0, 0, 0),
+('TRS000014', '2018-12-10', 0, 0, 0),
+('TRS000015', '2018-12-10', 0, 0, 0),
+('TRS000016', '2018-12-10', 0, 0, 0),
 ('TRS0001', '2018-08-12', 395000, 0, 0);
 
 -- --------------------------------------------------------
@@ -330,15 +343,9 @@ INSERT INTO `transaksi` (`kode_transaksi`, `tanggal`, `total`, `potongan`, `baya
 
 CREATE TABLE `transaksi_tmp` (
   `id_barang` int(10) NOT NULL,
-  `jumlah` int(10) NOT NULL
+  `jumlah` int(10) NOT NULL,
+  `sid` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `transaksi_tmp`
---
-
-INSERT INTO `transaksi_tmp` (`id_barang`, `jumlah`) VALUES
-(2, 1);
 
 --
 -- Triggers `transaksi_tmp`
