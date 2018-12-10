@@ -6,7 +6,7 @@ if(isset($_POST['transaksi'])){
 $nama_dokumen='Cetak Bukti -'.$_GET['val'];
 include '../../../config/koneksi.php';
 include '../../../dist/mpdf60/mpdf.php';
-$no_regist_keluar = $_GET['val'];
+$kode_transaksi = $_GET['val'];
 $mpdf=new mPDF('utf-8', 'A4'); // Create new mPDF Document
  
 //Beginning Buffer to save PHP variables and HTML tags
@@ -21,11 +21,11 @@ ob_start();
   JL. Raya Sukowono Jember
 </h4>
 <h5 style="text-align: center;">
-  <u>Struk Nota Penjualan</u><br>SBBK
+  <u>Struk Nota Penjualan</u><br>
 </h5>
 
 <?php
-  $query = mysqli_query($koneksi,"SELECT * FROM transaksi   WHERE kode_transaksi='$no_regist_keluar'") or die(mysqli_error());
+  $query = mysqli_query($koneksi,"SELECT * FROM transaksi  WHERE kode_transaksi='$kode_transaksi'") or die(mysqli_error());
   $no=1;
   $ttl=0;
   while ($data = mysqli_fetch_array($query)) {  
@@ -43,6 +43,25 @@ ob_start();
 </table>
 <?php } ?>
 <?php
+
+  $query = mysqli_query($koneksi,"SELECT * FROM transaksi JOIN detail ON transaksi.kode_transaksi=detail.kode_transaksi  WHERE kode_transaksi='$kode_transaksi'") or die(mysqli_error());
+  $no=1;
+  $ttl=0;
+  while ($data = mysqli_fetch_array($query)) {    
+?>
+<table>
+    <tr>
+      <td><?php echo $no ?></td>
+      <td><?php echo $data['id_barang ']; ?></td>
+      <td><?php echo $data['jumlah_beli']; ?></td>
+      <td><?php echo $data['potongan']; ?></td>
+      
+      <td style="text-align: right;"><?php echo $subtotal ?></td>
+  </tr>
+</table>
+
+<?php
+}
 /*
 //Query Untuk Menampilkan Isi Table Logistik Masuk
 $query = $connect->query("SELECT * FROM v_tlk WHERE no_regist_keluar='$no_regist_keluar'");
@@ -145,10 +164,12 @@ foreach($query2 as $data2){
 */
 ?>
 <?php
+/*
 $html = ob_get_contents(); //Proses untuk mengambil hasil dari OB..
 ob_end_clean();
 //Here convert the encode for UTF-8, if you prefer the ISO-8859-1 just change for $mpdf->WriteHTML($html);
 $mpdf->WriteHTML(utf8_encode($html));
 $mpdf->Output($nama_dokumen.".pdf" ,'I');
 exit;
+*/
 ?>
