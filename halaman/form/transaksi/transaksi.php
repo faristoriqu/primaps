@@ -20,7 +20,7 @@
   }
 
    if(isset($_GET['delete'])){
-    $query_delete = mysqli_query($koneksi,"DELETE FROM transaksi_tmp WHERE id_barang='$_GET[delete]'")or die(mysql_error());
+    $query_delete = mysqli_query($koneksi,"DELETE FROM transaksi_tmp WHERE id_barang='$_GET[delete]' ")or die(mysql_error());
     
     if ($query_delete == TRUE) {
       echo "<script>window.location.href='?halaman=transaksi'</script>";
@@ -36,16 +36,17 @@
     $jumlah=$_POST['jumlah'];
     $kode_transaksi=$_POST['kode_transaksi'];
     $stok=$_POST['stok'];
+    $sid = session_id();
 
 
 
-     $data = mysqli_query($koneksi, "SELECT * FROM transaksi_tmp WHERE id_barang='$id_barang'");
+     $data = mysqli_query($koneksi, "SELECT * FROM transaksi_tmp WHERE id_barang='$id_barang' AND sid = '$sid'");
      $cari = mysqli_num_rows($data);
      
     
       if ($cari==0 ) {
         if ($stok >= $jumlah) {
-      $query_add = mysqli_query($koneksi,"INSERT INTO transaksi_tmp VALUES('$id_barang','$jumlah')");
+      $query_add = mysqli_query($koneksi,"INSERT INTO transaksi_tmp VALUES('$id_barang','$jumlah','$sid')");
       if ($query_add==TRUE) {
         echo "<script>window.location.href='?halaman=transaksi'</script>";  
       }else{
@@ -56,7 +57,7 @@
       }
     }else{
       if ($stok >= $jumlah) {
-          $query_edit = mysqli_query($koneksi,"UPDATE transaksi_tmp SET jumlah=(jumlah + ".$jumlah.") WHERE id_barang='$id_barang' ");
+          $query_edit = mysqli_query($koneksi,"UPDATE transaksi_tmp SET jumlah=(jumlah + ".$jumlah.") WHERE id_barang='$id_barang' AND sid = '$sid' ");
       if ($query_edit==TRUE) {
         echo "<script>window.location.href='?halaman=transaksi'</script>";  
       }else{
@@ -109,24 +110,27 @@
                   <div class="box-body">
                          
                     <div class="form-group">
-                      <div class="col-sm-3 col-sm-offset-8">
+                      <label  class="col-sm-2 control-label">Transaksi</label>
+                      <div class="col-sm-3">
+                        <input type="text" class="form-control" readonly name="kode_transaksi" placeholder="" value="<?php echo $kode_otomatis ?>" >
+                      </div>
+                      <div class="col-sm-3">
+                        <input type="hidden" class="form-control" readonly name="sid" placeholder="" value="<?php $sid = session_id(); echo $sid ?>" >
+                        <input type="text" class="form-control" readonly name="username" placeholder="" value=" <?php echo $_SESSION['username'] ?>" >
+
+                      </div>
+                      <div class="col-sm-3 ">
                        <div class="input-group">
                             <div class="input-group-addon">
                               <i class="fa fa-calendar"></i>
                             </div>
-                            <input type="text" name="tanggal" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask value="<?php date_default_timezone_set("Asia/Jakarta"); echo date('d-m-Y'); ?>" readonly">
+                            <input type="text" name="tanggal" readonly class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask value="<?php date_default_timezone_set("Asia/Jakarta"); echo date('d-m-Y'); ?>" readonly">
                           </div>
                       </div>
                     </div>
 
                     <div class="form-group">
-                      <label  class="col-sm-2 control-label">Kode Transaksi</label>
-                      <div class="col-sm-3">
-                        <input type="text" class="form-control" readonly name="kode_transaksi" placeholder="" value="<?php echo $kode_otomatis ?>" >
-                      </div>
-                      <div class="col-sm-3">
-                        <input type="text" class="form-control" readonly name="kode_transaksi" placeholder="" value="<?php $sid = session_id(); echo $sid ?>" >
-                      </div>
+                      
                     </div>
 
                     <div class="form-group">
@@ -154,8 +158,8 @@
                       </div>
                     </div>
                     <div class="form-group" >
-                      <div class="col-sm-8" col-sm-offset-1>
-                        <table class="table table-striped table-bordered" >
+                      <div class="col-sm-8 col-sm-offset-2">
+                        <table  class="table table-striped table-bordered" >
                           <thead>
                           <tr>
                             <th>No</th>
@@ -168,7 +172,7 @@
                           </thead>
                           <tbody >
                                 <?php 
-                            $query = mysqli_query($koneksi,"SELECT * FROM transaksi_tmp JOIN barang ON transaksi_tmp.id_barang=barang.id_barang JOIN satuan ON barang.ids=satuan.ids JOIN kategori ON barang.idkat=kategori.idkat") or die(mysqli_error());
+                            $query = mysqli_query($koneksi,"SELECT * FROM transaksi_tmp JOIN barang ON transaksi_tmp.id_barang=barang.id_barang JOIN satuan ON barang.ids=satuan.ids JOIN kategori ON barang.idkat=kategori.idkat WHERE sid='$sid'") or die(mysqli_error());
                             $no=1;
                             $ttl=0;
                             while ($data = mysqli_fetch_array($query)) {  
@@ -186,7 +190,7 @@
                               ?>
                               <td style="text-align: right;"><?php echo $subtotal ?></td>
                               <td>
-                                <a class="btn btn-danger " href="?halaman=transaksi&delete=<?php echo $data['id_barang'] ?>" onclick="return confirm('Anda Yakin Ingin Menghapus Data?')"> <li class="fa fa-close"></li> </a>
+                                <a class="btn btn-danger " href="?halaman=transaksi&delete=<?php echo $data['id_barang']?>" onclick="return confirm('Anda Yakin Ingin Menghapus Data?')"> <li class="fa fa-close"></li> </a>
                                 <?php if($data['namasatuan']=="sak"&& $data['kategori']=="pakan"){ ?>
                                 <a href="" class="btn btn-primary"><li class="fa fa-print"></li></a>
                                 <?php } ?>
@@ -219,7 +223,8 @@
                       <div class="col-sm-3">
                         <input type="text" class="form-control"  id="kembalian" name="kembalian" placeholder="Kembalian">
                       </div>
-                      <div class="col-sm-3">
+
+                      <div class="col-sm-3 col-sm-offset-1">
                         <button  type="submit" class="btn btn-warning" name="transaksi"  href="">Transaksi</button>
                       </div>
                     </div>   

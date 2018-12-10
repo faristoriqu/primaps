@@ -1,112 +1,129 @@
 <?php
-$namabarang=$_POST["namabarang"];
-$hargab=$_POST["hargab"];
-$jumlah=$_POST["jumlah"];
-$hargaj=$_POST["hargaj"];
+ // Define relative path from this script to mPDF
+ $nama_dokumen='Cetak Bukti -'.$_GET['val'];
+include '../../../config/koneksi.php';
+include '../../../vendors/mpdf60/mpdf.php';
+$no_regist_keluar = $_GET['val'];
+$mpdf=new mPDF('utf-8', 'A4'); // Create new mPDF Document
+ 
+//Beginning Buffer to save PHP variables and HTML tags
+ob_start(); 
 ?>
+<!--sekarang Tinggal Codeing seperti biasanya. HTML, CSS, PHP tidak masalah.-->
+<!--CONTOH Code START-->
+
+<h4 style="text-align: center;">
+  INSTALASI PERBEKALAN FARMASI KABUPATEN LUMAJANG
+  <br>
+  JL. MAHAKAM NO. 103 TELP. 0334-882981 LUMAJANG
+</h4>
+<h5 style="text-align: center;">
+  <u>Surat Bukti Barang Keluar</u><br>SBBK
+</h5>
+<?php
+//Query Untuk Menampilkan Isi Table Logistik Masuk
+$query = $connect->query("SELECT * FROM v_tlk WHERE no_regist_keluar='$no_regist_keluar'");
+foreach ($query as $data) {
+  $tgl_regist = $data['tgl_keluar'];
+  $tgl_indo = date('d-m-Y',strtotime($tgl_regist));
+?>
+<table>
+  <tr>
+    <td>Penerima : </td>
+    <td><?php echo $data['nm_penerima']; ?></td>
+    <td style="width: 350px;"></td>
+    <td>Tanggal : </td>
+    <td><?php echo $tgl_indo; ?></td>
+  </tr>
+  <tr>
+    <td colspan="2"></td>
+    <td></td>
+    <td>Nomor :</td>
+    <td><?php echo $no_regist_keluar; ?></td>
+  </tr>
+</table>
+<?php } ?>
+<br>
+<?php 
+$query2 = $connect->query("SELECT * FROM trx_detail_logistik_keluar tdlk JOIN logistik ON tdlk.id_logistik=logistik.id_logistik JOIN anggaran ON logistik.id_anggaran=anggaran.id_anggaran WHERE no_regist_keluar='$no_regist_keluar' ");
+$no = 1;
+foreach($query2 as $data2){
+?>
+<table border="1" style="border-collapse: collapse;">
+  <tr>
+    <td style="text-align: center;">No.</td>
+    <td style="text-align: center;">Nama Obat</td>
+    <td style="text-align: center;">Satuan Kemasan</td>
+    <td style="text-align: center;">Jumlah Diberikan</td>
+    <td style="text-align: center;">Harga Per Unit+PPN</td>
+    <td style="text-align: center;">Jumlah Harga</td>
+    <td style="text-align: center;">KET/ETD</td>
+  </tr>
+  <tr>
+    <td><?php echo $no++; ?> </td>
+    <td><?php echo $data2['nm_logistik']; ?></td>
+    <td><?php echo $data2['satuan']; ?></td>
+    <td><?php echo $data2['qty']; ?></td>
+    <td><?php echo $data2['harga_satuan']+($data2['harga_satuan']/10); ?></td>
+    <td><?php echo $data2['subtotal']; ?></td>
+    <td><?php echo $data2['asal_anggaran']; ?></td>
+  </tr>
+</table>
+<?php } ?>
+<p style="text-align: right;">Lumajang, <?php echo $tgl_indo; ?></p>
+<table align="center">
+  <tr>
+    <td style="text-align: center;">Kepala Instansi</td>
+    <td width="150px;"></td>
+    <td style="text-align: center;">Yang Menyerahkan</td>
+    <td width="150px;"></td>
+    <td style="text-align: center">Penerima</td>
+  </tr>
+  <tr style="">
+    <td colspan="5" style="height: 80px;"></td>
+  </tr>
+  <tr>
+    <?php
+    $query3 = $connect->query("SELECT nama as nm_pegawai,nip,nm_penerima,nip_penerima FROM trx_logistik_keluar tlk JOIN pegawai ON tlk.id_pegawai_pimpinan=pegawai.id_pegawai WHERE no_regist_keluar='$no_regist_keluar'");
+    foreach($query3 as $data3){
+      $nip_pimpinan = $data3['nip'];
+    ?>
+    <td style="text-align: center;"><?php echo $data3['nm_pegawai'];; ?></td>
+    <?php } ?>
+    <td rowspan="3"></td>
+    <?php
+    $query4 = $connect->query("SELECT nama as nm_pegawai,nip,nm_penerima,nip_penerima FROM trx_logistik_keluar tlk JOIN pegawai ON tlk.id_pegawai_pen_jawab=pegawai.id_pegawai WHERE no_regist_keluar='$no_regist_keluar'");
+    foreach($query4 as $data4){
+      $nip_penanggung_jawab = $data4['nip'];
+      $nip_penerima = $data4['nip_penerima'];
+    ?>
+    <td style="text-align: center;"><?php echo $data4['nm_pegawai']; ?></td>
+    <td rowspan="3"></td>
+    <td style="text-align: center"><?php echo $data4['nm_penerima']; ?></td>
+    <?php } ?>
+  </tr>
+  
+  <tr>
+    <td><hr style="color: black;"></td>
+    <td><hr style="color: black;"></td>
+    <td><hr style="color: black"></td>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><?php echo $nip_pimpinan; ?></td>
+    <td style="text-align: center;"><?php echo $nip_penanggung_jawab; ?></td>
+    <td style="text-align: center"><?php echo $nip_penerima; ?></td>
+
+  </tr> 
+</table>
 
 
-
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Untitled Document</title>
-<style type="text/css">
-<!--
-.style1 {
-	font-family: Georgia, "Times New Roman", Times, serif;
-	font-weight: bold;
-}
-.style2 {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-weight: bold;
-}
--->
-</style>
-</head>
-
-<body>
-<label>
-<form id="form1" name="form1" method="post" action="">
-  <blockquote>
-    <h1 align="center">&nbsp;</h1>
-    <h1 align="center"><br/>
-      <br />
-    </h1>
-    <table width="355" border="0">
-      <tr>
-        <td width="82" rowspan="5">&nbsp; </td>
-        <td width="92">          <h4 align="center" class="style1"> Struk</h4></td>
-        <td colspan="2" rowspan="5">&nbsp;</td>
-      </tr>
-      <tr>
-        <td>          <h4 align="center" class="style2">&quot;PrimaPS&quot;</h4></td>
-      </tr>
-      <tr>
-        <td><h5 align="center">  Kec.Sukowono</h5></td>
-      </tr>
-      <tr>
-        <td><div align="center">
-          <h5>Telp.</h5>
-        </div></td>
-      </tr>
-      <tr>
-        <td height="39"><div align="center">
-          <h5>Tanggal.</h5>
-        </div></td>
-      </tr>
-      <tr>
-        <td height="39" colspan="4"><p> --------------------------------------------------------------------------------------------------------------------</p>        </td>
-      </tr>
-      <tr>
-        <td height="28"><h4><dfn><kbd>Nama Barang:</kbd></dfn></h4></td>
-        <td><h4><dfn><kbd>Harga Barag:</kbd></dfn></h4></td>
-        <td width="80"><h4><dfn><kbd>Jumlah Beli:</kbd></dfn></h4></td>
-        <td width="83"><h4><dfn><kbd>Total:</kbd></dfn></h4></td>
-      </tr>
-      <tr>
-        <td height="40"><h4><kbd><dfn><dfn><dfn><?php echo $namabarang ;?></dfn></dfn></dfn></kbd></h4></td>
-        <td><h4><kbd><dfn><dfn><dfn></dfn></dfn></dfn></kbd></h4></td>
-        <td><h4><kbd><dfn><dfn><dfn></dfn></dfn></dfn></kbd></h4></td>
-        <td><h5><kbd><dfn><dfn><dfn></dfn></dfn></dfn></kbd></h5></td>
-      </tr>
-      <tr>
-        <td height="39" colspan="4"><h4><dfn><kbd>-------------------------------------------</kbd></dfn></h4></td>
-      </tr>
-      <tr>
-        <td height="64"><h4><kbd><dfn><dfn><dfn></dfn></dfn></dfn></kbd></h4></td>
-        <td><h4><kbd><dfn><dfn><dfn></dfn></dfn></dfn></kbd></h4></td>
-        <td><h4><dfn><kbd>Pembayaran</kbd></dfn></h4></td>
-        <td><h5><kbd><dfn><dfn><dfn></dfn></dfn></dfn></kbd></h5></td>
-      </tr>
-      <tr>
-        <td height="64"><h4><kbd><dfn><dfn><dfn></dfn></dfn></dfn></kbd></h4></td>
-        <td><h4><kbd><dfn><dfn><dfn></dfn></dfn></dfn></kbd></h4></td>
-        <td><h4><dfn><kbd>Kembalian</kbd></dfn></h4></td>
-        <td><h5><kbd><dfn><dfn><dfn></dfn></dfn></dfn></kbd></h5></td>
-      </tr>
-      <tr>
-        <td height="39" colspan="4">&nbsp;</td>
-      </tr>
-    </table>
-    <p align="center">&nbsp;</p>
-    <p align="center">&nbsp;</p>
-    <p align="center">&nbsp;</p>
-    <p align="center">&nbsp;</p>
-    <p align="center">&nbsp;</p>
-    <p align="center">&nbsp;</p>
-    <p align="center">&nbsp;</p>
-    <table width="200" border="1"><tr></tr>
-    </table>
-    <p align="center">&nbsp;</p>
-  </blockquote>
-  <p>&nbsp;</p>
-  <blockquote>
-    <p>&nbsp;</p>
-  </blockquote>
-</form>
-</label>
-</body>
-</html>
+<!--CONTOH Code END-->
+ 
+<?php
+$html = ob_get_contents(); //Proses untuk mengambil hasil dari OB..
+ob_end_clean();
+//Here convert the encode for UTF-8, if you prefer the ISO-8859-1 just change for $mpdf->WriteHTML($html);
+$mpdf->WriteHTML(utf8_encode($html));
+$mpdf->Output($nama_dokumen.".pdf" ,'I');
+exit;
+?>

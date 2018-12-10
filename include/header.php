@@ -47,7 +47,7 @@
 
                 <p>
                   <?php echo $_SESSION['username']; ?>
-                  <small>Software Developer Nov. 2018</small>
+                  <small>PandawaDev Nov. 2018</small>
                 </p>
               </li>
               <!-- Menu Body -->

@@ -53,7 +53,7 @@
                 </div>
         	</div>
 	        <?php 	
-	        	include 'include/footer.php';
+	        	// include 'include/footer.php';
 	        ?>
 	        <div class="control-sidebar-bg"></div>
         </div>

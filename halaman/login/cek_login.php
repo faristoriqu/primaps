@@ -8,7 +8,7 @@ include '../../config/koneksi.php';
 // menangkap data yang dikirim dari form
 $username = $_POST['username'];
 $password = $_POST['password'];
-$id_user = $_POST['id_user'];
+
  
 // menyeleksi data admin dengan username dan password yang sesuai
 $data = mysqli_query($koneksi,"select * from login where username='$username' and password='$password'");
@@ -19,7 +19,7 @@ $cek = mysqli_num_rows($data);
 if($cek > 0){
 	session_start();
 	$_SESSION['username'] = $username;
-	$_SESSION['id_user'] = $id_user;
+	$_SESSION['id_user'] = $r['id_user'];
 	$_SESSION['status'] = "login";
 	header("location:../../index.php");
 }else{
