@@ -20,9 +20,10 @@
     if($query_tambah == TRUE){
       echo "<script>window.location.href='?halaman=supplier'</script>";
     } else{
-      echo "gagal";
+      echo "<script>alert('gagal')</script>";
     }
-  } 
+    echo "<script>window.location.href='?halaman=barang'</script>";
+  }
 
   if(isset($_POST['edit'])){
     $id = $_POST['id'];

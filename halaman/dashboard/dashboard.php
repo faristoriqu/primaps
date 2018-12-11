@@ -2,7 +2,7 @@
 <section class="content">
       <!-- Small boxes (Stat box) -->
       <div class="data">
-        <div class="col-lg-3 col-xs-6">
+        <div class="col-lg-3 col-xs-8">
           <!-- small box -->
           <div class="small-box bg-aqua">
             <div class="inner">

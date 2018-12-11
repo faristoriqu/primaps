@@ -14,14 +14,15 @@
     $kategori = $_POST['kategori'];
     
      
-  $query_tambah = mysqli_query($koneksi,"INSERT INTO kategori VALUES(NULL,'$kategori')");
+    $query_tambah = mysqli_query($koneksi,"INSERT INTO kategori VALUES(NULL,'$kategori')");
      
     if($query_tambah == TRUE){
       echo "<script>window.location.href='?halaman=data_kategori'</script>";
     } else{
-      echo "gagal";
+      echo "<script>alert('gagal')</script>";
     }
-  } 
+    echo "<script>window.location.href='?halaman=barang'</script>";
+  }
 
   if(isset($_POST['edit'])){
     $id = $_POST['id'];
