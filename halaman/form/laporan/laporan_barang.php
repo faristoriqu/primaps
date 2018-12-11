@@ -25,9 +25,9 @@
                               
                       <label  class="col-sm-1 control-label">Stok</label>
                       <div class="col-sm-3"> 
-                       <select class="form-control select2" name="idkat" style="width: 100%;">
+                       <select class="form-control select2" name="stok" style="width: 100%;">
                          <option value="">-Pilih Stok-</option>
-                         <option value="1">0</option>
+                         <option value="satu">0</option>
                          <option value="2">dibawah 50</option>                                                                
                         </select>
                       </div>
@@ -47,15 +47,29 @@
     $(document).ready(function () {
         $("#idkat").change(function(e) {
             var m = $("#idkat").val();
+            var n = $("#stok").val();
             $.ajax({
                 url: "halaman/form/laporan/barang.php",
                 type: "POST",
-                data : {id: m,},
+                data : {id: m, ids : n},
                 success: function (ajaxData){
                     $(".table").html(ajaxData);
                 }
             });
         });
-    });  
+    });
+    $(document).ready(function () {
+        $("#stok").change(function(e) {
+            var m = $("#stok").val();
+            $.ajax({
+                url: "halaman/form/laporan/barang.php",
+                type: "POST",
+                data : {ids: m,},
+                success: function (ajaxData){
+                    $(".table").html(ajaxData);
+                }
+            });
+        });
+    }); 
 </script>
     

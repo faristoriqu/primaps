@@ -23,7 +23,15 @@
                     if ($id == "show-all") {
                       $query = mysqli_query($koneksi,"SELECT * FROM transaksi JOIN detail ON transaksi.kode_transaksi =detail.kode_transaksi JOIN barang ON detail.id_barang=barang.id_barang ORDER BY transaksi.kode_transaksi ASC") or die(mysqli_error());
                     }else if ($id == "hari-ini"){
-                      $query = mysqli_query($koneksi,"SELECT * FROM transaksi JOIN detail ON transaksi.kode_transaksi =detail.kode_transaksi JOIN barang ON detail.id_barang=barang.id_barang WHERE tanggal= '$tanggal' ORDER BY transaksi.kode_transaksi ASC ") or die(mysqli_error());
+                      $query = mysqli_query($koneksi,"SELECT * FROM transaksi JOIN detail ON transaksi.kode_transaksi =detail.kode_transaksi JOIN barang ON detail.id_barang=barang.id_barang WHERE tanggal= DATE(NOW()) ORDER BY transaksi.kode_transaksi ASC ") or die(mysqli_error());
+                    }
+                    else if ($id == "minggu-ini"){
+                      $query = mysqli_query($koneksi,"SELECT * FROM transaksi JOIN detail ON transaksi.kode_transaksi =detail.kode_transaksi JOIN barang ON detail.id_barang=barang.id_barang WHERE YEARWEEK(tanggal)=YEARWEEK(NOW()) ORDER BY transaksi.kode_transaksi ASC ") or die(mysqli_error());
+                    }else if ($id == "bulan-ini"){
+                      $query = mysqli_query($koneksi,"SELECT * FROM transaksi JOIN detail ON transaksi.kode_transaksi =detail.kode_transaksi JOIN barang ON detail.id_barang=barang.id_barang WHERE MONTH(tanggal)=MONTH(NOW()) ORDER BY transaksi.kode_transaksi ASC ") or die(mysqli_error());
+                    }
+                    else if ($id == "tahun-ini"){
+                      $query = mysqli_query($koneksi,"SELECT * FROM transaksi JOIN detail ON transaksi.kode_transaksi =detail.kode_transaksi JOIN barang ON detail.id_barang=barang.id_barang WHERE YEAR(tanggal)=YEAR(NOW()) ORDER BY transaksi.kode_transaksi ASC ") or die(mysqli_error());
                     }
                     
                   $no=1;

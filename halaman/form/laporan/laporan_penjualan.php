@@ -17,9 +17,9 @@
                         <option selected="selected">Pilih Tanggal</option>
                         <option value="show-all">Semua</option>
                         <option value="hari-ini">Hari Ini</option>
-                        <option>Tennessee</option>
-                        <option>Texas</option>
-                        <option>Washington</option>
+                        <option value="minggu-ini">Minggu Ini</option>
+                        <option value="bulan-ini">Bulan Ini</option>
+                        <option value="tahun-ini">Tahun Ini</option>
                       </select>
                     </div>
                   </div>

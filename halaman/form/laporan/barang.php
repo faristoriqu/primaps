@@ -1,7 +1,6 @@
 <head>
   <link rel="stylesheet" href="bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
 </head>
-
   <table id="example1" class="table table-bordered table-striped">
                   <thead>
                     <tr>
@@ -16,9 +15,13 @@
                     <?php 
                   include '../../../config/koneksi.php';
                     $id=$_POST['id'];
-                    $query = mysqli_query($koneksi,"SELECT * FROM barang JOIN satuan ON barang.ids=satuan.ids   WHERE idkat='$id'  ORDER BY barang.namabarang ASC") or die(mysqli_error());
-                   
-                    while ($data = mysqli_fetch_array($query)) {  
+                    $ids=$_POST['ids'];
+                    if ($id != "" && $ids == "") {
+                      $query = mysqli_query($koneksi,"SELECT * FROM barang JOIN satuan ON barang.ids=satuan.ids   WHERE idkat='$id'  ORDER BY barang.namabarang ASC") or die(mysqli_error());
+                    }else if ($ids == "satu" ) {
+                      $query = mysqli_query($koneksi,"SELECT * FROM barang JOIN satuan ON barang.ids=satuan.ids   WHERE barang.stok >=3  ORDER BY barang.namabarang ASC") or die(mysqli_error());
+                    }
+                      while ($data = mysqli_fetch_array($query)) {  
                   ?> 
                  
                     <tr>
