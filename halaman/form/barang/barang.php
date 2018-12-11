@@ -8,11 +8,12 @@
   if(isset($_GET['delete'])){
     $query_delete = mysqli_query($koneksi,"DELETE FROM barang WHERE id_barang='$_GET[delete]'")or die(mysql_error());
     
-    if ($query_delete == TRUE) {
+    if ($query_delete) {
       echo "<script>window.location.href='?halaman=barang'</script>";
     }else{
-      echo "gagal";
+      echo "<script>alert('gagal')</script>";
     } 
+    echo "<script>window.location.href='?halaman=barang'</script>";
   }
 
   if(isset($_POST['simpan'])){
@@ -27,8 +28,9 @@
     if($query_tambah == TRUE){
      echo "<script>window.location.href='?halaman=barang'</script>";
     } else{
-      echo "gagal";
+       echo "<script>alert('gagal')</script>";
     }
+    echo "<script>window.location.href='?halaman=barang'</script>";
   } 
 
   if(isset($_POST['edit'])){

@@ -42,26 +42,35 @@ ob_start();
   </tr>
 </table>
 <?php } ?>
+<table>
+    <tr>
+      <td>No</td>
+      <td>Nama Balang</td>
+      <td>Halga Balang</td>
+      <td>Jumlah Beli</td>
+      <td>Total</td>
+    </tr>
 <?php
 
-  $query = mysqli_query($koneksi,"SELECT * FROM transaksi JOIN detail ON transaksi.kode_transaksi=detail.kode_transaksi  WHERE kode_transaksi='$kode_transaksi'") or die(mysqli_error());
+  $query = mysqli_query($koneksi,"SELECT * FROM transaksi JOIN detail ON transaksi.kode_transaksi=detail.kode_transaksi join barang on barang.id_barang = detail.id_barang  WHERE transaksi.kode_transaksi='$kode_transaksi'") or die(mysqli_error());
   $no=1;
   $ttl=0;
   while ($data = mysqli_fetch_array($query)) {    
+    $subtotal = $data['hargaj'] * $data['jumlah_beli'];
 ?>
-<table>
     <tr>
       <td><?php echo $no ?></td>
-      <td><?php echo $data['id_barang ']; ?></td>
+      <td><?php echo $data['namabarang']; ?></td>
+      <td><?php echo $data['hargaj']; ?></td>
       <td><?php echo $data['jumlah_beli']; ?></td>
-      <td><?php echo $data['potongan']; ?></td>
       
       <td style="text-align: right;"><?php echo $subtotal ?></td>
   </tr>
-</table>
+
 
 <?php
 }
+echo "</table>";
 /*
 //Query Untuk Menampilkan Isi Table Logistik Masuk
 $query = $connect->query("SELECT * FROM v_tlk WHERE no_regist_keluar='$no_regist_keluar'");
@@ -173,3 +182,4 @@ $mpdf->Output($nama_dokumen.".pdf" ,'I');
 exit;
 */
 ?>
+
