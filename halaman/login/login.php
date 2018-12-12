@@ -42,13 +42,13 @@
     }
   } 
   ?>
-<div class="login-box">
+<div class="login-box ">
   <div class="login-logo">
-    <a href="../../index2.html"><b>Login</b></a>
+    <a href="../../index2.html"><b><font face="Cooper Black">Login</font></b></a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Silahkan Masukkan Username dan Password</p>
+    <p class="login-box-msg"><font face="Comic Sans MS">Masukkan Username dan Password</font></p>
 
     <form action="cek_login.php" method="post">
       <div class="form-group has-feedback">

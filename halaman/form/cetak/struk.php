@@ -42,17 +42,22 @@ ob_start();
   </tr>
 </table>
 <?php } ?>
-<table>
+
+
+
+<tbody>
+  <table cellspacing="30">
+
     <tr>
       <td>No</td>
-      <td>Nama Balang</td>
-      <td>Halga Balang</td>
+      <td>Nama Barang</td>
+      <td>Harga Barang</td>
       <td>Jumlah Beli</td>
       <td>Total</td>
     </tr>
-<?php
+    <?php
 
-  $query = mysqli_query($koneksi,"SELECT * FROM transaksi JOIN detail ON transaksi.kode_transaksi=detail.kode_transaksi join barang on barang.id_barang = detail.id_barang  WHERE transaksi.kode_transaksi='$kode_transaksi'") or die(mysqli_error());
+  $query = mysqli_query($koneksi,"SELECT * FROM detail  join barang on barang.id_barang = detail.id_barang  WHERE kode_transaksi='$kode_transaksi'") or die(mysqli_error());
   $no=1;
   $ttl=0;
   while ($data = mysqli_fetch_array($query)) {    
@@ -64,13 +69,48 @@ ob_start();
       <td><?php echo $data['hargaj']; ?></td>
       <td><?php echo $data['jumlah_beli']; ?></td>
       
+      
       <td style="text-align: right;"><?php echo $subtotal ?></td>
   </tr>
+  <?php } ?>
+  </table>
+  
+</tbody>
+<?php
+  $query = mysqli_query($koneksi,"SELECT * FROM transaksi  WHERE kode_transaksi='$kode_transaksi'") or die(mysqli_error());
+  $no=1;
+  $ttl=0;
+  while ($data = mysqli_fetch_array($query)) {    
+    
+    $kembalian = $data['bayar'] - $data['total'];
+?>  
+<hr>
+  <table cellspacing="10" align="right">
+    <tr>  
+      <th>potongan :</th>
+      <th><?php echo $data['potongan']; ?></th>
+    </tr>
+    <tr> 
+      <th>total     :</th>
+      <th><?php echo $data['total']; ?></th>
+    </tr>
+    <tr> 
+      <th>bayar     :</th>
+      <th><?php echo $data['bayar']; ?></th>
+    </tr>
+    <tr>
+      <th>kembalian :</th>
+      <th><?php echo $kembalian ?></th>
+    </tr>
 
-
+    </tr>
+    
+      
+   
+  </table>
 <?php
 }
-echo "</table>";
+
 /*
 //Query Untuk Menampilkan Isi Table Logistik Masuk
 $query = $connect->query("SELECT * FROM v_tlk WHERE no_regist_keluar='$no_regist_keluar'");
@@ -173,13 +213,13 @@ foreach($query2 as $data2){
 */
 ?>
 <?php
-/*
+
 $html = ob_get_contents(); //Proses untuk mengambil hasil dari OB..
 ob_end_clean();
 //Here convert the encode for UTF-8, if you prefer the ISO-8859-1 just change for $mpdf->WriteHTML($html);
 $mpdf->WriteHTML(utf8_encode($html));
 $mpdf->Output($nama_dokumen.".pdf" ,'I');
 exit;
-*/
+
 ?>
 
