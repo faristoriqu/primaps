@@ -112,7 +112,7 @@
                         <input type="text" class="form-control" readonly name="kode_transaksi" placeholder="" value="<?php echo $kode_otomatis ?>" >
                       </div>
                       <div class="col-sm-3">
-                        <input type="hidden" class="form-control" readonly name="sid" placeholder="" value="<?php $sid = session_id(); echo $sid ?>" >
+                        <input type="text" class="form-control" readonly name="sid" placeholder="" value="<?php $sid = session_id(); echo $sid ?>" >
                         <input type="text" class="form-control" readonly name="username" placeholder="" value=" <?php echo $_SESSION['username'] ?>" >
 
                       </div>
@@ -189,7 +189,7 @@
                               <td>
                                 <a class="btn btn-danger " href="?halaman=transaksi&delete=<?php echo $data['id_barang']?>" onclick="return confirm('Anda Yakin Ingin Menghapus Data?')"> <li class="fa fa-close"></li> </a>
                                 <?php if($data['namasatuan']=="sak"&& $data['kategori']=="pakan"){ ?>
-                                <a href="" class="btn btn-primary"><li class="fa fa-print"></li></a>
+                                <button class="btn btn-info" name="printdo" type="submit"><li class="fa fa-print"></li></button>
                                 <?php } ?>
                               </td>
                             </tr>
@@ -302,5 +302,11 @@
 <!-- Select2 -->
 <script src="bower_components/select2/dist/js/select2.full.min.js"></script>
 
+<?php 
+  if(isset($_POST['printdo'])){
 
+    echo "<script>window.location.href='halaman/form/cetak/do.php?val=$sid'</script>";  
+    
+  }
+?>
                             
