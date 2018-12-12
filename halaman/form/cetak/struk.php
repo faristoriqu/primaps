@@ -72,7 +72,7 @@ ob_start();
       
       <td style="text-align: right;"><?php echo $subtotal ?></td>
   </tr>
-  <?php } ?>
+  <?php $no++; } ?>
   </table>
   
 </tbody>

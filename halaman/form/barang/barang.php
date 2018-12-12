@@ -138,12 +138,13 @@
                   <th>Pilihan</th>
                 </tr>
                 </thead>
+                <tbody>
                 <?php 
                   $query = mysqli_query($koneksi,"SELECT * FROM barang JOIN kategori ON barang.idkat =kategori.idkat JOIN satuan ON barang.ids=satuan.ids ORDER BY namabarang") or die(mysqli_error());
                   $no=1;
                   while ($data = mysqli_fetch_array($query)) {  
                 ?> 
-                <tbody>
+                
                 <tr>
                   <td><?php echo $no ?></td>
                     <td><?php echo $data['namabarang']; ?></td>
@@ -159,9 +160,9 @@
                     
                </tr>
         
-                
+                <?php $no++; }  ?>
                 </tbody> 
-                 <?php $no++; }  ?>
+                 
               
               </table>
             </div>
