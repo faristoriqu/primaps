@@ -82,60 +82,63 @@
 
           <div class="box box-info">
                 <div class="box-header with-border">
-                  <center><h3 class="box-title"> <?php date_default_timezone_set("Asia/Jakarta"); echo date('d-m-Y H:i:s'); ?></h3> </center>
+                  <center>
+                  <script type="text/javascript">
+                    window.onload = function() { jam(); }
+
+                    function jam() {
+                    var e = document.getElementById('jam'),
+                    d = new Date(), h, m, s;
+                    h = d.getHours();
+                    m = set(d.getMinutes());
+                    s = set(d.getSeconds());
+
+                    e.innerHTML = h +':'+ m +':'+ s;
+
+                    setTimeout('jam()', 1000);
+                     }
+
+                    function set(e) {
+                    e = e < 10 ? '0'+ e : e;
+                    return e;
+                    }
+                  </script>
+
+                  <h2 id="jam"></h2>
+                  </center>
                 </div>
                 <!-- /.box-header -->
                 <!-- form start -->
                 <form action="?halaman=barang" method="post"class="form-horizontal">
                   <div class="box-body">
                     <div class="form-group">
-                      <label  class="col-sm-2 control-label">Nama Barang</label>
-                      <div class="col-sm-8">
-                        <input type="text" class="form-control" id="namabarang" name="namabarang" placeholder="Nama Barang">
-                      </div>
+                      <label  class="col-sm-2 control-label">Contact Person</label>
                     </div>
+                      <div class="col-sm-7">
+                        <label  class="col-sm-10 control-label">
+                          <i class="fa fa-phone"> 081554231595</i></label>
+                      </div>
 
-                     <div class="form-group">
-                      <label  class="col-sm-2 control-label">Kategori</label>
-                      <div class="col-sm-8">
-                         
-                       <select class="form-control select2" name="idkat" style="width: 100%;">
-                         <option value="">-Pilih Kategori-</option>
-                        <?php 
-                      
-                          $query = mysqli_query($koneksi,"SELECT * FROM kategori") or die(mysqli_error());
-                          while ($data = mysqli_fetch_array($query)) {  
-                        ?>
-                        <option value="<?php echo $data['idkat'] ?>"><?php echo $data['kategori'] ?></option>
-                        <?php } ?>    
-                          
-                          </select>
+                      <div class="col-sm-7">
+                        <label  class="col-sm-12 control-label">
+                          <i class="fa fa-envelope">  www.pandawa.com</i></label>
                       </div>
+                  </div>
+
+                     <div class="box-body">
+                    <div class="form-group">
+                      <label  class="col-sm-1 control-label">Instansi</label>
+                    </div>
+                    <div class="col-sm-8">
+                        <label  class="col-sm-12 control-label">
+                          <i class="fa fa-building">  Politeknik Negeri Jember</i></label>
                       </div>
-                   
-                      <div class="form-group">
-                      <label  class="col-sm-2 control-label">Satuan</label>
-                      <div class="col-sm-8">
-                       <select class="form-control select2" name="ids" style="width: 100%;">
-                        <option value="">-Pilih Satuan-</option>
-                        <?php 
-                        $query = mysqli_query($koneksi,"SELECT * FROM satuan") or die(mysqli_error());
-                          while ($data = mysqli_fetch_array($query)) {  
-                        ?>
-                        <option value="<?php echo $data['ids'] ?>"><?php echo $data['namasatuan'] ?></option>
-                        <?php } ?>    
-                         
-                        </select>
-                      </div>
-                      </div>                                    
+                  </div>
+                                                 
                     
                     </div>
                   <!-- /.box-body -->
-                  <div class="box-footer">
-                    <button type="submit" class="btn btn-default" id="hideform">Batal</button>
-                    <button type="submit" class="btn btn-info pull-right" name="simpan">Simpan
-                    </button>
-                  </div>
+                  
                   <!-- /.box-footer -->
                 </form>
           </div>
@@ -158,3 +161,4 @@
         <!-- ./col -->
       </div>
 </section>
+
