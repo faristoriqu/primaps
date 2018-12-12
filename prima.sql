@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.8.3
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 10, 2018 at 05:48 AM
--- Server version: 10.1.9-MariaDB
--- PHP Version: 5.6.15
+-- Waktu pembuatan: 12 Des 2018 pada 08.34
+-- Versi server: 10.1.36-MariaDB
+-- Versi PHP: 7.2.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -23,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `barang`
+-- Struktur dari tabel `barang`
 --
 
 CREATE TABLE `barang` (
@@ -37,17 +39,17 @@ CREATE TABLE `barang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `barang`
+-- Dumping data untuk tabel `barang`
 --
 
 INSERT INTO `barang` (`id_barang`, `namabarang`, `idkat`, `stok`, `ids`, `hargab`, `hargaj`) VALUES
-(2, '124p', 1, 0, 2, 0, 380000),
-(5, 'premix', 1, 12, 3, 0, 15000);
+(2, '124p', 1, 5, 2, 300000, 300000),
+(5, 'premix', 1, 19, 3, 100000, 100000);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `barangmasuk`
+-- Struktur dari tabel `barangmasuk`
 --
 
 CREATE TABLE `barangmasuk` (
@@ -61,7 +63,15 @@ CREATE TABLE `barangmasuk` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Triggers `barangmasuk`
+-- Dumping data untuk tabel `barangmasuk`
+--
+
+INSERT INTO `barangmasuk` (`nofaktur`, `tgl`, `id_barang`, `id_supplier`, `jumlah`, `harga`, `jual`) VALUES
+('1234', '2018-12-12', 2, 4, 5, 300000, 300000),
+('1234', '2018-12-12', 5, 4, 5, 100000, 100000);
+
+--
+-- Trigger `barangmasuk`
 --
 DELIMITER $$
 CREATE TRIGGER `barangmamsukadd` AFTER INSERT ON `barangmasuk` FOR EACH ROW BEGIN
@@ -78,7 +88,28 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `detail`
+-- Struktur dari tabel `barangmasuk_tmp`
+--
+
+CREATE TABLE `barangmasuk_tmp` (
+  `id_barang` int(10) NOT NULL,
+  `jumlah` int(10) NOT NULL,
+  `harga` int(20) NOT NULL,
+  `jual` int(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `barangmasuk_tmp`
+--
+
+INSERT INTO `barangmasuk_tmp` (`id_barang`, `jumlah`, `harga`, `jual`) VALUES
+(2, 2, 300000, 300000),
+(5, 2, 100000, 100000);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `detail`
 --
 
 CREATE TABLE `detail` (
@@ -88,7 +119,7 @@ CREATE TABLE `detail` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `detail`
+-- Dumping data untuk tabel `detail`
 --
 
 INSERT INTO `detail` (`kode_transaksi`, `id_barang`, `jumlah_beli`) VALUES
@@ -98,10 +129,14 @@ INSERT INTO `detail` (`kode_transaksi`, `id_barang`, `jumlah_beli`) VALUES
 ('TRS000003', 5, 2),
 ('TRS000004', 2, 1),
 ('TRS000004', 5, 1),
-('TRS000005', 2, 1);
+('TRS000005', 2, 1),
+('TRS000017', 2, 2),
+('TRS000017', 2, 3),
+('TRS000017', 2, 1),
+('TRS000017', 5, 1);
 
 --
--- Triggers `detail`
+-- Trigger `detail`
 --
 DELIMITER $$
 CREATE TRIGGER `kurangistok` AFTER INSERT ON `detail` FOR EACH ROW BEGIN
@@ -114,7 +149,7 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `detail_pemesanan`
+-- Struktur dari tabel `detail_pemesanan`
 --
 
 CREATE TABLE `detail_pemesanan` (
@@ -124,7 +159,7 @@ CREATE TABLE `detail_pemesanan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `detail_pemesanan`
+-- Dumping data untuk tabel `detail_pemesanan`
 --
 
 INSERT INTO `detail_pemesanan` (`kode_pemesanan`, `id_po`, `jumlah`) VALUES
@@ -144,7 +179,7 @@ INSERT INTO `detail_pemesanan` (`kode_pemesanan`, `id_po`, `jumlah`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kategori`
+-- Struktur dari tabel `kategori`
 --
 
 CREATE TABLE `kategori` (
@@ -153,7 +188,7 @@ CREATE TABLE `kategori` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `kategori`
+-- Dumping data untuk tabel `kategori`
 --
 
 INSERT INTO `kategori` (`idkat`, `kategori`) VALUES
@@ -163,7 +198,7 @@ INSERT INTO `kategori` (`idkat`, `kategori`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `login`
+-- Struktur dari tabel `login`
 --
 
 CREATE TABLE `login` (
@@ -174,7 +209,7 @@ CREATE TABLE `login` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `login`
+-- Dumping data untuk tabel `login`
 --
 
 INSERT INTO `login` (`id_user`, `username`, `password`, `level`) VALUES
@@ -186,7 +221,7 @@ INSERT INTO `login` (`id_user`, `username`, `password`, `level`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pegawai`
+-- Struktur dari tabel `pegawai`
 --
 
 CREATE TABLE `pegawai` (
@@ -200,7 +235,7 @@ CREATE TABLE `pegawai` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pemesanan`
+-- Struktur dari tabel `pemesanan`
 --
 
 CREATE TABLE `pemesanan` (
@@ -211,7 +246,7 @@ CREATE TABLE `pemesanan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `pemesanan`
+-- Dumping data untuk tabel `pemesanan`
 --
 
 INSERT INTO `pemesanan` (`kode_pemesanan`, `tanggal`, `total`, `bayar`) VALUES
@@ -223,7 +258,7 @@ INSERT INTO `pemesanan` (`kode_pemesanan`, `tanggal`, `total`, `bayar`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pemesanan_tmp`
+-- Struktur dari tabel `pemesanan_tmp`
 --
 
 CREATE TABLE `pemesanan_tmp` (
@@ -234,7 +269,7 @@ CREATE TABLE `pemesanan_tmp` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `po`
+-- Struktur dari tabel `po`
 --
 
 CREATE TABLE `po` (
@@ -244,7 +279,7 @@ CREATE TABLE `po` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `po`
+-- Dumping data untuk tabel `po`
 --
 
 INSERT INTO `po` (`id_po`, `nama`, `harga`) VALUES
@@ -254,7 +289,7 @@ INSERT INTO `po` (`id_po`, `nama`, `harga`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `satuan`
+-- Struktur dari tabel `satuan`
 --
 
 CREATE TABLE `satuan` (
@@ -263,26 +298,17 @@ CREATE TABLE `satuan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `satuan`
+-- Dumping data untuk tabel `satuan`
 --
 
 INSERT INTO `satuan` (`ids`, `namasatuan`) VALUES
 (2, 'sak'),
-(3, 'kilo'),
-(4, 'a'),
-(5, 'c'),
-(6, 'sadf'),
-(7, 'sdaf'),
-(8, 'ew'),
-(9, 'sdaf'),
-(10, 'sdaf'),
-(11, 'sadf'),
-(12, 'sdf');
+(3, 'kilo');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `supplier`
+-- Struktur dari tabel `supplier`
 --
 
 CREATE TABLE `supplier` (
@@ -293,7 +319,7 @@ CREATE TABLE `supplier` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `supplier`
+-- Dumping data untuk tabel `supplier`
 --
 
 INSERT INTO `supplier` (`id_supplier`, `namasupplier`, `alamat`, `telefon`) VALUES
@@ -302,7 +328,7 @@ INSERT INTO `supplier` (`id_supplier`, `namasupplier`, `alamat`, `telefon`) VALU
 -- --------------------------------------------------------
 
 --
--- Table structure for table `transaksi`
+-- Struktur dari tabel `transaksi`
 --
 
 CREATE TABLE `transaksi` (
@@ -314,7 +340,7 @@ CREATE TABLE `transaksi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `transaksi`
+-- Dumping data untuk tabel `transaksi`
 --
 
 INSERT INTO `transaksi` (`kode_transaksi`, `tanggal`, `total`, `potongan`, `bayar`) VALUES
@@ -333,12 +359,13 @@ INSERT INTO `transaksi` (`kode_transaksi`, `tanggal`, `total`, `potongan`, `baya
 ('TRS000014', '2018-12-10', 0, 0, 0),
 ('TRS000015', '2018-12-10', 0, 0, 0),
 ('TRS000016', '2018-12-10', 0, 0, 0),
+('TRS000017', '2018-12-11', 400000, 0, 410000),
 ('TRS0001', '2018-08-12', 395000, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `transaksi_tmp`
+-- Struktur dari tabel `transaksi_tmp`
 --
 
 CREATE TABLE `transaksi_tmp` (
@@ -348,7 +375,15 @@ CREATE TABLE `transaksi_tmp` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Triggers `transaksi_tmp`
+-- Dumping data untuk tabel `transaksi_tmp`
+--
+
+INSERT INTO `transaksi_tmp` (`id_barang`, `jumlah`, `sid`) VALUES
+(2, 2, '5r83gq3vkg6uc50akjcjd5o95l'),
+(5, 3, '5r83gq3vkg6uc50akjcjd5o95l');
+
+--
+-- Trigger `transaksi_tmp`
 --
 DELIMITER $$
 CREATE TRIGGER `tmp` AFTER INSERT ON `transaksi_tmp` FOR EACH ROW BEGIN
@@ -383,7 +418,7 @@ DELIMITER ;
 --
 
 --
--- Indexes for table `barang`
+-- Indeks untuk tabel `barang`
 --
 ALTER TABLE `barang`
   ADD PRIMARY KEY (`id_barang`),
@@ -391,124 +426,131 @@ ALTER TABLE `barang`
   ADD KEY `idkat` (`idkat`);
 
 --
--- Indexes for table `barangmasuk`
+-- Indeks untuk tabel `barangmasuk`
 --
 ALTER TABLE `barangmasuk`
   ADD UNIQUE KEY `id_barang` (`id_barang`),
   ADD KEY `id_supplier` (`id_supplier`);
 
 --
--- Indexes for table `detail`
+-- Indeks untuk tabel `detail`
 --
 ALTER TABLE `detail`
   ADD KEY `kode_transaksi` (`kode_transaksi`),
   ADD KEY `id_barang` (`id_barang`);
 
 --
--- Indexes for table `kategori`
+-- Indeks untuk tabel `kategori`
 --
 ALTER TABLE `kategori`
   ADD PRIMARY KEY (`idkat`);
 
 --
--- Indexes for table `login`
+-- Indeks untuk tabel `login`
 --
 ALTER TABLE `login`
   ADD PRIMARY KEY (`id_user`);
 
 --
--- Indexes for table `pegawai`
+-- Indeks untuk tabel `pegawai`
 --
 ALTER TABLE `pegawai`
   ADD PRIMARY KEY (`id_pegawai`);
 
 --
--- Indexes for table `po`
+-- Indeks untuk tabel `po`
 --
 ALTER TABLE `po`
   ADD PRIMARY KEY (`id_po`);
 
 --
--- Indexes for table `satuan`
+-- Indeks untuk tabel `satuan`
 --
 ALTER TABLE `satuan`
   ADD PRIMARY KEY (`ids`);
 
 --
--- Indexes for table `supplier`
+-- Indeks untuk tabel `supplier`
 --
 ALTER TABLE `supplier`
   ADD PRIMARY KEY (`id_supplier`);
 
 --
--- Indexes for table `transaksi`
+-- Indeks untuk tabel `transaksi`
 --
 ALTER TABLE `transaksi`
   ADD PRIMARY KEY (`kode_transaksi`);
 
 --
--- Indexes for table `transaksi_tmp`
+-- Indeks untuk tabel `transaksi_tmp`
 --
 ALTER TABLE `transaksi_tmp`
   ADD KEY `id_barang` (`id_barang`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `barang`
+-- AUTO_INCREMENT untuk tabel `barang`
 --
 ALTER TABLE `barang`
   MODIFY `id_barang` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
 --
--- AUTO_INCREMENT for table `kategori`
+-- AUTO_INCREMENT untuk tabel `kategori`
 --
 ALTER TABLE `kategori`
   MODIFY `idkat` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
--- AUTO_INCREMENT for table `pegawai`
+-- AUTO_INCREMENT untuk tabel `pegawai`
 --
 ALTER TABLE `pegawai`
   MODIFY `id_pegawai` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT for table `po`
+-- AUTO_INCREMENT untuk tabel `po`
 --
 ALTER TABLE `po`
   MODIFY `id_po` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
 --
--- AUTO_INCREMENT for table `satuan`
+-- AUTO_INCREMENT untuk tabel `satuan`
 --
 ALTER TABLE `satuan`
-  MODIFY `ids` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `ids` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
--- AUTO_INCREMENT for table `supplier`
+-- AUTO_INCREMENT untuk tabel `supplier`
 --
 ALTER TABLE `supplier`
   MODIFY `id_supplier` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `barang`
+-- Ketidakleluasaan untuk tabel `barang`
 --
 ALTER TABLE `barang`
   ADD CONSTRAINT `barang_ibfk_1` FOREIGN KEY (`ids`) REFERENCES `satuan` (`ids`) ON UPDATE CASCADE,
   ADD CONSTRAINT `barang_ibfk_2` FOREIGN KEY (`idkat`) REFERENCES `kategori` (`idkat`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `barangmasuk`
+-- Ketidakleluasaan untuk tabel `barangmasuk`
 --
 ALTER TABLE `barangmasuk`
   ADD CONSTRAINT `barangmasuk_ibfk_1` FOREIGN KEY (`id_barang`) REFERENCES `barang` (`id_barang`) ON UPDATE CASCADE,
   ADD CONSTRAINT `barangmasuk_ibfk_2` FOREIGN KEY (`id_supplier`) REFERENCES `supplier` (`id_supplier`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `detail`
+-- Ketidakleluasaan untuk tabel `detail`
 --
 ALTER TABLE `detail`
   ADD CONSTRAINT `detail_ibfk_2` FOREIGN KEY (`id_barang`) REFERENCES `barang` (`id_barang`) ON UPDATE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
