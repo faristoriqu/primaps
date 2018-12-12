@@ -53,7 +53,7 @@
  
 <section class="content">
   <div class="data">
-      <div class="col-md-10 col-sm-offset-1" id="tambah">
+    <div class="col-md-10 col-sm-offset-1" id="tambah">
       <div class="box box-info">
                 <div class="box-header with-border">
                 <h3 class="box-title">Kelola Data Barang</h3>
@@ -118,7 +118,7 @@
     </div>
 
 
-      <div class="col-md-10 col-sm-offset-1">
+    <div class="col-md-10 col-sm-offset-1">
       <div class="box">
             <div class="box-header">
              <button class="btn btn-info " id="click-tambah" ><li class="fa fa-plus"></li> Tambah</button> 
@@ -166,7 +166,7 @@
               </table>
             </div>
             <!-- /.box-body -->
-          </div>
+      </div>
     </div>
   </div>
 </section>
