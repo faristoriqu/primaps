@@ -94,14 +94,14 @@
                                   
                 </tr>
                 </thead>
-
+                <tbody>
                 <?php 
                   
                   $query = mysqli_query($koneksi,"SELECT * FROM kategori") or die(mysqli_error());
                   $no=1;
                   while ($data = mysqli_fetch_array($query)) {  
                 ?>  
-                <tbody>
+                
                   <tr>
                     <td><?php echo $no ?></td>
                     
@@ -115,11 +115,12 @@
                     </td>
                     
                   </tr>
+                  <?php $no++; }  ?>
                 </tbody>
                 <tfoot>
                 
                 </tfoot>
-                <?php $no++; }  ?>
+                
               </table>
             </div>
             <!-- /.box-body -->

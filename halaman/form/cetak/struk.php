@@ -3,7 +3,7 @@ if(isset($_POST['transaksi'])){
 
 }
  // Define relative path from this script to mPDF
-$nama_dokumen='Cetak Bukti -'.$_GET['val'];
+$nama_dokumen='Cetak Bukti Tansaksi -'.$_GET['val'];
 include '../../../config/koneksi.php';
 include '../../../dist/mpdf60/mpdf.php';
 $kode_transaksi = $_GET['val'];

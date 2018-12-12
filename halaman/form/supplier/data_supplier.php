@@ -110,13 +110,14 @@
                     <th>Pilihan</th>
                   </tr>
                 </thead>
+                <tbody>
                 <?php 
                   
                   $query = mysqli_query($koneksi,"SELECT * FROM supplier") or die(mysqli_error());
                   $no=1;
                   while ($data = mysqli_fetch_array($query)) {  
                 ?>  
-                <tbody>
+                
                   <tr>
                     <td><?php echo $no ?></td>
                     <td><?php echo $data['namasupplier']; ?></td>
@@ -130,8 +131,9 @@
                     </td>
                     
                   </tr>
+                   <?php $no++; }  ?>
                 </tbody>
-                <?php $no++; }  ?>
+               
               </table>
             </div>
       </div>
