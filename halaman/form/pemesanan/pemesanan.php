@@ -32,21 +32,22 @@
   
   if(isset($_POST['tambah'])){
     
-    $id_po=$_POST['id_po'];
+    $id_barang=$_POST['id_barang'];
     $jumlah=$_POST['jumlah'];
+    $sid=$_POST['sid'];
     
 
-     $data = mysqli_query($koneksi, "SELECT * FROM pemesanan_tmp WHERE id_po='$id_po'");
+     $data = mysqli_query($koneksi, "SELECT * FROM pemesanan_tmp WHERE sid='$id_po'");
      $cari = mysqli_num_rows($data);
     if ($cari==0) {
-        $query_add = mysqli_query($koneksi,"INSERT INTO pemesanan_tmp VALUES('$id_po','$jumlah')");
+        $query_add = mysqli_query($koneksi,"INSERT INTO pemesanan_tmp VALUES('$id_po','$jumlah','$sid')");
       // if ($query_add==TRUE) {
       //   echo "<script>window.location.href='?halaman=transaksi'</script>";  
       // }else{
       //       echo("gagal");
       // }
     }else{
-          $query_edit = mysqli_query($koneksi,"UPDATE pemesanan_tmp SET jumlah=(jumlah + ".$jumlah.") WHERE id_po='$id_po' ");
+          $query_edit = mysqli_query($koneksi,"UPDATE pemesanan_tmp SET jumlah=(jumlah + ".$jumlah.") WHERE id_po='$id_po' ADN sid= '$sid' ");
       // if ($query_edit==TRUE) {
       //   echo "<script>window.location.href='?halaman=transaksi'</script>";  
       // }else{
@@ -141,9 +142,9 @@
                     </div>
 
                     <div class="form-group">
-                      <label  class="col-sm-2 control-label">Data Pembeli</label>
+                      <label  class="col-sm-2 control-label">Data Pemesan</label>
                       <div class="col-sm-3">
-                        <input type="text" class="form-control"  name="namapembeli" placeholder="Pembeli" id="jumlah">  
+                        <input type="text" class="form-control"  name="namapemesan" placeholder="Pemesan" id="jumlah">  
                       </div>
                       <div class="col-sm-3">
                         <input type="text" class="form-control"  name="telepon" placeholder="Telepon" id="jumlah">
@@ -154,9 +155,9 @@
                     </div>
 
                     <div class="form-group">
-                      <label  class="col-sm-2 control-label">Nama Barang</label>
+                      <label  class="col-sm-2 control-label">Nama Pesanan</label>
                       <div class="col-sm-3">
-                       <select class="form-control select2" style="width: 100%;" name="id_po" id="id_barang">
+                       <select class="form-control select2" style="width: 100%;" name="id_po" id="id_po">
                         <option value="">---Select---</option>
                           <?php 
                           $query = mysqli_query($koneksi,"SELECT * FROM po") or die(mysqli_error());
