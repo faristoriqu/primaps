@@ -20,7 +20,8 @@
   }
 
    if(isset($_GET['delete'])){
-    $query_delete = mysqli_query($koneksi,"DELETE FROM transaksi_tmp WHERE id_barang='$_GET[delete]' ")or die(mysql_error());
+    $sid = session_id();
+    $query_delete = mysqli_query($koneksi,"DELETE FROM transaksi_tmp WHERE id_barang='$_GET[delete]' AND sid ='$sid' ")or die(mysql_error());
     
     if ($query_delete == TRUE) {
       echo "<script>window.location.href='?halaman=transaksi'</script>";
@@ -81,7 +82,7 @@
     $sid = session_id();
 
 
-    $baca = mysqli_query($koneksi,"SELECT * FROM transaksi_tmp WHERE sid = $sid");
+    $baca = mysqli_query($koneksi,"SELECT * FROM transaksi_tmp WHERE sid = '$sid'");
     foreach ($baca as $kolom ) {
       $id = $kolom['id_barang'];
       $j = $kolom['jumlah'];
@@ -90,7 +91,7 @@
 
     // simpan ke transaksi
     $query_tambah= mysqli_query($koneksi,"INSERT INTO transaksi VALUES ('$kode_transaksi','$tanggal','$total','$potongan','$bayar')");
-    $query_deltmp = mysqli_query($koneksi,"DELETE FROM transaksi_tmp WHERE sid = $sid"); 
+    $query_deltmp = mysqli_query($koneksi,"DELETE FROM transaksi_tmp WHERE sid = '$sid'"); 
   }
 
 ?> 
@@ -167,7 +168,7 @@
                           </thead>
                           <tbody >
                                 <?php 
-                            $query = mysqli_query($koneksi,"SELECT * FROM transaksi_tmp JOIN barang ON transaksi_tmp.id_barang=barang.id_barang JOIN satuan ON barang.ids=satuan.ids JOIN kategori ON barang.idkat=kategori.idkat WHERE sid='$sid'") or die(mysqli_error());
+                            $query = mysqli_query($koneksi,"SELECT * FROM transaksi_tmp JOIN barang ON transaksi_tmp.id_barang=barang.id_barang JOIN satuan ON barang.ids=satuan.ids JOIN kategori ON barang.idkat=kategori.idkat WHERE transaksi_tmp.sid='$sid'") or die(mysqli_error());
                             $no=1;
                             $ttl=0;
                             while ($data = mysqli_fetch_array($query)) {  
@@ -303,8 +304,7 @@
     echo "<script>window.location.href='halaman/form/cetak/do.php?val=$sid'</script>";   
   }
     if(isset($_POST['transaksi'])){
-        echo "
-        <script>window.location.href='halaman/form/cetak/struk.php?val=$kode_transaksi'; </script>";
+        
     
   }else{
     // echo "<script>window.location.href='?halaman=transaksi'</script>"; 
