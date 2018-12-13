@@ -43,8 +43,8 @@
                                 include 'halaman/form/laporan/laporan_penjualan.php';
                             }else if($_GET['halaman']=='pemesanan') {
                                 include 'halaman/form/pemesanan/pemesanan.php';
-                            }else if($_GET['halaman']=='struk') {
-                                include 'halaman/form/cetak/struk.php';
+                            }else if($_GET['halaman']=='laporan_pemesanan') {
+                                include 'halaman/form/laporan/laporan_pemesanan.php';
                             }
 
                         }else{

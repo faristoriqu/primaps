@@ -80,18 +80,19 @@
     $bayar=$_POST['bayar'];
     $potongan=$_POST['potongan'];
     $sid = session_id();
+    if ($bayar >= $total && $bayar != 0 ) {
+    
+      $baca = mysqli_query($koneksi,"SELECT * FROM transaksi_tmp WHERE sid = '$sid'");
+      foreach ($baca as $kolom ) {
+        $id = $kolom['id_barang'];
+        $j = $kolom['jumlah'];
+       $query_detadd = mysqli_query($koneksi,"INSERT INTO detail VALUES ('$kode_transaksi','$id','$j')");      
+      }
 
-
-    $baca = mysqli_query($koneksi,"SELECT * FROM transaksi_tmp WHERE sid = '$sid'");
-    foreach ($baca as $kolom ) {
-      $id = $kolom['id_barang'];
-      $j = $kolom['jumlah'];
-     $query_detadd = mysqli_query($koneksi,"INSERT INTO detail VALUES ('$kode_transaksi','$id','$j')");      
+      // simpan ke transaksi
+      $query_tambah= mysqli_query($koneksi,"INSERT INTO transaksi VALUES ('$kode_transaksi','$tanggal','$total','$potongan','$bayar')");
+      $query_deltmp = mysqli_query($koneksi,"DELETE FROM transaksi_tmp WHERE sid = '$sid'"); 
     }
-
-    // simpan ke transaksi
-    $query_tambah= mysqli_query($koneksi,"INSERT INTO transaksi VALUES ('$kode_transaksi','$tanggal','$total','$potongan','$bayar')");
-    $query_deltmp = mysqli_query($koneksi,"DELETE FROM transaksi_tmp WHERE sid = '$sid'"); 
   }
 
 ?> 
@@ -221,7 +222,7 @@
                       </div>
 
                       <div class="col-sm-3 col-sm-offset-1">
-                        <button  type="submit" class="btn btn-warning" name="transaksi">Transaksi</button>
+                        <button  type="submit" class="btn btn-warning" name="transaksi" id="transaksi">Transaksi</button>
                       </div>
                     </div>   
                   </div>
@@ -238,12 +239,12 @@
 ?>
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script type="text/javascript">
-    $(document).ready(function(){
+  $(document).ready(function(){
     $("#id_barang").change(function(){
       var stok = $(this).find(":selected").data("stok")
       $("#stok").val(stok)
     })
-    $("#jumlah").change(function(){
+    $("#jumlah").keyup(function(){
       var id_barang = $("#id_barang").val()
       var jumlah = $("#jumlah").val()
       if(id_barang==""){
@@ -251,7 +252,7 @@
       }else{
           var stok = parseInt($("#stok").val())
           var thisVal = parseInt($(this).val())
-          var jumlah = $("#jumlah").val()
+          var jumlah = parseInt($("#jumlah").val())
           
           if(thisVal > stok){
             alert("Stok tidak mecukupi, tersedia = " +stok);
@@ -260,6 +261,15 @@
           }else{
             return TRUE;
           }
+      }
+    })
+    $("#transaksi").click(function(){
+      var bayar = document.getElementById('bayar').value;
+      var total =parseInt($("#total").val())
+      if(bayar<=total && bayar != ""){
+        alert("Bayarnya Kurang");
+      }else if(bayar ==""){
+        alert("belum bayar")
       }
     })
   })
@@ -303,11 +313,10 @@
   if(isset($_POST['printdo'])){
     echo "<script>window.location.href='halaman/form/cetak/do.php?val=$sid'</script>";   
   }
-    if(isset($_POST['transaksi'])){
-        
-    
-  }else{
-    // echo "<script>window.location.href='?halaman=transaksi'</script>"; 
+  if(isset($_POST['transaksi'])){
+    if ($bayar >= $total) {
+      echo "<script>window.location.href='halaman/form/cetak/struk.php?val=$kode_transaksi'</script>"; 
+    }
   }
 ?>
                             

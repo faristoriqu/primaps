@@ -114,7 +114,7 @@
                 </form>
       </div>
     </div>
-    <div  <div class="col-md-10 col-sm-offset-1" id="edit">   
+    <div class="col-md-10 col-sm-offset-1" id="edit">   
     </div>
 
 

@@ -20,7 +20,10 @@
   }
 
    if(isset($_GET['delete'])){
-    $query_delete = mysqli_query($koneksi,"DELETE FROM pemesanan_tmp WHERE id_po='$_GET[delete]'")or die(mysql_error());
+    //menamping session id ke dalam $sid
+    $sid = session_id();
+    //hapus data sesuai id po dan sid
+    $query_delete = mysqli_query($koneksi,"DELETE FROM pemesanan_tmp WHERE id_po='$_GET[delete]' AND sid='$sid'")or die(mysql_error());
     
     if ($query_delete == TRUE) {
       echo "<script>window.location.href='?halaman=pemesanan'</script>";
@@ -29,87 +32,57 @@
     } 
   }
 
+
+
   
   if(isset($_POST['tambah'])){
     
-    $id_barang=$_POST['id_barang'];
+    $id_po=$_POST['id_po'];
     $jumlah=$_POST['jumlah'];
     $sid=$_POST['sid'];
     
-
-     $data = mysqli_query($koneksi, "SELECT * FROM pemesanan_tmp WHERE sid='$id_po'");
+    //masukkan data ke dalam tabel pemesanan_tmp
+    //cari dulu nama barang nya dengan sid yang sama dengan saat ini
+     $data = mysqli_query($koneksi, "SELECT * FROM pemesanan_tmp WHERE id_po='$id_po' AND sid='$sid'");
      $cari = mysqli_num_rows($data);
     if ($cari==0) {
+      // jika tidak ditemykan adanya data, maka insert
         $query_add = mysqli_query($koneksi,"INSERT INTO pemesanan_tmp VALUES('$id_po','$jumlah','$sid')");
-      // if ($query_add==TRUE) {
-      //   echo "<script>window.location.href='?halaman=transaksi'</script>";  
-      // }else{
-      //       echo("gagal");
-      // }
+      
     }else{
-          $query_edit = mysqli_query($koneksi,"UPDATE pemesanan_tmp SET jumlah=(jumlah + ".$jumlah.") WHERE id_po='$id_po' ADN sid= '$sid' ");
-      // if ($query_edit==TRUE) {
-      //   echo "<script>window.location.href='?halaman=transaksi'</script>";  
-      // }else{
-      //     echo("gagal");
-      // }  
+      //jika sudah ada data dan session nya sama makan jumlah akan bertambah
+          $query_edit = mysqli_query($koneksi,"UPDATE pemesanan_tmp SET jumlah=(jumlah + ".$jumlah.") WHERE id_po='$id_po' AND sid= '$sid' ");
+      
     }
   }
 
-  if (isset($_POST['transaksi'])) {
-
-    $id_po=$_POST['id_po'];
-    $jumlah=$_POST['jumlah'];
+  if (isset($_POST['simpan'])) {
+    $sid =session_id();
     $kode_pemesanan=$_POST['kode_pemesanan'];
     $tanggal=date("Y-m-d",strtotime($_POST['tanggal']));
+    // $tanggal=$_POST['tanggal'];
+    $namapemesan=$_POST['namapemesan'];
+    $telepon=$_POST['telepon'];
+    $alamat=$_POST['alamat'];
+    $id_po=$_POST['id_po'];
+    $jumlah=$_POST['jumlah'];
     $total=$_POST['total'];
     $bayar=$_POST['bayar'];
-    $kembalian=$_POST['kembalian'];
-
-    // fungsi untuk mendapatkan isi keranjang belanja
-    // function isi_tmp(){
-    //   include 'config/koneksi.php';
-    //   $isitmp = array();
-      
-    //   $baca = mysqli_query($koneksi,"SELECT * FROM transaksi_tmp");
-    //   while ($data = mysqli_fetch_array($baca)) {
-    //     $isitmp[] = $data;
-    //   }
-    //   return $isitmp;
-    // }
-
-    $baca = mysqli_query($koneksi,"SELECT * FROM pemesanan_tmp");
+    //mendata data yang ada di pemesanan tmp dengan sid tsb
+    $baca = mysqli_query($koneksi,"SELECT * FROM pemesanan_tmp WHERE sid = '$sid'");
+    //kemudian di array dengan foreach dengan tujuan agar tak perlu perulangan jika data lebih dari satu
     foreach ($baca as $kolom ) {
       $id = $kolom['id_po'];
       $j = $kolom['jumlah'];
+      // insert ke dalam detail
      $query_detadd = mysqli_query($koneksi,"INSERT INTO detail_pemesanan VALUES ('$kode_pemesanan','$id','$j')");      
     }
 
     // simpan ke transaksi
-    $query_tambah= mysqli_query($koneksi,"INSERT INTO pemesanan VALUES ('$kode_pemesanan','$tanggal','$total','$bayar')");
-    if ($query_tambah==TRUE) {
-        $query_deltmp = mysqli_query($koneksi,"DELETE FROM pemesanan_tmp"); 
-
-        // echo "<script>window.location.href='halaman/form/cetak/lhk.php'</script>";
-      }else{
-          echo("gagal");
-      }
-
-    //panggil isi keranjang dan hitung jumlah produk yang dibeli
-    // $isitmp = isi_tmp();
-    // $jml = count($isitmp);
-
-    // for ($i=0; $i < $jml ; $i++) {
-     
-    //   $query_detadd = mysqli_query($koneksi,"INSERT INTO detail VALUES ('$kode_transaksi','{$isitmp[$i]['id_barang']}','{$isitmp[$i]['jumlah']}')");
-    // }
-    //hapus data tmp
-      
-
-      echo "<script>window.location.href='?halaman=pemesanan'</script>";  
-       
-
-
+    $query_tambah= mysqli_query($koneksi,"INSERT INTO pemesanan VALUES ('$kode_pemesanan','$tanggal','$namapemesan','$telepon','$alamat','$total','$bayar')");
+    //hapus data di tmp
+    $query_deltmp = mysqli_query($koneksi,"DELETE FROM pemesanan_tmp WHERE sid = '$sid'"); 
+    echo "<script>window.location.href='?halaman=pemesanan'</script>";  
   }
 
 ?> 
@@ -122,19 +95,20 @@
                   <div class="box-body">
                          
                     <div class="form-group">
-                      <label  class="col-sm-2 control-label">Kode Transaksi</label>
+                      <label  class="col-sm-2 control-label">Kode Pemesanan</label>
                       <div class="col-sm-3 col-sm-offset-1">
-                        <input type="text" class="form-control" readonly name="kode_pemesanan" placeholder="" value="<?php echo $kode_otomatis ?>" >
+                        <input type="text" class="form-control" readonly name="kode_pemesanan" placeholder="" value="<?php echo $kode_otomatis; ?>" >
                       </div>
 
-                      <div class="col-sm-3 col-sm-offset-2">
+                      
+                       <div class="col-sm-3 ">
                        <div class="input-group">
                             <div class="input-group-addon">
                               <i class="fa fa-calendar"></i>
                             </div>
-                            <input type="text" name="tanggal" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask value="<?php $tgl=date('d-m-Y'); echo $tgl; ?>" readonly">
+                            <input type="text" name="tanggal" readonly class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask value="<?php date_default_timezone_set("Asia/Jakarta"); echo date('d-m-Y'); ?>" readonly">
                           </div>
-                          
+                      
                       </div>
                       <div class="col-sm-3">
                             <input type="text" class="form-control" readonly name="sid" placeholder="" value="<?php $sid = session_id(); echo $sid ?>" >
@@ -144,13 +118,13 @@
                     <div class="form-group">
                       <label  class="col-sm-2 control-label">Data Pemesan</label>
                       <div class="col-sm-3">
-                        <input type="text" class="form-control"  name="namapemesan" placeholder="Pemesan" id="jumlah">  
+                        <input type="text" class="form-control"  name="namapemesan" placeholder="Pemesan" >  
                       </div>
                       <div class="col-sm-3">
-                        <input type="text" class="form-control"  name="telepon" placeholder="Telepon" id="jumlah">
+                        <input type="text" class="form-control"  name="telepon" placeholder="Telepon" >
                       </div>
-                      <div class="col-sm-3">
-                        <input type="text" class="form-control"  name="namapembeli" placeholder="Alamat" id="jumlah">  
+                      <div class="col-sm-4">
+                        <textarea name="alamat" row="4" placeholder="Alamat"></textarea>
                       </div>
                     </div>
 
@@ -193,7 +167,7 @@
                           </thead>
                           <tbody >
                             <?php 
-                            $query = mysqli_query($koneksi,"SELECT * FROM pemesanan_tmp JOIN po ON pemesanan_tmp.id_po=po.id_po") or die(mysqli_error());
+                            $query = mysqli_query($koneksi,"SELECT * FROM pemesanan_tmp JOIN po ON pemesanan_tmp.id_po=po.id_po WHERE sid='$sid'") or die(mysqli_error());
                             $no=1;
                             $ttl=0;
                             while ($data = mysqli_fetch_array($query)) {  
@@ -209,7 +183,7 @@
                               ?>
                               <td style="text-align: right;"><?php echo $subtotal ?></td>
                               <td>
-                                <a class="btn btn-danger " href="?halaman=transaksi&delete=<?php echo $data['id_po'] ?>" onclick="return confirm('Anda Yakin Ingin Menghapus Data?')"> <li class="fa fa-close"></li> </a>
+                                <a class="btn btn-danger " href="?halaman=pemesanan&delete=<?php echo $data['id_po'] ?>" onclick="return confirm('Anda Yakin Ingin Menghapus Data?')"> <li class="fa fa-close"></li> </a>
 
                               </td>
                             </tr>
@@ -231,17 +205,18 @@
                         <input type="text" class="form-control" onkeyup="totalan(<?php echo $ttl ?>);" id="potongan" name="potongan" placeholder="Potongan">
                       </div>
                       <div class="col-sm-3">
-                        <input type="text" class="form-control" id="total" onkeyup="totalan();" name="total" value="<?php echo $ttl ?>">
-                        <!-- <input type="text" class="form-control" onkeyup="totalan();hitung();" id="totals" name="totals" value="" placeholder="tot"> -->
+                        <input type="text" class="form-control" id="total"  name="total" value="<?php echo $ttl ?>">
+                        
                       </div>
                       <div class="col-sm-3">
-                        <input type="text" class="form-control" onkeyup="totalan();" id="bayar" name="bayar" placeholder="Bayar">
+                        <input type="text" class="form-control" onkeyup="hitung();" id="bayar" name="bayar" placeholder="Bayar">
                       </div>
                       <div class="col-sm-3">
                         <input type="text" class="form-control"  id="kembalian" name="kembalian" placeholder="Kembalian">
                       </div>
-                      <div class="col-sm-3">
-                        <button  type="submit" class="btn btn-warning" name="transaksi"  href="">Transaksi</button>
+
+                      <div class="col-sm-3 col-sm-offset-1">
+                        <button  type="submit" class="btn btn-warning" name="simpan" id="transaksi">Simpan</button>
                       </div>
                     </div>   
                   </div>
@@ -255,34 +230,31 @@
 
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script type="text/javascript">
-  //print
-  $( document ).ready(function() {
-    $('#trs').click(function()
-     {
-         window.print();
-         
-     });
-});
-
-  //load crud dengan ajax
   $(document).ready(function(){
-    loadData();
-  });
-  function loadData(){
-    $.get('data.php', function(data){
-      $('#table').html(data);  
+    $("#id_barang").change(function(){
+      var stok = $(this).find(":selected").data("stok")
+      $("#stok").val(stok)
     })
-  }
-
-  $(document).ready(function(){
-    loadData();
-  });
-  function loadData(){
-    $.get('data.php', function(data){
-      $('#table').html(data);  
+    $("#jumlah").keyup(function(){
+      var id_barang = $("#id_barang").val()
+      var jumlah = $("#jumlah").val()
+      if(id_barang==""){
+        alert("pilih barang");
+      }else{
+          var stok = parseInt($("#stok").val())
+          var thisVal = parseInt($(this).val())
+          var jumlah = $("#jumlah").val()
+          
+          if(thisVal > stok){
+            alert("Stok tidak mecukupi, tersedia = " +stok);
+          }else if(thisVal==""){
+            alert("masukkan jumlah");
+          }else{
+            return TRUE;
+          }
+      }
     })
-  }
-
+  })
 </script>
 <script type="text/javascript">
       //kembalian dan total bayar  
@@ -292,21 +264,28 @@
 
           var result = parseInt(bayar) - parseInt(total);
           
-          if (isNaN(result)) {
-            
+          if (bayar=="") {
+            document.getElementById('kembalian').value = "";
+          }else{
+            document.getElementById('kembalian').value = result;
+            if (result == 0) {
+                document.getElementById('kembalian').value = "";
+            }  
           }
-          document.getElementById('kembalian').value = result;
         }
         function totalan(ttl) {
           var potongan = document.getElementById('potongan').value;
           var bayar = document.getElementById('bayar').value;
           var result = parseInt(ttl) - parseInt(potongan);
-          var kembaliannya = parseInt(ttl) - parseInt(potongan);
+          
           if (potongan=="") {
             document.getElementById('total').value = ttl;   
-          }else{
+            
+          }else {
             document.getElementById('total').value =result;
+            
           }
+          hitung();
         }
 </script>
 <!-- Select2 -->

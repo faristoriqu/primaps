@@ -61,6 +61,7 @@
           <ul class="treeview-menu">
             <li><a href="?halaman=laporan_barang"><i class="fa fa-circle-o"></i> Barang</a></li>
             <li><a href="?halaman=laporan_penjualan"><i class="fa fa-circle-o"></i> Penjualan</a></li>
+            <li><a href="?halaman=laporan_pemesanan"><i class="fa fa-circle-o"></i> Pemesanan</a></li>
             
           </ul>
         </li>
