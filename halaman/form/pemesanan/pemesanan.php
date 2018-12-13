@@ -133,19 +133,23 @@
                             </div>
                             <input type="text" name="tanggal" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask value="<?php $tgl=date('d-m-Y'); echo $tgl; ?>" readonly">
                           </div>
+                          
                       </div>
+                      <div class="col-sm-3">
+                            <input type="text" class="form-control" readonly name="sid" placeholder="" value="<?php $sid = session_id(); echo $sid ?>" >
+                          </div>
                     </div>
 
                     <div class="form-group">
-                      <label  class="col-sm-2 control-label">Nama Barang</label>
+                      <label  class="col-sm-2 control-label">Data Pembeli</label>
                       <div class="col-sm-3">
-                        <input type="number" class="form-control"  name="namapembeli" placeholder="Pembeli" id="jumlah">  
+                        <input type="text" class="form-control"  name="namapembeli" placeholder="Pembeli" id="jumlah">  
                       </div>
                       <div class="col-sm-3">
-                        <input type="number" class="form-control"  name="telepon" placeholder="Telepon" id="jumlah">
+                        <input type="text" class="form-control"  name="telepon" placeholder="Telepon" id="jumlah">
                       </div>
                       <div class="col-sm-3">
-                        <input type="number" class="form-control"  name="namapembeli" placeholder="Alamat" id="jumlah">  
+                        <input type="text" class="form-control"  name="namapembeli" placeholder="Alamat" id="jumlah">  
                       </div>
                     </div>
 

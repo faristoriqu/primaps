@@ -220,6 +220,6 @@ ob_end_clean();
 $mpdf->WriteHTML(utf8_encode($html));
 $mpdf->Output($nama_dokumen.".pdf" ,'I');
 exit;
-
+header("location:index.php?halaman=transaksi");
 ?>
 

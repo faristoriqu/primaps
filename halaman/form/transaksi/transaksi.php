@@ -78,10 +78,10 @@
     $total=$_POST['total'];
     $bayar=$_POST['bayar'];
     $potongan=$_POST['potongan'];
-    
+    $sid = session_id();
 
 
-    $baca = mysqli_query($koneksi,"SELECT * FROM transaksi_tmp");
+    $baca = mysqli_query($koneksi,"SELECT * FROM transaksi_tmp WHERE sid = $sid");
     foreach ($baca as $kolom ) {
       $id = $kolom['id_barang'];
       $j = $kolom['jumlah'];
@@ -90,7 +90,7 @@
 
     // simpan ke transaksi
     $query_tambah= mysqli_query($koneksi,"INSERT INTO transaksi VALUES ('$kode_transaksi','$tanggal','$total','$potongan','$bayar')");
-    $query_deltmp = mysqli_query($koneksi,"DELETE FROM transaksi_tmp"); 
+    $query_deltmp = mysqli_query($koneksi,"DELETE FROM transaksi_tmp WHERE sid = $sid"); 
   }
 
 ?> 
@@ -300,22 +300,14 @@
 
 <?php 
   if(isset($_POST['printdo'])){
-
-    echo "<script>window.location.href='halaman/form/cetak/do.php?val=$sid'</script>";  
-    
+    echo "<script>window.location.href='halaman/form/cetak/do.php?val=$sid'</script>";   
   }
-
     if(isset($_POST['transaksi'])){
-    for ($x=0; $x<2; $x++){
-      if ($x == 0){
-        echo "<script>window.location.href='halaman/form/cetak/struk.php?val=$kode_transaksi'</script>";
-      } else {
-        //Refresh
-        
-        echo "<script>window.location.href='?halaman=transaksi'</script>"; 
-      }
-    }
-
+        echo "
+        <script>window.location.href='halaman/form/cetak/struk.php?val=$kode_transaksi'; </script>";
+    
+  }else{
+    // echo "<script>window.location.href='?halaman=transaksi'</script>"; 
   }
 ?>
                             
