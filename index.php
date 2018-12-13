@@ -35,6 +35,8 @@
                                 include 'halaman/form/supplier/data_supplier.php';
                             }else if($_GET['halaman']=='barang_masuk') {
                                 include 'halaman/form/barang_masuk/barang_masuk.php';
+                            }else if($_GET['halaman']=='po') {
+                                include 'halaman/form/po/po.php';
                             }else if($_GET['halaman']=='transaksi') {
                                 include 'halaman/form/transaksi/transaksi.php';
                             }else if($_GET['halaman']=='laporan_barang') {
