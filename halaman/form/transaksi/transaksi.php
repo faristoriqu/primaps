@@ -90,9 +90,7 @@
 
     // simpan ke transaksi
     $query_tambah= mysqli_query($koneksi,"INSERT INTO transaksi VALUES ('$kode_transaksi','$tanggal','$total','$potongan','$bayar')");
-    
     $query_deltmp = mysqli_query($koneksi,"DELETE FROM transaksi_tmp"); 
-
   }
 
 ?> 
@@ -234,10 +232,8 @@
   </div>
 </section>
 <?php 
-  if(isset($_POST['transaksi'])){
-    echo "<script>window.location.href='halaman/form/cetak/struk.php?val=$kode_transaksi'</script>";  
-    
-  }
+
+
 ?>
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script type="text/javascript">
@@ -307,6 +303,19 @@
 
     echo "<script>window.location.href='halaman/form/cetak/do.php?val=$sid'</script>";  
     
+  }
+
+    if(isset($_POST['transaksi'])){
+    for ($x=0; $x<2; $x++){
+      if ($x == 0){
+        echo "<script>window.location.href='halaman/form/cetak/struk.php?val=$kode_transaksi'</script>";
+      } else {
+        //Refresh
+        
+        echo "<script>window.location.href='?halaman=transaksi'</script>"; 
+      }
+    }
+
   }
 ?>
                             
