@@ -41,7 +41,7 @@
                     ?>
                     <td><?php echo $kurang; ?></td>
                     <td>
-                      <button class="btn btn-warning click-edit" id="<?php echo $data['ids'] ?>" ><li class="fa fa-pencil"></li></button>
+                      <button class="btn btn-warning click-edit" id="<?php echo $data['kode_pemesanan'] ?>" data-toggle="modal" data-target="#modal-detail"><li class="fa fa-pencil"></li></button>
                       <a class="btn btn-danger " href="?halaman=data_satuan&delete=<?php echo $data['ids'] ?>" onclick="return confirm('Anda Yakin Ingin Menghapus Data?')"> <li class="fa fa-close"></li> </a>
                     </td>
                   </tr>
@@ -55,9 +55,10 @@
   </div>
 </section>
 <div class="modal fade" id="modal-detail">
-  
-  <!-- /.modal-dialog -->
+    <!-- /.modal-content -->
 </div>
+</div>
+<script src="bower_components/jquery/dist/jquery.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $(".click-edit").click(function(e) {

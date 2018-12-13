@@ -75,7 +75,7 @@
     $id_barang=$_POST['id_barang'];
     $jumlah=$_POST['jumlah'];
     $kode_transaksi=$_POST['kode_transaksi'];
-    $tanggal=date("Y-d-m",strtotime($_POST['tanggal']));
+     $tanggal=date("Y-d-m",strtotime($_POST['tanggal']));
     $total=$_POST['total'];
     $bayar=$_POST['bayar'];
     $potongan=$_POST['potongan'];
@@ -118,10 +118,12 @@
                       </div>
                       <div class="col-sm-3 ">
                        <div class="input-group">
+                            
+                          <div class="input-group">
                             <div class="input-group-addon">
                               <i class="fa fa-calendar"></i>
                             </div>
-                            <input type="text" name="tanggal" readonly class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask value="<?php date_default_timezone_set("Asia/Jakarta"); echo date('d-m-Y'); ?>" readonly">
+                            <input type="text" name="tanggal" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask value="<?php date_default_timezone_set("Asia/Jakarta"); echo date('d-m-Y'); ?>" readonly="readonly" >
                           </div>
                       </div>
                     </div>
@@ -266,7 +268,7 @@
     $("#transaksi").click(function(){
       var bayar = document.getElementById('bayar').value;
       var total =parseInt($("#total").val())
-      if(bayar<=total && bayar != ""){
+      if(bayar<total && bayar != ""){
         alert("Bayarnya Kurang");
       }else if(bayar ==""){
         alert("belum bayar")
