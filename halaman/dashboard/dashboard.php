@@ -87,7 +87,7 @@
                     window.onload = function() { jam(); }
 
                     function jam() {
-                    var e = document.getElementById('jam'),
+                    var e = document.getElementById('jam2'),
                     d = new Date(), h, m, s;
                     h = d.getHours();
                     m = set(d.getMinutes());
@@ -104,7 +104,7 @@
                     }
                   </script>
 
-                  <h2 id="jam"></h2>
+                  <h2 id="jam2"></h2>
                   </center>
                 </div>
                 <!-- /.box-header -->

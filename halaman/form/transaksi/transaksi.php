@@ -75,7 +75,8 @@
     $id_barang=$_POST['id_barang'];
     $jumlah=$_POST['jumlah'];
     $kode_transaksi=$_POST['kode_transaksi'];
-     $tanggal=date("Y-d-m",strtotime($_POST['tanggal']));
+    $tanggal=date("Y-m-d",strtotime($_POST['tanggal']));
+
     $total=$_POST['total'];
     $bayar=$_POST['bayar'];
     $potongan=$_POST['potongan'];
