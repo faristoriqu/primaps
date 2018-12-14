@@ -31,6 +31,7 @@ ob_start();
       <td>No</td>
       <td>Nama Barang</td>
       <td>Jumlah Beli</td>
+      <td>Satuan</td>
     </tr>
     <?php
 
@@ -40,7 +41,7 @@ ob_start();
       while ($data = mysqli_fetch_array($query)) {    
         
     ?>
-    <tr>
+    <tr cellspacing="5">
       <td><?php echo $no ?></td>
       <td><?php echo $data['namabarang']; ?></td>
       <td><?php echo $data['jumlah']; ?></td>
