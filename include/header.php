@@ -21,7 +21,9 @@
          <!-- Messages: style can be found in dropdown.less-->
           <li class="dropdown tasks-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class=""><?php date_default_timezone_set("Asia/Jakarta"); echo date('d-m-Y H:i:s'); ?></i>              
+              <i class=""><?php date_default_timezone_set("Asia/Jakarta"); echo date('d-m-Y'); ?>
+                <h7 id="jam"></h7>
+              </i>              
             </a>
           </li>
           <li class="dropdown tasks-menu">
