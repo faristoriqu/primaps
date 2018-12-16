@@ -12,58 +12,53 @@ include '../../../config/koneksi.php';
         <h4 class="modal-title">Data Pemesanan</h4>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" action="?halaman=laporan_pemesanan" method="POST">
-              <div class="box-body">
   
                 <div class="form-group">
-                  <label  class="col-sm-2 control-label">Kode Pemesanan</label>
-                  <div class="col-sm-8">
-                    
+                  <label  class="col-md-3 control-label">Kode Pemesanan</label>
+                  <div class="col-md-8">
                     <input type="hidden" name="id" value="<?php echo $id?>">
                     <input type="text" class="form-control"  name="kode_pemesanan" readonly="readonly" placeholder="Username" value="<?php echo $data['kode_pemesanan']?>">
                   </div>
                 </div>
 
                 <div class="form-group">
-                  <label  class="col-sm-2 control-label">Nama</label>
-                  <div class="col-sm-8">
+                  <label  class="col-md-2 control-label">Nama</label>
+                  <div class="col-md-4">
                     <input type="text" class="form-control" name="namapemesan" id="namapemesan"  value="<?php echo $data['namapemesan']?>" >
+                  </div>
+                  <div class="col-md-4">
+                    <input type="text" class="form-control" name="telepon" id="telepon"  value="<?php echo $data['telepon']?>" >
+                  <label  class="col-md-2 control-label">Telefon</label>
                   </div>
                 </div>
 
                 <div class="form-group">
-                  <label  class="col-sm-2 control-label">Telefon</label>
-                  <div class="col-sm-8">
-                    <input type="text" class="form-control" name="telepon" id="telepon"  value="<?php echo $data['telepon']?>" >
+                  <label  class="col-md-2 control-label">Total</label>
+                  <div class="col-md-4">
+                    <input type="text" class="form-control" name="total" id="total" placeholder="Password" value="<?php echo $data['total']?>" >
+                  </div>
+                  <div class="col-md-4">
+                    <input type="text" class="form-control" name="bayar" onkeyup="hitung();" id="bayar" placeholder="Password" value="<?php echo $data['bayar']?>" >
+                  <label  class="col-md-2 control-label">Bayar</label>
                   </div>
                 </div>
                 
+                <?php
+                  $kurang = $data['bayar']-$data['total'];
+                ?>
                 <div class="form-group">
-                  <label  class="col-sm-2 control-label">Total</label>
-                  <div class="col-sm-8">
-                    <input type="text" class="form-control" name="total" id="total" placeholder="Password" value="<?php echo $data['total']?>" >
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label  class="col-sm-2 control-label">Bayar</label>
-                  <div class="col-sm-8">
-                    <input type="text" class="form-control" name="bayar" onkeyup="hitung();" id="bayar" placeholder="Password" value="<?php echo $data['bayar']?>" >
-                  </div>
-                </div>
-                    <?php
-                      $kurang = $data['bayar']-$data['total'];
-                    ?>
-                <div class="form-group">
-                  <label  class="col-sm-2 control-label">Sisa</label>
-                  <div class="col-sm-8">
+                  <label  class="col-md-2 control-label">Sisa</label>
+                  <div class="col-md-4">
                     <input type="text" class="form-control"  name="kurang" id="kurang" placeholder="Password" value="<?php echo $kurang?>" >
                   </div>
                 </div>
-              </div>
+                <!-- <div class="form-group">
+                </div>
+                <div class="form-group">
+                </div> -->
               <!-- /.box-body -->
               
               <!-- /.box-footer -->
-        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
@@ -73,34 +68,3 @@ include '../../../config/koneksi.php';
     <!-- /.modal-content -->
 </div>
 <?php } ?>
-<script src="bower_components/jquery/dist/jquery.js"></script>
-<script type="text/javascript">
-      //kembalian dan total bayar  
-        function hitung() {
-          var total = document.getElementById('total').value;
-          var bayar = document.getElementById('bayar').value;
-
-          var result = parseInt(bayar) - parseInt(total);
-          
-          if (bayar=="") {
-            document.getElementById('kurang').value = "";
-          }else{
-            document.getElementById('kurang').value = result;
-            
-          }
-        }
-        function totalan(ttl) {
-          var potongan = document.getElementById('potongan').value;
-          var bayar = document.getElementById('bayar').value;
-          var result = parseInt(ttl) - parseInt(potongan);
-          
-          if (potongan=="") {
-            document.getElementById('total').value = ttl;   
-            
-          }else {
-            document.getElementById('total').value =result;
-            
-          }
-          hitung();
-        }
-</script>

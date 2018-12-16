@@ -1,3 +1,6 @@
+<?php
+
+?>
 <section class="content">
   <div class="data">
     <div class="col-md-11 " >
@@ -24,7 +27,7 @@
                 </thead>
                 <tbody>
                     <?php
-                      $query = mysqli_query($koneksi,"SELECT * FROM pemesanan JOIN detail_pemesanan ON pemesanan.kode_pemesanan=detail_pemesanan.kode_pemesanan") or die(mysqli_error());
+                      $query = mysqli_query($koneksi,"SELECT * FROM pemesanan JOIN detail_pemesanan ON pemesanan.kode_pemesanan=detail_pemesanan.kode_pemesanan ORDER BY pemesanan.kode_pemesanan DESC" ) or die(mysqli_error());
                       $no=1;
                       while ($data = mysqli_fetch_array($query)) {  
                     ?>  
@@ -41,8 +44,15 @@
                     ?>
                     <td><?php echo $kurang; ?></td>
                     <td>
-                      <button class="btn btn-warning click-edit" id="<?php echo $data['kode_pemesanan'] ?>" data-toggle="modal" data-target="#modal-detail"><li class="fa fa-pencil"></li></button>
-                      <a class="btn btn-danger " href="?halaman=data_satuan&delete=<?php echo $data['ids'] ?>" onclick="return confirm('Anda Yakin Ingin Menghapus Data?')"> <li class="fa fa-close"></li> </a>
+                      <?php
+                        if ($kurang<0) {
+                        
+                      ?>
+                      <button class="btn btn-warning click-edit" id="<?php echo $data['kode_pemesanan'] ?>" data-toggle="modal" data-target="#modal-edit"><li class="fa fa-pencil"></li>tambahan</button>
+                      <?php } ?>
+                      <button class="btn btn-primary click-detail" id="<?php echo $data['kode_pemesanan'] ?>" data-toggle="modal" data-target="#modal-detail"><li class="fa fa-search"></li></button>
+                      
+                      
                     </td>
                   </tr>
                 <?php $no++; }  ?>
@@ -54,10 +64,14 @@
     </div>
   </div>
 </section>
+<div class="modal fade" id="modal-edit">
+    <!-- /.modal-content -->
+</div>
+
 <div class="modal fade" id="modal-detail">
     <!-- /.modal-content -->
 </div>
-</div>
+
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -68,9 +82,51 @@
                 type: "POST",
                 data : {id: m,},
                 success: function (ajaxData){
+                    $("#modal-edit").html(ajaxData);
+                }
+            });
+        });
+        $(".click-detail").click(function(e) {
+            var m = $(this).attr("id");
+            $.ajax({
+                url: "halaman/form/pemesanan/detail_laporan.php",
+                type: "POST",
+                data : {id: m,},
+                success: function (ajaxData){
                     $("#modal-detail").html(ajaxData);
                 }
             });
         });
     });
+</script>
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script type="text/javascript">
+      //kembalian dan total bayar  
+        function hitung() {
+          var total = document.getElementById('total').value;
+          var bayar = document.getElementById('bayar').value;
+
+          var result = parseInt(bayar) - parseInt(total);
+          
+          if (bayar=="") {
+            document.getElementById('kurang').value = "";
+          }else{
+            document.getElementById('kurang').value = result;
+            
+          }
+        }
+        function totalan(ttl) {
+          var potongan = document.getElementById('potongan').value;
+          var bayar = document.getElementById('bayar').value;
+          var result = parseInt(ttl) - parseInt(potongan);
+          
+          if (potongan=="") {
+            document.getElementById('total').value = ttl;   
+            
+          }else {
+            document.getElementById('total').value =result;
+            
+          }
+          hitung();
+        }
 </script>

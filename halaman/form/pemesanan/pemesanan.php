@@ -59,7 +59,7 @@
   if (isset($_POST['simpan'])) {
     $sid =session_id();
     $kode_pemesanan=$_POST['kode_pemesanan'];
-    $tanggal=date("Y-m-d",strtotime($_POST['tanggal']));
+    $tanggal=date("Y-d-m",strtotime($_POST['tanggal']));
     // $tanggal=$_POST['tanggal'];
     $namapemesan=$_POST['namapemesan'];
     $telepon=$_POST['telepon'];
@@ -68,21 +68,26 @@
     $jumlah=$_POST['jumlah'];
     $total=$_POST['total'];
     $bayar=$_POST['bayar'];
-    //mendata data yang ada di pemesanan tmp dengan sid tsb
-    $baca = mysqli_query($koneksi,"SELECT * FROM pemesanan_tmp WHERE sid = '$sid'");
-    //kemudian di array dengan foreach dengan tujuan agar tak perlu perulangan jika data lebih dari satu
-    foreach ($baca as $kolom ) {
-      $id = $kolom['id_po'];
-      $j = $kolom['jumlah'];
-      // insert ke dalam detail
-     $query_detadd = mysqli_query($koneksi,"INSERT INTO detail_pemesanan VALUES ('$kode_pemesanan','$id','$j')");      
-    }
 
-    // simpan ke transaksi
-    $query_tambah= mysqli_query($koneksi,"INSERT INTO pemesanan VALUES ('$kode_pemesanan','$tanggal','$namapemesan','$telepon','$alamat','$total','$bayar')");
-    //hapus data di tmp
-    $query_deltmp = mysqli_query($koneksi,"DELETE FROM pemesanan_tmp WHERE sid = '$sid'"); 
-    echo "<script>window.location.href='?halaman=pemesanan'</script>";  
+    if ($namapemesan != "" && $telepon != "" && $bayar !="") {
+      # code...
+      
+      //mendata data yang ada di pemesanan tmp dengan sid tsb
+      $baca = mysqli_query($koneksi,"SELECT * FROM pemesanan_tmp WHERE sid = '$sid'");
+      //kemudian di array dengan foreach dengan tujuan agar tak perlu perulangan jika data lebih dari satu
+      foreach ($baca as $kolom ) {
+        $id = $kolom['id_po'];
+        $j = $kolom['jumlah'];
+        // insert ke dalam detail
+       $query_detadd = mysqli_query($koneksi,"INSERT INTO detail_pemesanan VALUES ('$kode_pemesanan','$id','$j')");      
+      }
+
+      // simpan ke transaksi
+      $query_tambah= mysqli_query($koneksi,"INSERT INTO pemesanan VALUES ('$kode_pemesanan',now(),'$namapemesan','$telepon','$alamat','$total','$bayar')");
+      //hapus data di tmp
+      $query_deltmp = mysqli_query($koneksi,"DELETE FROM pemesanan_tmp WHERE sid = '$sid'"); 
+      echo "<script>window.location.href='?halaman=laporan_pemesanan'</script>";  
+    }
   }
 
 ?> 
@@ -118,10 +123,10 @@
                     <div class="form-group">
                       <label  class="col-sm-2 control-label">Data Pemesan</label>
                       <div class="col-sm-3">
-                        <input type="text" class="form-control"  name="namapemesan" placeholder="Pemesan" >  
+                        <input type="text" class="form-control"  name="namapemesan" placeholder="Pemesan" id="namapemesan">  
                       </div>
                       <div class="col-sm-3">
-                        <input type="text" class="form-control"  name="telepon" placeholder="Telepon" >
+                        <input type="text" class="form-control"  name="telepon" placeholder="Telepon" id="telepon">
                       </div>
                       <div class="col-sm-4">
                         <textarea name="alamat" row="4" placeholder="Alamat"></textarea>
@@ -216,7 +221,7 @@
                       </div>
 
                       <div class="col-sm-3 col-sm-offset-1">
-                        <button  type="submit" class="btn btn-warning" name="simpan" id="transaksi">Simpan</button>
+                        <button  type="submit" class="btn btn-warning" name="simpan" id="simpan">Simpan</button>
                       </div>
                     </div>   
                   </div>
@@ -231,27 +236,50 @@
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script type="text/javascript">
   $(document).ready(function(){
-    $("#id_barang").change(function(){
+    $("#id_po").change(function(){
       var stok = $(this).find(":selected").data("stok")
       $("#stok").val(stok)
     })
     $("#jumlah").keyup(function(){
-      var id_barang = $("#id_barang").val()
+      var id_po = $("#id_po").val()
       var jumlah = $("#jumlah").val()
-      if(id_barang==""){
-        alert("pilih barang");
+      if(id_po==""){
+        alert("Pilih Pesanan");
       }else{
           var stok = parseInt($("#stok").val())
           var thisVal = parseInt($(this).val())
           var jumlah = $("#jumlah").val()
-          
-          if(thisVal > stok){
-            alert("Stok tidak mecukupi, tersedia = " +stok);
-          }else if(thisVal==""){
+          if(thisVal==""){
             alert("masukkan jumlah");
           }else{
             return TRUE;
           }
+      }
+    })
+    $("#btn").click(function(){
+      var jumlah = document.getElementById('jumlah').value;
+      var id_po = $("#id_po").val()
+      if(jumlah =="" && id_po == ""){
+        alert("Pilih Barang Dan Masukkan Jumlah")
+      }else if(jumlah =="" && id_po != ""){
+        alert("Masukkan Jumlah")
+      }else if(jumlah !="" && id_po == ""){
+        alert("Pilih Barang")
+      }
+    })
+
+    $("#simpan").click(function(){
+      var namapemesan = document.getElementById('namapemesan').value;
+      var bayar = document.getElementById('bayar').value;
+      var telepon = document.getElementById('telepon').value;
+      if(telepon =="" && namapemesan == ""){
+        alert("Masukkan Nama Pemesan Dan No Telefon")
+      }else if((telepon =="" && namapemesan != "")){
+        alert("Masukkan No Telefon")
+      }else if((telepon !="" && namapemesan == "")){
+        alert("Masukkan Nama Pemesan")
+      }else if(jumlah !="" && id_po != "" && bayar ==""){
+        alert("Cek Bayar")
       }
     })
   })
