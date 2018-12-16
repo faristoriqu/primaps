@@ -319,5 +319,12 @@
 <!-- Select2 -->
 <script src="bower_components/select2/dist/js/select2.full.min.js"></script>
 
-
+<?php 
+  
+  if(isset($_POST['transaksi'])){
+  
+      echo "<script>window.location.href='halaman/form/cetak/cetak_pemesanan.php?val=$kode_pemesanan'</script>"; 
+  
+  }
+?>
                             
