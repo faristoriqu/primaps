@@ -1,6 +1,36 @@
 <head>
   <link rel="stylesheet" href="bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
 </head>
+              <div class="form-group">
+                <div class="col-md-3 ">
+                  <?php
+                   include '../../../config/koneksi.php';
+                   $id=$_POST['id']; 
+                   if ($id == "show-all") {
+                  ?>
+                    <button class="btn btn-success" name="semua" ><li class="fa fa-print"></li>DO</button>
+                  <?php
+                    }else if ($id == "hari-ini"){    
+                  ?>  
+                    <button class="btn btn-success" name="hariini"><li class="fa fa-print"></li>DO</button>  
+                  <?php 
+                    }else if ($id == "minggu-ini"){
+                  ?>
+                    <button class="btn btn-success" name="mingguini"><li class="fa fa-print"></li>DO</button>  
+                  <?php
+                    }else if ($id == "bulan-ini"){
+                  ?>
+                    <button class="btn btn-success" name="bulanini"><li class="fa fa-print"></li>DO</button>  
+                  <?php  
+                    }else if ($id == "tahun-ini"){
+                  ?>
+                    <button class="btn btn-success" name="tahunini"><li class="fa fa-print"></li>DO</button>  
+                  <?php  
+                    }
+                  ?>
+                </div>
+              </div>
+              <br><br>
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                   <tr>
@@ -14,9 +44,9 @@
                 </thead>                
                 <tbody>
                    <?php 
-                   include '../../../config/koneksi.php';
-                   $id=$_POST['id'];
-                   date_default_timezone_set("Asia/Jakarta");
+                    include '../../../config/koneksi.php';
+                    $id=$_POST['id'];
+                    date_default_timezone_set("Asia/Jakarta");
                     $tanggal=date('Y-m-d');
                     
 

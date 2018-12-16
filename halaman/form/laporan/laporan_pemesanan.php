@@ -42,17 +42,23 @@
                     <?php
                       $kurang = $data['bayar']-$data['total'];
                     ?>
-                    <td><?php echo $kurang; ?></td>
+                    <td><?php 
+                      if ($kurang<0) {
+                        echo $kurang;
+                      }else{
+                        echo("0");
+                      }
+                       ?>
+                    </td>
                     <td>
                       <?php
                         if ($kurang<0) {
-                        
                       ?>
                       <button class="btn btn-warning click-edit" id="<?php echo $data['kode_pemesanan'] ?>" data-toggle="modal" data-target="#modal-edit"><li class="fa fa-pencil"></li>tambahan</button>
+                      <?php } else{ ?>
+                      <button class="btn btn-success "><li class="fa fa-print"></li>DO</button>
                       <?php } ?>
                       <button class="btn btn-primary click-detail" id="<?php echo $data['kode_pemesanan'] ?>" data-toggle="modal" data-target="#modal-detail"><li class="fa fa-search"></li></button>
-                      
-                      
                     </td>
                   </tr>
                 <?php $no++; }  ?>
@@ -130,3 +136,20 @@
           hitung();
         }
 </script>
+<?php  
+  if(isset($_POST['semua'])){
+      echo "<script>window.location.href='halaman/form/cetak/struk.php?val=$kode_pemesanan'</script>"; 
+
+  }else if(isset($_POST['hariini'])){
+      echo "<script>window.location.href='halaman/form/cetak/struk.php?val=$kode_pemesanan'</script>"; 
+
+  }else if(isset($_POST['mingguini'])){
+      echo "<script>window.location.href='halaman/form/cetak/struk.php?val=$kode_pemesanan'</script>"; 
+
+  }else if(isset($_POST['bulanini'])){
+      echo "<script>window.location.href='halaman/form/cetak/struk.php?val=$kode_pemesanan'</script>"; 
+
+  }else if(isset($_POST['tahunini'])){
+      echo "<script>window.location.href='halaman/form/cetak/struk.php?val=$kode_pemesanan'</script>"; 
+  }
+?>

@@ -15,56 +15,45 @@ include '../../../config/koneksi.php';
   
                 <div class="form-group">
                   <label  class="col-md-3 control-label">Kode Pemesanan</label>
-                  <div class="col-md-8">
+                  <div class="col-md-4">
                     <input type="hidden" name="id" value="<?php echo $id?>">
                     <input type="text" class="form-control"  name="kode_pemesanan" readonly="readonly" placeholder="Username" value="<?php echo $data['kode_pemesanan']?>">
                   </div>
-                </div>
-
-                <div class="form-group">
-                  <label  class="col-md-2 control-label">Nama</label>
                   <div class="col-md-4">
-                    <input type="text" class="form-control" name="namapemesan" id="namapemesan"  value="<?php echo $data['namapemesan']?>" >
-                  </div>
-                  <div class="col-md-4">
-                    <input type="text" class="form-control" name="telepon" id="telepon"  value="<?php echo $data['telepon']?>" >
-                  <label  class="col-md-2 control-label">Telefon</label>
+                    <input type="hidden" name="id" value="<?php echo $id?>">
+                    <input type="text" class="form-control"  name="kode_pemesanan" readonly="readonly" placeholder="Username" value="<?php echo $data['namapemesan']?>">
                   </div>
                 </div>
-
-                <div class="form-group">
-                  <label  class="col-md-2 control-label">Total</label>
-                  <div class="col-md-4">
-                    <input type="text" class="form-control" name="total" id="total" placeholder="Password" value="<?php echo $data['total']?>" >
-                  </div>
-                  <div class="col-md-4">
-                    <input type="text" class="form-control" name="bayar" onkeyup="hitung();" id="bayar" placeholder="Password" value="<?php echo $data['bayar']?>" >
-                  <label  class="col-md-2 control-label">Bayar</label>
-                  </div>
-                </div>
-                
-                <?php
-                  $kurang = $data['bayar']-$data['total'];
-                ?>
-                <div class="form-group">
-                  <label  class="col-md-2 control-label">Sisa</label>
-                  <div class="col-md-4">
-                    <input type="text" class="form-control"  name="kurang" id="kurang" placeholder="Password" value="<?php echo $kurang?>" >
-                  </div>
-                </div>
-                <!-- <div class="form-group">
-                </div>
-                <div class="form-group">
-                </div> -->
-              <!-- /.box-body -->
-              
-              <!-- /.box-footer -->
+                <?php } ?>
+                <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Nama Pemesanan</th>
+                  <th>Jumlah</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <?php
+                      $query = mysqli_query($koneksi,"SELECT * FROM pemesanan JOIN detail_pemesanan ON pemesanan.kode_pemesanan=detail_pemesanan.kode_pemesanan JOIN po ON detail_pemesanan.id_po=po.id_po WHERE pemesanan.kode_pemesanan = '$id' ORDER BY pemesanan.kode_pemesanan DESC" ) or die(mysqli_error());
+                      $no=1;
+                      while ($data = mysqli_fetch_array($query)) {  
+                    ?>  
+                  <tr>
+                    <td><?php echo $no ?></td>
+                    <td><?php echo $data['nama']; ?></td>
+                    <td><?php echo $data['jumlah']; ?></td>
+                    
+                  </tr>
+                <?php $no++; }  ?>
+                </tbody>
+              </table>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+        
       </div>
     </div>
     <!-- /.modal-content -->
 </div>
-<?php } ?>
+

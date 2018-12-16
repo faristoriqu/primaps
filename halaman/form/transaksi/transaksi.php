@@ -91,7 +91,7 @@
       }
 
       // simpan ke transaksi
-      $query_tambah= mysqli_query($koneksi,"INSERT INTO transaksi VALUES ('$kode_transaksi','$tanggal','$total','$potongan','$bayar')");
+      $query_tambah= mysqli_query($koneksi,"INSERT INTO transaksi VALUES ('$kode_transaksi',now(),'$total','$potongan','$bayar')");
       $query_deltmp = mysqli_query($koneksi,"DELETE FROM transaksi_tmp WHERE sid = '$sid'"); 
     }
   }
@@ -157,6 +157,7 @@
                         <button type="submit" class="btn btn-info" name="tambah" id="btn">Tambah</button>
                       </div>
                     </div>
+
                     <div class="form-group" >
                       <div class="col-sm-8 col-sm-offset-2">
                         <table  class="table table-striped table-bordered" >
