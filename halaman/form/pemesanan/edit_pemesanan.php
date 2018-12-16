@@ -3,6 +3,7 @@ include '../../../config/koneksi.php';
   $id = $_POST['id'];
   $query = mysqli_query($koneksi,"SELECT * FROM pemesanan WHERE kode_pemesanan = '$id'") or die(mysqli_error());
   foreach ($query as $data) {
+    
 ?>
 <div class="modal-dialog">
     <div class="modal-content">
@@ -12,7 +13,7 @@ include '../../../config/koneksi.php';
         <h4 class="modal-title">Data Pemesanan</h4>
       </div>
       <div class="modal-body">
-        <form class="form-horizontal" action="?halaman=laporan_pemesanan" method="POST">
+        <form class="form-horizontal" action="?halaman=laporan_pemesanan" method="post">
               <div class="box-body"> 
   
                 <div class="form-group">
@@ -41,7 +42,7 @@ include '../../../config/koneksi.php';
                 <div class="form-group">
                   <label  class="col-sm-2 control-label">Total</label>
                   <div class="col-sm-8">
-                    <input type="text" class="form-control" name="total" id="total" placeholder="Password" value="<?php echo $data['total']?>" >
+                    <input type="text" class="form-control" name="total" id="total" readonly="readonly" placeholder="Password" value="<?php echo $data['total']?>">
                   </div>
                 </div>
                 <div class="form-group">
@@ -56,7 +57,7 @@ include '../../../config/koneksi.php';
                 <div class="form-group">
                   <label  class="col-sm-2 control-label">Sisa</label>
                   <div class="col-sm-8">
-                    <input type="text" class="form-control"  name="kurang" id="kurang" placeholder="Password" value="<?php echo $kurang?>" >
+                    <input type="text" class="form-control"  name="kurang" id="kurang" readonly="readonly"  placeholder="Password" value="<?php echo $kurang?>" >
                   </div>
                 </div>
               </div>

@@ -1,7 +1,7 @@
 <?php 
   if(isset($_GET['delete'])){
      $sid = session_id();
-    $query_delete = mysqli_query($koneksi,"DELETE FROM barangmasuk_tmp WHERE nofaktur='$_GET[delete]' AND sid ='$sid'")or die(mysql_error());
+    $query_delete = mysqli_query($koneksi,"DELETE FROM barangmasuk_tmp WHERE id_barang='$_GET[delete]' AND sid ='$sid'")or die(mysql_error());
     
     if ($query_delete == TRUE) {
       echo "<script>window.location.href='?halaman=barang_masuk'</script>";
@@ -50,7 +50,8 @@
     
 
     // simpan ke barangmasuk
-    $query_add= mysqli_query($koneksi,"INSERT INTO barangmasuk VALUES ('$nofaktur', '$tgl', '$id_barang', '$id_supplier', '$jumlah', '$harga', '$jual')");
+    $query_add= mysqli_query($koneksi,"INSERT INTO barangmasuk VALUES ('$nofaktur',now(), '$id_barang', '$id_supplier', '$jumlah', '$harga', '$jual')");
+    
     
     $query_deltmp = mysqli_query($koneksi,"DELETE FROM barangmasuk_tmp"); 
 }
@@ -186,7 +187,7 @@
                       <td style="text-align: right;"><?php echo $subtotal ?></td>
                              
                     <td>
-                                <a class="btn btn-danger " href="?halaman=barang_masuk&delete=<?php echo $data['nofaktur']?>" onclick="return confirm('Anda Yakin Ingin Menghapus Data?')"> <li class="fa fa-close"></li> </a>
+                     <a class="btn btn-danger " href="?halaman=barang_masuk&delete=<?php echo $data['id_barang']?>" onclick="return confirm('Anda Yakin Ingin Menghapus Data?')"> <li class="fa fa-close"></li> </a>
                                 </td>
                             </tr>
                           <?php $no++; }  ?>  

@@ -1,5 +1,21 @@
 <?php
 
+if(isset($_POST['edit'])){
+    $id = $_POST['id'];
+    $kode_pemesanan = $_POST['kode_pemesanan'];
+    $namapemesan = $_POST['namapemesan'];
+    $telepon = $_POST['telepon'];
+    $bayar = $_POST['bayar'];
+     
+    $query_edit=mysqli_query($koneksi,"UPDATE pemesanan SET namapemesan='$namapemesan', telepon='$telepon', bayar='$bayar'  WHERE kode_pemesanan='$id'");
+
+    if($query_edit==TRUE){
+      echo "<script>window.location.href='?halaman=laporan_pemesanan'</script>";
+    }else{
+      echo "gagal";
+    }
+    }
+    
 ?>
 <section class="content">
   <div class="data">
