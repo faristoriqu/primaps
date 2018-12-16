@@ -23,15 +23,7 @@
                         </select>
                       </div>  
                               
-                      <label  class="col-sm-1 control-label">Stok</label>
-                      <div class="col-sm-3"> 
-                       <select class="form-control select2" name="stok" style="width: 100%;">
-                         <option value="">-Pilih Stok-</option>
-                         <option value="satu">0</option>
-                         <option value="2">dibawah 50</option>                                                                
-                        </select>
-                      </div>
-                </div>  
+                       
                 <br><br> 
 
                

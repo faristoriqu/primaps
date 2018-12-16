@@ -15,11 +15,9 @@
                     <?php 
                   include '../../../config/koneksi.php';
                     $id=$_POST['id'];
-                    $ids=$_POST['ids'];
-                    if ($id != "" && $ids == "") {
+                    // $ids=$_POST['ids'];
+                    if ($id != "" ) {
                       $query = mysqli_query($koneksi,"SELECT * FROM barang JOIN satuan ON barang.ids=satuan.ids   WHERE idkat='$id'  ORDER BY barang.namabarang ASC") or die(mysqli_error());
-                    }else if ($ids == "satu" ) {
-                      $query = mysqli_query($koneksi,"SELECT * FROM barang JOIN satuan ON barang.ids=satuan.ids   WHERE barang.stok >=3  ORDER BY barang.namabarang ASC") or die(mysqli_error());
                     }
                       while ($data = mysqli_fetch_array($query)) {  
                   ?> 
