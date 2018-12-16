@@ -13,7 +13,7 @@ include '../../../config/koneksi.php';
       </div>
       <div class="modal-body">
         <form class="form-horizontal" action="?halaman=laporan_pemesanan" method="POST">
-              <div class="box-body">
+              <div class="box-body"> 
   
                 <div class="form-group">
                   <label  class="col-sm-2 control-label">Kode Pemesanan</label>
@@ -67,7 +67,7 @@ include '../../../config/koneksi.php';
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" name="edit">Save changes</button>
       </div>
     </div>
     <!-- /.modal-content -->
