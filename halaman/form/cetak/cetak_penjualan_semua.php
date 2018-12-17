@@ -21,7 +21,7 @@ ob_start();
   JL. Raya Sukowono Jember
 </h4>
 <h5 style="text-align: center;">
-  <u>Cetak Penjualan Bulanini</u><br>
+  <u>Struk Nota Penjualan</u><br>
 </h5>
 
 <table id="example1" class="table table-bordered table-striped">
@@ -44,7 +44,7 @@ ob_start();
                     
 
                    
-                      $query = mysqli_query($koneksi,"SELECT * FROM transaksi JOIN detail ON transaksi.kode_transaksi =detail.kode_transaksi JOIN barang ON detail.id_barang=barang.id_barang WHERE MONTH(tanggal)=MONTH(NOW()) ORDER BY transaksi.kode_transaksi ASC ") or die(mysqli_error());
+                      $query = mysqli_query($koneksi,"SELECT * FROM transaksi JOIN detail ON transaksi.kode_transaksi =detail.kode_transaksi JOIN barang ON detail.id_barang=barang.id_barang ORDER BY transaksi.kode_transaksi ASC") or die(mysqli_error());
                   $no=1;
                   foreach ($query as $data) {  
                 ?> 
@@ -60,6 +60,7 @@ ob_start();
                 </tbody>
               </table>
               
+
 
 
 <?php

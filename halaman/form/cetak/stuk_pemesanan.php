@@ -21,49 +21,81 @@ ob_start();
   JL. Raya Sukowono Jember
 </h4>
 <h5 style="text-align: center;">
-  <u>Cetak Penjualan Bulanini</u><br>
+  <u>Nota Pemesanan</u><br>
 </h5>
 
-<table id="example1" class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                    <th>Tanggal</th>
-                    <th>Kode Transaksi</th>
-                    <th>Kode Barang</th>
-                    <th>Nama Barang</th>
-                    <th>Potongan</th>
-                    <th>Total Harga</th>
-                  </tr>
-                </thead>                
-                <tbody>
-                   <?php 
-                   include '../../../config/koneksi.php';
-                   $id=$_POST['id'];
-                   date_default_timezone_set("Asia/Jakarta");
-                    $tanggal=date('Y-m-d');
-                    
+<?php
+  $query = mysqli_query($koneksi,"SELECT * FROM transaksi  WHERE kode_transaksi='$kode_transaksi'") or die(mysqli_error());
+  $no=1;
+  $ttl=0;
+  while ($data = mysqli_fetch_array($query)) {  
+    $tgl_regist = $data['tanggal'];
+  $tgl_indo = date('d-m-Y',strtotime($tgl_regist));
+?>
+<table>
+  <tr>
+    <td colspan="2">Kode Pemesanan : </td>
+    <td><?php echo $data['kode_pemesanan']; ?></td>
+    <td style="width: 350px;"></td>
+    <td>Tanggal : </td>
+    <td><?php echo $tgl_indo; ?></td>
+  </tr>
+</table>
+<?php } ?>
 
-                   
-                      $query = mysqli_query($koneksi,"SELECT * FROM transaksi JOIN detail ON transaksi.kode_transaksi =detail.kode_transaksi JOIN barang ON detail.id_barang=barang.id_barang WHERE MONTH(tanggal)=MONTH(NOW()) ORDER BY transaksi.kode_transaksi ASC ") or die(mysqli_error());
-                  $no=1;
-                  foreach ($query as $data) {  
-                ?> 
+
+
+<tbody>
+  <table cellspacing="30">
+
+    <tr>
+        <th>No</th>
+        <th>Kode Pemesanan</th>
+        <th>Tanggal</th>
+        <th>Nama Pemesan</th>
+        <th>Telepon</th>
+        <th>Total</th>
+        <th>Bayar</th>
+        <th>Kurang</th>
+        <th>Pilihan</th>  
+    </tr>
+    <?php
+
+  $query = mysqli_query($koneksi,"SELECT * FROM pemesanan JOIN detail_pemesanan ON pemesanan.kode_pemesanan=detail_pemesanan.kode_pemesanan ORDER BY pemesanan.kode_pemesanan DESC" ) or die(mysqli_error());
+                      $no=1;
+                      while ($data = mysqli_fetch_array($query)) {  
+                    ?>  
                   <tr>
+                    <td><?php echo $no ?></td>
+                    <td><?php echo $data['kode_pemesanan']; ?></td>
                     <td><?php echo $data['tanggal']; ?></td>
-                    <td><?php echo $data['kode_transaksi']; ?></td>
+                    <td><?php echo $data['namapemesan']; ?></td>
+                    <td><?php echo $data['telepon']; ?></td>
                     <td><?php echo $data['total']; ?></td>
-                    <td><?php echo $data['namabarang']; ?></td>
-                    <td><?php echo $data['potongan']; ?></td>
-                    <td><?php echo $data['bayar']; ?></td> 
+                    <td><?php echo $data['bayar']; ?></td>
+                    <?php
+                      $kurang = $data['bayar']-$data['total'];
+                    ?>
+                    <td><?php 
+                      if ($kurang<0) {
+                        echo $kurang;
+                      }else{
+                        echo("0");
+                      }
+                       ?>
+                    </td>
+                    <td>
+                      <?php
+                        if ($kurang<0) {
+                      ?>
+                    </td>
                   </tr>
-                  <?php $no++;} ?>
+                <?php $no++; }  ?>
                 </tbody>
               </table>
-              
-
-
+  </table>
+  
 <?php
-
 
 /*
 //Query Untuk Menampilkan Isi Table Logistik Masuk

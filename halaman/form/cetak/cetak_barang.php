@@ -21,49 +21,45 @@ ob_start();
   JL. Raya Sukowono Jember
 </h4>
 <h5 style="text-align: center;">
-  <u>Cetak Penjualan Bulanini</u><br>
+  <u>Cetak Barang</u><br>
 </h5>
+  <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                    <tr>
+                      <th>Nama Barang</th>
+                      <th>Satuan</th>
+                      <th>Jumlah</th>
+                      <th>Harga Beli</th>
+                      <th>Harga Jual</th>
+                    </tr>
+                  </thead>                
+                  <tbody>
+                    <?php 
+                  include '../../../config/koneksi.php';
+                    $id=$_POST['id'];
+                    // $ids=$_POST['ids'];
+                    if ($id != "" ) {
+                      $query = mysqli_query($koneksi,"SELECT * FROM barang JOIN satuan ON barang.ids=satuan.ids   WHERE idkat='$id'  ORDER BY barang.namabarang ASC") or die(mysqli_error());
+                    }
+                      while ($data = mysqli_fetch_array($query)) {  
+                  ?> 
+                 
+                    <tr>
+                      
+                      <td><?php echo $data['namabarang']; ?></td>
+                      <td><?php echo $data['namasatuan']; ?></td>
+                      <td><?php echo $data['stok']; ?></td>
+                      <td><?php echo $data['hargab']; ?></td>
+                      <td><?php echo $data['hargaj']; ?></td>
+                      
+                    </tr>
+                    <?php } ?>
+                  </tbody>
+                  <tfoot>
+                  </tfoot>
+  </table>
 
-<table id="example1" class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                    <th>Tanggal</th>
-                    <th>Kode Transaksi</th>
-                    <th>Kode Barang</th>
-                    <th>Nama Barang</th>
-                    <th>Potongan</th>
-                    <th>Total Harga</th>
-                  </tr>
-                </thead>                
-                <tbody>
-                   <?php 
-                   include '../../../config/koneksi.php';
-                   $id=$_POST['id'];
-                   date_default_timezone_set("Asia/Jakarta");
-                    $tanggal=date('Y-m-d');
-                    
-
-                   
-                      $query = mysqli_query($koneksi,"SELECT * FROM transaksi JOIN detail ON transaksi.kode_transaksi =detail.kode_transaksi JOIN barang ON detail.id_barang=barang.id_barang WHERE MONTH(tanggal)=MONTH(NOW()) ORDER BY transaksi.kode_transaksi ASC ") or die(mysqli_error());
-                  $no=1;
-                  foreach ($query as $data) {  
-                ?> 
-                  <tr>
-                    <td><?php echo $data['tanggal']; ?></td>
-                    <td><?php echo $data['kode_transaksi']; ?></td>
-                    <td><?php echo $data['total']; ?></td>
-                    <td><?php echo $data['namabarang']; ?></td>
-                    <td><?php echo $data['potongan']; ?></td>
-                    <td><?php echo $data['bayar']; ?></td> 
-                  </tr>
-                  <?php $no++;} ?>
-                </tbody>
-              </table>
-              
-
-
-<?php
-
+  <?php
 
 /*
 //Query Untuk Menampilkan Isi Table Logistik Masuk
@@ -176,4 +172,7 @@ $mpdf->Output($nama_dokumen.".pdf" ,'I');
 exit;
 header("location:index.php?halaman=transaksi");
 ?>
+
+
+
 

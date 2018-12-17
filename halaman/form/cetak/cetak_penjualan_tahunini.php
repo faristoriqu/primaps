@@ -21,7 +21,7 @@ ob_start();
   JL. Raya Sukowono Jember
 </h4>
 <h5 style="text-align: center;">
-  <u>Struk Nota Penjualan</u><br>
+  <u>Cetak Penjualan Tahunini</u><br>
 </h5>
 
 <table id="example1" class="table table-bordered table-striped">
@@ -59,28 +59,12 @@ ob_start();
                   <?php $no++;} ?>
                 </tbody>
               </table>
-              <script>
-  $(function () {
-    $('#example1').DataTable()
-    $('#example2').DataTable({
-      'paging'      : true,
-      'lengthChange': false,
-      'searching'   : true,
-      'ordering'    : true,
-      'info'        : true,
-      'autoWidth'   : false,
-      'responsive'  : true,
-    })
-  })
-</script>
-<!-- DataTables -->
-<script src="bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
-<script src="bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+              
 
 
 
 <?php
-}
+
 
 /*
 //Query Untuk Menampilkan Isi Table Logistik Masuk
