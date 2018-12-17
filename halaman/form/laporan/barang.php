@@ -1,18 +1,7 @@
 <head>
   <link rel="stylesheet" href="bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
 </head>
-              <div class="form-group">
-                <div class="col-md-3 ">
-                  <?php
-                   include '../../../config/koneksi.php';
-                   $id=$_POST['id']; 
-                  ?>
-                    <button class="btn btn-success" name="cetak_barang" ><li class="fa fa-print"></li>Cetak</button>
-                  
-                </div>
-              </div>
-              <br><br>
-                <table id="example1" class="table table-bordered table-striped">
+  <table id="example1" class="table table-bordered table-striped">
                   <thead>
                     <tr>
                       <th>Nama Barang</th>

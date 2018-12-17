@@ -8,23 +8,23 @@
                    $id=$_POST['id']; 
                    if ($id == "show-all") {
                   ?>
-                    <button class="btn btn-success" name="semua" ><li class="fa fa-print"></li>Cetak</button>
+                    <button class="btn btn-success" name="semua" ><li class="fa fa-print"></li>DO</button>
                   <?php
                     }else if ($id == "hari-ini"){    
                   ?>  
-                    <button class="btn btn-success" name="hariini"><li class="fa fa-print"></li>Cetak</button>  
+                    <button class="btn btn-success" name="hariini"><li class="fa fa-print"></li>DO</button>  
                   <?php 
                     }else if ($id == "minggu-ini"){
                   ?>
-                    <button class="btn btn-success" name="mingguini"><li class="fa fa-print"></li>Cetak</button>  
+                    <button class="btn btn-success" name="mingguini"><li class="fa fa-print"></li>DO</button>  
                   <?php
                     }else if ($id == "bulan-ini"){
                   ?>
-                    <button class="btn btn-success" name="bulanini"><li class="fa fa-print"></li>Cetak</button>  
+                    <button class="btn btn-success" name="bulanini"><li class="fa fa-print"></li>DO</button>  
                   <?php  
                     }else if ($id == "tahun-ini"){
                   ?>
-                    <button class="btn btn-success" name="tahunini"><li class="fa fa-print"></li>Cetak</button>  
+                    <button class="btn btn-success" name="tahunini"><li class="fa fa-print"></li>DO</button>  
                   <?php  
                     }
                   ?>
