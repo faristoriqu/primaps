@@ -62,18 +62,19 @@ include '../../../config/koneksi.php';
                 </div>
               </div>
               <!-- /.box-body -->
-              
+              <button type="submit" class="btn btn-primary" name="edit">Save changes</button>
               <!-- /.box-footer -->
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" name="edit" >Save changes</button>
+        
       </div>
     </div>
     <!-- /.modal-content -->
 </div>
 <?php } ?>
+
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script type="text/javascript">
       //kembalian dan total bayar  

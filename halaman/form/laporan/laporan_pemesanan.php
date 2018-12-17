@@ -14,7 +14,7 @@ if(isset($_POST['edit'])){
     }else{
       echo "gagal";
     }
-    }
+}
     
 ?>
 <section class="content">
