@@ -52,18 +52,18 @@
 </script>
 <?php  
   if(isset($_POST['semua'])){
-      echo "<script>window.location.href='halaman/form/cetak/struk.php?val=$kode_pemesanan'</script>"; 
+      echo "<script>window.location.href='halaman/form/cetak/cetak_penjualan_semua.php'</script>"; 
 
   }else if(isset($_POST['hariini'])){
       echo "<script>window.location.href='halaman/form/cetak/cetak_penjualan_hariini.php'</script>"; 
 
   }else if(isset($_POST['mingguini'])){
-      echo "<script>window.location.href='halaman/form/cetak/cetak_penjualan_mingguini'</script>"; 
+      echo "<script>window.location.href='halaman/form/cetak/cetak_penjualan_mingguini.php'</script>"; 
 
   }else if(isset($_POST['bulanini'])){
-      echo "<script>window.location.href='halaman/form/cetak/cetak_penjualan_hariini'</script>"; 
+      echo "<script>window.location.href='halaman/form/cetak/cetak_penjualan_bulanini.php'</script>"; 
 
   }else if(isset($_POST['tahunini'])){
-      echo "<script>window.location.href='halaman/form/cetak/cetak_penjualan_hariini'</script>"; 
+      echo "<script>window.location.href='halaman/form/cetak/cetak_penjualan_tahunini.php'</script>"; 
   }
 ?>

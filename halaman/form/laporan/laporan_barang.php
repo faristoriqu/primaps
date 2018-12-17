@@ -14,11 +14,12 @@
                        <select class="form-control select2" name="idkat" style="width: 100%;" id="idkat">
                          <option value="">-Pilih Kategori-</option>
                         <?php 
+
                       
                           $query = mysqli_query($koneksi,"SELECT * FROM kategori") or die(mysqli_error());
                           while ($data = mysqli_fetch_array($query)) {  
                         ?>
-                        <option value="<?php echo $data['idkat'] ?>"><?php echo $data['kategori'] ?></option>
+                        <option value="<?php echo $data['idkat'] ?>"><button class="btn btn-info" name="printdo" type="submit"><li class="fa fa-print"></li></button><?php echo $data['kategori'] ?></option>
                         <?php } ?>    
                         </select>
                       </div>  
@@ -64,4 +65,3 @@
         });
     }); 
 </script>
-    

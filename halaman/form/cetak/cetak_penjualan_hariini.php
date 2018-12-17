@@ -21,7 +21,7 @@ ob_start();
   JL. Raya Sukowono Jember
 </h4>
 <h5 style="text-align: center;">
-  <u>Struk Nota Penjualan</u><br>
+  <u>Cetak Penjualan Hariini</u><br>
 </h5>
 
 <table id="example1" class="table table-bordered table-striped">
