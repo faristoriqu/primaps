@@ -192,7 +192,7 @@
                               <td style="text-align: right;"><?php echo $subtotal ?></td>
                               <td>
                                 <a class="btn btn-danger " href="?halaman=transaksi&delete=<?php echo $data['id_barang']?>" onclick="return confirm('Anda Yakin Ingin Menghapus Data?')"> <li class="fa fa-close"></li> </a>
-                                <?php if($data['namasatuan']=="sak"&& $data['kategori']=="pakan"){ ?>
+                                <?php if($data['namasatuan']=="sak" && $data['kategori']=="pakan"){ ?>
                                 <button class="btn btn-info" name="printdo" type="submit"><li class="fa fa-print"></li></button>
                                 <?php } ?>
                               </td>

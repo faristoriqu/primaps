@@ -10,7 +10,7 @@ if(isset($_POST['edit'])){
     $query_edit=mysqli_query($koneksi,"UPDATE pemesanan SET namapemesan='$namapemesan', telepon='$telepon', bayar='$bayar'  WHERE kode_pemesanan='$id'");
 
     if($query_edit==TRUE){
-      echo "<script>window.location.href='?halaman=laporan_pemesanan'</script>";
+      // echo "<script>window.location.href='?halaman=laporan_pemesanan'</script>";
     }else{
       echo "gagal";
     }
@@ -70,11 +70,12 @@ if(isset($_POST['edit'])){
                       <?php
                         if ($kurang<0) {
                       ?>
-                      <button class="btn btn-warning click-edit" id="<?php echo $data['kode_pemesanan'] ?>" data-toggle="modal" data-target="#modal-edit"><li class="fa fa-pencil"></li>tambahan</button>
-                      <?php } else{ ?>
-                      <button type="submit" class="btn btn-success " name="do_pemesanan"><li class="fa fa-print"></li>DO</button>
+                      <button class="btn btn-warning click-edit" id="<?php echo $data['kode_pemesanan']; ?>" data-toggle="modal" data-target="#modal-edit"><li class="fa fa-pencil"></li>tambahan</button>
+                      <?php } else if ($kurang>=0) {
+                       ?>
+                       <button class="btn btn-primary" type="submit" name="mencetak"><li class="fa fa-print"></li></button>
                       <?php } ?>
-                      <button class="btn btn-primary click-detail" id="<?php echo $data['kode_pemesanan'] ?>" data-toggle="modal" data-target="#modal-detail"><li class="fa fa-search"></li></button>
+                      <button class="btn btn-primary click-detail" id="<?php echo $data['kode_pemesanan']; ?>" data-toggle="modal" data-target="#modal-detail"><li class="fa fa-search"></li></button>
                     </td>
                   </tr>
                 <?php $no++; }  ?>
@@ -86,6 +87,7 @@ if(isset($_POST['edit'])){
     </div>
   </div>
 </section>
+
 <div class="modal fade" id="modal-edit">
     <!-- /.modal-content -->
 </div>
@@ -109,6 +111,17 @@ if(isset($_POST['edit'])){
             });
         });
         $(".click-detail").click(function(e) {
+            var m = $(this).attr("id");
+            $.ajax({
+                url: "halaman/form/pemesanan/detail_laporan.php",
+                type: "POST",
+                data : {id: m,},
+                success: function (ajaxData){
+                    $("#modal-detail").html(ajaxData);
+                }
+            });
+        });
+        $(".click-cetak").click(function(e) {
             var m = $(this).attr("id");
             $.ajax({
                 url: "halaman/form/pemesanan/detail_laporan.php",
@@ -152,9 +165,13 @@ if(isset($_POST['edit'])){
           hitung();
         }
 </script>
-<?php  
-  if(isset($_POST['do_pemesanan'])){
-      echo "<script>window.location.href='halaman/form/cetak/struk_dopemesanan.php?val=$kode_pemesanan'</script>"; 
+<?php 
+  
+  if(isset($_POST['mencetak'])){
+      echo "<script>window.location.href='halaman/form/cetak/struk_pemesanan.php?val=$kode_pemesanan'</script>"; 
+  }
+  if(isset($_POST['edit'])){
+      echo "<script>window.location.href='halaman/form/cetak/struk_pemesanan.php?val=$kode_pemesanan'</script>"; 
+      
   }
 ?>
-

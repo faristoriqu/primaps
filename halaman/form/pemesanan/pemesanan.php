@@ -86,7 +86,7 @@
       $query_tambah= mysqli_query($koneksi,"INSERT INTO pemesanan VALUES ('$kode_pemesanan',now(),'$namapemesan','$telepon','$alamat','$total','$bayar')");
       //hapus data di tmp
       $query_deltmp = mysqli_query($koneksi,"DELETE FROM pemesanan_tmp WHERE sid = '$sid'"); 
-      echo "<script>window.location.href='?halaman=laporan_pemesanan'</script>";  
+      
     }
   }
 
@@ -321,10 +321,9 @@
 
 <?php 
   
-  if(isset($_POST['transaksi'])){
-  
-      echo "<script>window.location.href='halaman/form/cetak/cetak_pemesanan.php?val=$kode_pemesanan'</script>"; 
-  
+  if(isset($_POST['simpan'])){
+    
+      echo "<script>window.location.href='halaman/form/cetak/struk_pemesanan.php?val=$kode_pemesanan'</script>"; 
+    
   }
-?>
-                            
+?>                        

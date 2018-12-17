@@ -63,6 +63,6 @@
 <?php  
   if(isset($_POST['cetak_barang'])){
     $idkat=$_POST['idkat'];
-      echo "<script>window.location.href='halaman/form/cetak/cetak_barang.php?val=$idkat'</script>"; 
+    echo "<script>window.location.href='halaman/form/cetak/cetak_barang.php?val=$idkat'</script>"; 
   }
 ?>
