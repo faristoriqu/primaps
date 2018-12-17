@@ -29,13 +29,13 @@
                 <div class="form-group"> 
                   <label class="col-sm-3 control-label">Kategori</label>
                   <div class="col-sm-7" >
-                    <select class="form-control select2" name="idkat" style="width: 100%;">
+                  <select class="form-control select2" name="idkat" style="width: 100%;">
                       <option value="">-Pilih Kategori-</option>
                     <?php 
                     $querykat = mysqli_query($koneksi,"SELECT * FROM kategori") or die(mysqli_error());
                     foreach ($querykat as $kat ) {  
                     ?>
-                    <option value="<?php echo $data['idkat'] ?>"
+                    <option value="<?php echo $kat['idkat'] ?>"
                       
                       <?php if($kat['idkat']==$data['idkat']){ 
                         echo "Selected";
@@ -61,7 +61,7 @@
                     $query1 = mysqli_query($koneksi,"SELECT * FROM satuan") or die(mysqli_error());
                     foreach ($query1 as $kat ) {  
                     ?>
-                    <option value="<?php echo $data['ids'] ?>"
+                    <option value="<?php echo $kat['ids'] ?>"
                       
                       <?php if($kat['ids']==$data['ids']){ 
                         echo "Selected";
