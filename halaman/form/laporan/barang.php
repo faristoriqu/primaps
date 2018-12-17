@@ -5,7 +5,7 @@
     include '../../../config/koneksi.php';
       $id=$_POST['id'];
     ?> 
-    <button class="btn btn-success" name="cetak_barang" ><li class="fa fa-print"></li>Cetak</button>
+    
     <br><br>
   <table id="example1" class="table table-bordered table-striped">
     <thead>

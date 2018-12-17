@@ -6,7 +6,7 @@ if(isset($_POST['transaksi'])){
 $nama_dokumen='Cetak Laporan Barang -'.$_GET['val'];
 include '../../../config/koneksi.php';
 include '../../../dist/mpdf60/mpdf.php';
-$kode_transaksi = $_GET['val'];
+$idkat = $_GET['val'];
 $mpdf=new mPDF('utf-8', 'A4'); // Create new mPDF Document
  
 //Beginning Buffer to save PHP variables and HTML tags
@@ -35,12 +35,9 @@ ob_start();
                   </thead>                
                   <tbody>
                     <?php 
-                  include '../../../config/koneksi.php';
-                    $id=$_POST['id'];
-                    // $ids=$_POST['ids'];
-                    if ($id != "" ) {
-                      $query = mysqli_query($koneksi,"SELECT * FROM barang JOIN satuan ON barang.ids=satuan.ids   WHERE idkat='$id'  ORDER BY barang.namabarang ASC") or die(mysqli_error());
-                    }
+                  
+                       $query = mysqli_query($koneksi,"SELECT * FROM barang JOIN satuan ON barang.ids=satuan.ids JOIN kategori ON barang.idkat = kategori.idkat  WHERE kategori.idkat='$idkat'  ORDER BY barang.namabarang ASC") or die(mysqli_error());
+                    
                       while ($data = mysqli_fetch_array($query)) {  
                   ?> 
                  

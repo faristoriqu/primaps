@@ -7,7 +7,7 @@
                <center><h3 class="big-box">LAPORAN BARANG</h3></center>
                <br>
 
-                <div class="form-group">
+                  <div class="form-group">
                       <label  class="col-sm-1 control-label">Kategori</label>
                       <div class="col-sm-3">
                          
@@ -19,10 +19,18 @@
                           $query = mysqli_query($koneksi,"SELECT * FROM kategori") or die(mysqli_error());
                           while ($data = mysqli_fetch_array($query)) {  
                         ?>
-                        <option value="<?php echo $data['idkat'] ?>"><button class="btn btn-info" name="printdo" type="submit"><li class="fa fa-print"></li></button><?php echo $data['kategori'] ?></option>
+                        <option value="<?php echo $data['idkat'] ?>">
+                          <?php echo $data['kategori'] ?>    
+                        </option>
                         <?php } ?>    
                         </select>
                       </div>  
+                    </div>
+                    <div class="form-group">
+                      <div class="col-md-3 col-sm-offset-5">
+                        <button class="btn btn-success" name="cetak_barang"><li class="fa fa-print"></li>Cetak</button>
+                      </div>
+                    </div>
                               
                        
                 <br><br> 
@@ -44,29 +52,17 @@
             $.ajax({
                 url: "halaman/form/laporan/barang.php",
                 type: "POST",
-                data : {id: m, ids : n},
+                data : {id: m,},
                 success: function (ajaxData){
                     $(".table").html(ajaxData);
                 }
             });
         });
     });
-    $(document).ready(function () {
-        $("#stok").change(function(e) {
-            var m = $("#stok").val();
-            $.ajax({
-                url: "halaman/form/laporan/barang.php",
-                type: "POST",
-                data : {ids: m,},
-                success: function (ajaxData){
-                    $(".table").html(ajaxData);
-                }
-            });
-        });
-    }); 
 </script>
 <?php  
   if(isset($_POST['cetak_barang'])){
-      echo "<script>window.location.href='halaman/form/cetak/cetak_barang.php'</script>"; 
+    $idkat=$_POST['idkat'];
+      echo "<script>window.location.href='halaman/form/cetak/cetak_barang.php?val=$idkat'</script>"; 
   }
 ?>
