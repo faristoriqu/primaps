@@ -21,7 +21,7 @@
     } else{
       echo "<script>alert('gagal')</script>";
     }
-    echo "<script>window.location.href='?halaman=barang'</script>";
+    echo "<script>window.location.href='?halaman=data_kategori'</script>";
   }
 
   if(isset($_POST['edit'])){

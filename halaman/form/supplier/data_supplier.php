@@ -22,7 +22,7 @@
     } else{
       echo "<script>alert('gagal')</script>";
     }
-    echo "<script>window.location.href='?halaman=barang'</script>";
+    echo "<script>window.location.href='?halaman=supplier'</script>";
   }
 
   if(isset($_POST['edit'])){
