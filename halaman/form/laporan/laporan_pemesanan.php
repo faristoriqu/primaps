@@ -72,7 +72,7 @@ if(isset($_POST['edit'])){
                       ?>
                       <button class="btn btn-warning click-edit" id="<?php echo $data['kode_pemesanan'] ?>" data-toggle="modal" data-target="#modal-edit"><li class="fa fa-pencil"></li>tambahan</button>
                       <?php } else{ ?>
-                      <button class="btn btn-success "><li class="fa fa-print"></li>DO</button>
+                      <button type="submit" class="btn btn-success " name="do_pemesanan"><li class="fa fa-print"></li>DO</button>
                       <?php } ?>
                       <button class="btn btn-primary click-detail" id="<?php echo $data['kode_pemesanan'] ?>" data-toggle="modal" data-target="#modal-detail"><li class="fa fa-search"></li></button>
                     </td>
@@ -152,4 +152,9 @@ if(isset($_POST['edit'])){
           hitung();
         }
 </script>
+<?php  
+  if(isset($_POST['do_pemesanan'])){
+      echo "<script>window.location.href='halaman/form/cetak/struk_dopemesanan.php?val=$kode_pemesanan'</script>"; 
+  }
+?>
 
