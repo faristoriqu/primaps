@@ -64,4 +64,9 @@
         });
     }); 
 </script>
-    
+<?php  
+  if(isset($_POST['cetak_barang'])){
+      echo "<script>window.location.href='halaman/form/cetak/struk.php?val=$idkat'</script>"; 
+
+  }
+?>    
