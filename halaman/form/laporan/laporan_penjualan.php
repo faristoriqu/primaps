@@ -15,7 +15,7 @@
                       
                       <select class="form-control select2" style="width: 100%;" name="tanggal" id="tanggal">
                         <option selected="selected">Pilih Tanggal</option>
-                        <option value="show-all">Semua<button class="btn btn-info" name="printdo" type="submit"><li class="fa fa-print"></li></button></option>
+                        <option value="show-all">Semua</option>
                         <option value="hari-ini">Hari Ini</option>
                         <option value="minggu-ini">Minggu Ini</option>
                         <option value="bulan-ini">Bulan Ini</option>

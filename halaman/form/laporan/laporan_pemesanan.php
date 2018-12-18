@@ -1,4 +1,14 @@
 <?php
+if(isset($_GET['delete'])){
+    // $query_delete = mysqli_query($koneksi,"DELETE FROM login WHERE id_user='$_GET[delete]'")or die(mysql_error());
+    $query_delete = mysqli_query($koneksi,"DELETE FROM detail_pemesanan WHERE kode_pemesanan='$_GET[delete]'")or die(mysql_error());
+    $query_delete = mysqli_query($koneksi,"DELETE FROM pemesanan WHERE kode_pemesanan='$_GET[delete]'")or die(mysql_error());
+    if ($query_delete == TRUE) {
+      echo "<script>window.location.href='?halaman=laporan_pemesanan'</script>";
+    }else{
+      echo "gagal";
+    }
+  }
 
 if(isset($_POST['edit'])){
     $id = $_POST['id'];
@@ -70,12 +80,13 @@ if(isset($_POST['edit'])){
                       <?php
                         if ($kurang<0) {
                       ?>
-                      <button class="btn btn-warning click-edit" id="<?php echo $data['kode_pemesanan']; ?>" data-toggle="modal" data-target="#modal-edit"><li class="fa fa-pencil"></li>tambahan</button>
+                      <button class="btn btn-warning click-edit" id="<?php echo $data['kode_pemesanan']; ?>" data-toggle="modal" data-target="#modal-edit"><li class="fa fa-pencil"></li></button>
                       <?php } else if ($kurang>=0) {
                        ?>
-                       <button class="btn btn-primary" type="submit" name="mencetak"><li class="fa fa-print"></li></button>
+                       <a class="btn btn-primary"  href="halaman/form/cetak/strukdo.php?val=<?php echo $data['kode_pemesanan']; ?>"><li class="fa fa-print"></li></a>
                       <?php } ?>
                       <button class="btn btn-primary click-detail" id="<?php echo $data['kode_pemesanan']; ?>" data-toggle="modal" data-target="#modal-detail"><li class="fa fa-search"></li></button>
+                      <a class="btn btn-danger " href="?halaman=laporan_pemesanan&delete=<?php echo $data['kode_pemesanan'] ?>" onclick="return confirm('Anda Yakin Ingin Menghapus Data?')"> <li class="fa fa-close"></li> </a>
                     </td>
                   </tr>
                 <?php $no++; }  ?>
@@ -166,10 +177,6 @@ if(isset($_POST['edit'])){
         }
 </script>
 <?php 
-  
-  if(isset($_POST['mencetak'])){
-      echo "<script>window.location.href='halaman/form/cetak/struk_pemesanan.php?val=$kode_pemesanan'</script>"; 
-  }
   if(isset($_POST['edit'])){
       echo "<script>window.location.href='halaman/form/cetak/struk_pemesanan.php?val=$kode_pemesanan'</script>"; 
       

@@ -1,6 +1,5 @@
 <?php
-if(isset($_POST['transaksi'])){
-}
+ 
  // Define relative path from this script to mPDF
 $nama_dokumen='Cetak Bukti DO -'.$_GET['val'];
 include '../../../config/koneksi.php';
@@ -29,13 +28,13 @@ ob_start();
   <table cellspacing="30">
     <tr>
       <td>No</td>
-      <td>Nama Barang</td>
+      <td>Nama Pesanan</td>
       <td>Jumlah Beli</td>
-      <td>Satuan</td>
+      
     </tr>
     <?php
 
-      $query = mysqli_query($koneksi,"SELECT * FROM detail_pemesanan  join po on detail_pemesanan.id_po = po.id_po WHERE detail_pemesanan.kode_pemesanan='$sid'") or die(mysqli_error());
+      $query = mysqli_query($koneksi,"SELECT * FROM detail_pemesanan  join po on detail_pemesanan.id_po = po.id_po WHERE detail_pemesanan.kode_pemesanan='$_GET[val]'") or die(mysqli_error());
       $no=1;
       $ttl=0;
       while ($data = mysqli_fetch_array($query)) {    
@@ -57,6 +56,5 @@ ob_end_clean();
 $mpdf->WriteHTML(utf8_encode($html));
 $mpdf->Output($nama_dokumen.".pdf" ,'I');
 exit;
-
 ?>
 
